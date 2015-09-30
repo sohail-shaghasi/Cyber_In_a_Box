@@ -1,0 +1,16 @@
+﻿
+
+@{
+    ViewBag.Title = "View1";
+}
+
+<h2>View1</h2>
+
+
+@Html.DropDownList("ddl1", new List<SelectListItem>
+{
+new SelectListItem{ Text = "option1", Value= "1"},
+new SelectListItem{ Text = "option2", Value= "2"},
+new SelectListItem{ Text = "option3", Value= "3"}
+    
+}, "Select an Option")
