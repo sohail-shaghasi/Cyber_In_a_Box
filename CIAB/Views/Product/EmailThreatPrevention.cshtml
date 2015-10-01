@@ -47,31 +47,56 @@
                                     <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
                                     <li class="active"><a href="@Url.Action("aboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
                                     <li class="flag"><a href="#">SGD</a></li>
-                                    <li>
-                                        @ViewData["testing"]
-                                        @if (HttpContext.Current.Session["UserName"] != null)
+                                    
+                                    @if (HttpContext.Current.Session["UserName"] != null)
+                                    {
+
+                                        if ((string)HttpContext.Current.Session["UserName"] == "admin")
                                         {
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-user"></i>
 
 
-                                                <span>Hi</span> @HttpContext.Current.Session["UserName"]
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
 
 
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
-                                                <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
-                                            </ul>
-                                        </li>
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="@Url.Action("adminview", "admin")" onclick='location.href=this.getAttribute("href")'>Panel</a></li>
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
 
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
                                         }
+
+
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+
+                                    }
                                     </ul>
                                 </div><!--/.nav-collapse -->
 

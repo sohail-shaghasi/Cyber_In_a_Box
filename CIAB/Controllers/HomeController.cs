@@ -340,7 +340,7 @@ namespace CIAB.Controllers
                 if (CIABuser.UserName == adminUserID && CIABuser.Password == adminPass)
                 {
                     Session["UserName"] = CIABuser.UserName;//Username store in the session
-                    FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);//To make User's login credentials persistent.
+                    //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);//To make User's login credentials persistent.
 
                     Session["Password"] = CIABuser.HashPassword;
                     return RedirectToAction("Index", "Home");

@@ -28,7 +28,7 @@
     <![endif]-->
     <script src="~/Scripts/jquery-1.8.3.min.js"></script>
 
-  
+
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-static-top">
@@ -71,21 +71,47 @@
 
                                     @if (HttpContext.Current.Session["UserName"] != null)
                                     {
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-user"></i>
+
+                                        if ((string)HttpContext.Current.Session["UserName"] == "admin")
+                                        {
 
 
-                                                <span>Hi</span> @HttpContext.Current.Session["UserName"]
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
 
 
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
-                                                <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
-                                            </ul>
-                                        </li>
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="@Url.Action("adminview", "admin")" onclick='location.href=this.getAttribute("href")'>Panel</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
+
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+
+
                                     }
                                     else
                                     {
@@ -103,8 +129,8 @@
 
         </div><!-- /menu -->
     </div><!-- /menu-sticky-wrapper -->
-    
-    
+
+
 
     <div id="sub_header">
         <div class="container">
@@ -116,105 +142,85 @@
             </div>
         </div>
     </div><!-- /sub_header -->
-    
-    
-
     @*<div class="navbar navbar-default navbar-static-top sticky" id="menu" role="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2 logo">
-                    <a href="index.html"><img src="~/Images/kpmg-logo.png" alt="" /></a>
-                </div>
-                <div class="col-md-4">
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav main_menu">
-                            <li><a href="cybermart.html">Cyber Mart</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>/.nav-collapse 
-                </div>
-                <div class="col-md-6">
-                    <a href="cybersecurity-check-signup.html" type="button" class="btn btn-default btn-cta btn-block">Get Your FREE Cyber Health Check Scan Now!</a>
-                </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 logo">
+                        <a href="index.html"><img src="~/Images/kpmg-logo.png" alt="" /></a>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav main_menu">
+                                <li><a href="cybermart.html">Cyber Mart</a></li>
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>/.nav-collapse
+                    </div>
+                    <div class="col-md-6">
+                        <a href="cybersecurity-check-signup.html" type="button" class="btn btn-default btn-cta btn-block">Get Your FREE Cyber Health Check Scan Now!</a>
+                    </div>
 
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div id="sub_content">
         <div class="container">
             <div class="row">
                 @*<div class="col-md-3 dash_profile">
-                    <img src="images/graham.jpg" alt="" class="img-responsive">
-                    <h4>Graham Williams</h4>
-                    <h5>Oganization: DekatKu Sdn Bhd</h5>
-                    <p>Vestibulum et varius arcu. Pellentesque a diam diam. Vestibulum vestibulum lacinia ligula. Nullam mauris metus, fringilla eget feugiat ac, sollicitudin quis libero. </p>
-                    <a type="button" class="btn btn-info"><i class="fa fa-sign-out"></i>&nbsp; Log Out</a>
-                </div>*@
+                        <img src="images/graham.jpg" alt="" class="img-responsive">
+                        <h4>Graham Williams</h4>
+                        <h5>Oganization: DekatKu Sdn Bhd</h5>
+                        <p>Vestibulum et varius arcu. Pellentesque a diam diam. Vestibulum vestibulum lacinia ligula. Nullam mauris metus, fringilla eget feugiat ac, sollicitudin quis libero. </p>
+                        <a type="button" class="btn btn-info"><i class="fa fa-sign-out"></i>&nbsp; Log Out</a>
+                    </div>*@
                 <div class="col-md-9">
                     <div class="dash_details">
-                       
+
                         <div class="dash_content">
-                            @*<p>Edit your account settings, billing information, and account status below.</p>*@
-                            <form class="form-horizontal" action="/Home/UserProfileEdit" method="post">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Full Name<span class="req">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="FullName" id="FullName" value="@ViewData["fullname"]" required>
-                                    </div>
+
+
+                            @using (Html.BeginForm("UserProfileEdit", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+                            {
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Full Name<span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="FullName" id="FullName" value="@ViewData["fullname"]" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email<span class="req">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" value="@ViewData["email"]" name="email" id="email" placeholder="@ViewData["email"]" required>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email<span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" value="@ViewData["email"]" name="email" id="email" placeholder="@ViewData["email"]" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Website</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="Website" id="Website" value="@ViewData["website"]" required>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Website</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="Website" id="Website" value="@ViewData["website"]" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Company Name<span class="req">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="CompanyName" id="ComapnyName" value="@ViewData["CompanyName"]" required>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Company Name<span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="CompanyName" id="ComapnyName" value="@ViewData["CompanyName"]" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Company Address<span class="req">*</span></label>
-                                    <div class="col-sm-9">
-                                        <textarea type="text" class="form-control" name="CompanyAddress" id="CompanyAddress" placeholder="@ViewData["CompanyAddress"]" rows="5" required></textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Company Address<span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" class="form-control" name="CompanyAddress" id="CompanyAddress" placeholder="@ViewData["CompanyAddress"]" rows="5" required></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-default btn-cta">Save</button>
-                                        <!--<button type="submit" class="btn btn-default btn-cta btn-cancel">Cancel</button>-->
-                                        
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-default btn-cta">Save</button>
+                                    <!--<button type="submit" class="btn btn-default btn-cta btn-cancel">Cancel</button>-->
                                 </div>
-                            </form>
+                            </div>
+                            }
                             <hr />
-                            @*<div class="man_acc">
-                                <h3>Manage Account</h3>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <a class="btn btn-default btn-hold btn-block">Put Account Onhold</a>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Put your account on hold for up to 6 months to stall your payment subscription.</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <a class="btn btn-default btn-hold btn-del btn-block">Delete Account</a>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Delete your account only if you want to permanently remove your account, If you want to stall your payments and not delete all of your account information, put your account on hold.</p>
-                                    </div>
-                                </div>
-                            </div>*@ 
                         </div><!-- /dash_content -->
                     </div><!-- /dash_details -->
                 </div>
@@ -230,7 +236,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="@Url.Action("CyberHealthSignUp", "Home")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-default btn-cta btn-block"><i class="fa fa-search"></i> &nbsp;Get Your FREE Scan Now!</a>
-                 </div>
+                </div>
 
             </div>
         </div>
@@ -249,16 +255,16 @@
                 </div>
                 <div class="col-md-3">
                     <h4>Cyber Mart</h4>
-                    
+
                     <ul>
-                    
-                       
+
+
                         <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
                         <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
                         <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
                         <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
-                   
-                   
+
+
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -300,21 +306,21 @@
             });
         });
     </script>
-   
-     @if (ViewData["ProfileUpdated"]!= null)
-{
-    <script type="text/javascript">
-        $(function () {
-            alert('@ViewData["ProfileUpdated"]');
+
+    @if (ViewData["ProfileUpdated"] != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert('@ViewData["ProfileUpdated"]');
 
 
-        });  
-    </script>
-}
-     else
-     {
+            });
+        </script>
+    }
+    else
+    {
 
-     }
+    }
 
 
 </body>
