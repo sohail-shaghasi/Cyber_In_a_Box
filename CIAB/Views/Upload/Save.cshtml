@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+    <div>
+
+        @*<form method="post" action='@Url.Action("Submit", "Admin")' style="width:45%">
+                <div class="demo-section">
+                    @(Html.Kendo().Upload()
+                    .Name("files")
+                    )
+                    <p>
+                        <input type="submit" value="Submit" class="k-button" />
+                    </p>
+                </div>
+            </form>*@
+
+
+
+        <div style="width:45%">
+            <div class="demo-section">
+                   
+                
+                 @(Html.Kendo().Upload()
+                    .Name("files")
+                    .Async(a => a
+                    .Save("Save", "Upload")
+                    .Remove("Remove", "Upload")
+                    .AutoUpload(true)
+                    )
+                    )
+            
+            </div>
+
+        </div>

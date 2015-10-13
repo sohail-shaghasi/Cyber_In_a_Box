@@ -1,248 +1,139 @@
 ﻿@using Telerik.Web.Mvc.UI
 @using Kendo.Mvc.UI
+@*@using CIAB.Models*@
+
 @model IEnumerable<CIAB.Models.AdminViewModel>
 
 @{
-    Layout = null;
-    //WebGrid grid = new WebGrid(Model);//webGrid Object
+    Layout = "~/Views/_LayoutCIAB.cshtml";
+
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    @*@Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.vista.css"))*@
-
-
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Administrator | KPMG Cyber Security</title>
-
-    <meta name="desc" content="">
-    <!-- Bootstrap -->
 
 
 
 
-    <link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
-    <link href="~/Content/kendo/kendo.rtl.min.css" rel="stylesheet" />
-    <link href="~/Content/kendo/kendo.default.min.css" rel="stylesheet" />
-    <link href="~/Content/kendo/kendo.default.mobile.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
-
-
-
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/custom.css" rel="stylesheet" />
-    <link href="~/Content/style.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-
-
-
-
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    @*<!--Telerik Render Bundles Starts-->
-        @Styles.Render("~/Content/kendo/css")<!--Bundle for css-->
-        @Scripts.Render("~/bundles/jquery")<!--Bundle for jQuery-->
-        @Scripts.Render("~/bundles/kendo")<!--Bundle for JavaScript-->
-        <!--Telerik Render Bundles Ends-->*@
-
-
-
-
-
-
-</head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-static-top">
-
-    <!-- Static navbar -->
-
-    <div id="menu" class="sticky" role="navigation" style="width: 100%; position: fixed; top: 0px;">
-
-        <div class="top_header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 search-top">
-                        <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" /></a>
-                    </div>
-                    <div class="col-md-9 col-md-offset-1 top-nav top-nav">
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
-                                <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                                <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")' ">About Us</a></li>
-                                <li class="flag"><a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'>SGD</a></li>
-
-
-                                @if (HttpContext.Current.Session["UserName"] != null)
-                                {
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-user"></i>
-
-
-                                            <span>Hi</span> @HttpContext.Current.Session["UserName"]
-
-
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
-                                            <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
-                                        </ul>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
-
-                                }
-
-
-                                <!-- <li><a id="myBtn"><i class="fa fa-user"></i> Login</a></li> -->
-                            </ul>
-                        </div><!--/.nav-collapse -->
-
-                    </div>
-                </div>
-            </div><!-- /top_header -->
-
-
-        </div><!-- /menu -->
-    </div><!-- /menu-sticky-wrapper -->
-    <div id="sub_header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 about_header admin_header">
-                    <h1>Admin Panel</h1>
-                </div><!-- /about_header -->
-            </div>
+<div id="sub_header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 about_header admin_header">
+                <h1>Admin Panel</h1>
+            </div><!-- /about_header -->
         </div>
-    </div><!-- /sub_header -->
+    </div>
+</div><!-- /sub_header -->
 
 
-    <div id="sub_content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="bs-example" data-example-id="striped-table" style="background:#fff;padding:40px 20px 20px 20px;">
+<div id="sub_content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bs-example" data-example-id="striped-table" style="background:#fff;padding:40px 20px 20px 20px;">
 
 
-
-                        @(Html.Kendo().Grid(Model)
-                        .Name("OrdersGrid")
-                            .Columns(columns =>
+                    <!--Grid Starts-->
+                    @(Html.Kendo().Grid(Model).Name("OrdersGrid").Columns(columns =>
                             {
-                                // columns.Template(p => @Html.Action(p.OrderID, "foo", new { id = c.OrderID, }));
-                                columns.Bound(p => p.OrderID).Title("Request ID");
+                                columns.Bound(p => p.OrderID).Title("Request ID").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(130);//.ClientTemplate("<a href='" + Url.Action("ProductDetails", "Product") + "/#= OrderID #'" + "></a>");
                                 //columns.Bound(p => p.OrderID).Title("Request ID").ClientTemplate(@Html.ActionLink("this", "that", "trt", new { ID = 2 }));
-                                columns.Bound(p => p.OrderDate).Title("Date").Format("{0:MMMM dd, yyyy}");
-                                columns.Bound(p => p.UserEmail).Title("Email");
-                                columns.Bound(p => p.UserCompany).Title("Company");
-                                columns.Bound(p => p.UserContactNumber).Title("Contact Number");
-
-                                columns.Bound(p => p.ProductID).Title("Product ID");
-                                columns.Bound(p => p.ProductName).Title("Product Name").Width(140);
-                                columns.Bound(p => p.OrderStatus).Title("Status");
-                                columns.Command(command => command.Custom("Update"));
-                                //columns.Command(command => command.Edit());
-
+                                columns.Bound(p => p.OrderDate).Title("Date").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Format("{0:MMMM dd, yyyy}");//Format("{0:MMMM dd, yyyy}");
+                                columns.Bound(p => p.UserEmail).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                                columns.Bound(p => p.UserCompany).Title("Company").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(120);
+                                columns.Bound(p => p.UserContactNumber).Title("Contact Number").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(145);
+                                columns.Bound(p => p.ProductName).Title("Product Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(140);
+                                columns.Bound(p => p.AdminOrderStatus).ClientTemplate("#: AdminOrderStatus.StatusValue #").Title("Status").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                                columns.Command(command => command.Edit().Text("Update")).Title("Action");
+                                columns.Command(command => command.Custom("Upload").Click("showDetails"));
                             })
+
+                                .DataSource(dataSource => dataSource.Ajax().Model(model =>
+                               {
+                                   model.Id(config => config.OrderID);
+                                   model.Field(product => product.AdminOrderStatus);
+                               })
+                            .PageSize(7)
+                            .ServerOperation(false)//No server-side postback , Do it in client side
+                            .Read(read => read.Action("AdminView", "Admin"))//read and display the records
+                            .Update(update => update.Action("Update", "Admin"))//update the record
+
+                            .Events(events => events.Error("error_handler"))
+                            )
+                            .Reorderable(reorder => reorder.Columns(true))
+                            .Resizable(resize => resize.Columns(true))
                             .Pageable()
                             .Sortable()
-
                             .Scrollable()
                             .Filterable()
                             .Selectable()
                             .Editable(m => m.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
-                            .HtmlAttributes(new { style = "height:330px;" })
-                            .DataSource(dataSource => dataSource
-                            .Ajax()
-                            .PageSize(10)
-                            .Model(model => model.Id(p => p.OrderID))
-                            .Read(read => read.Action("AdminView", "Admin"))//read and display the records
-                            .Update(update => update.Action("AdminView", "Admin"))//update the record
-                            .Create(create => create.Action("AdminView", "Admin")//Create a new record
-                            )
-
-                            ))
-
-                    </div><!-- /bs-example -->
+                            .HtmlAttributes(new { style = "height:330px; width: 1100px" })
+                    )  <!--Grid Finished-->
                 </div>
 
-            </div>
-        </div>
-    </div><!-- /sub_header -->
+               @(Html.Kendo().Window()
+               .Name("Details")
+               .Title("Purchase Request Details")
+               .Visible(false)
+               .Modal(true)
+               .Draggable(true)
+               .Width(950)
+               .Height(500)
+               .Iframe(true)
+)
+
+                <script>
+                    function showDetails(e) {
+                        e.preventDefault();
+
+                        var pathname = window.location.host;
+                        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                        var url = "http://" + pathname + "/NewRequest/FileDetailRequest?serialNumber=" + dataItem.SN;
+                        var wnd = $("#Details").kendoWindow({
+                            title: "Purchase Request Details",
+                            actions: ["Minimize", "Maximize", "Close"],
+                            content: url,
+                            visible: false,
+                            modal: true
+                        }).data("kendoWindow");
+
+                        wnd.center();
+                        wnd.open();
+
+                    }
+                </script>
 
 
 
-    <div id="footer">
-        <div class="container">
-            <div class="row t_footer">
-                <div class="col-md-5">
-                    <img src="../Images/kpmg-logo.png" class="" />
-                    <p>
-                        (+65) 6213 3388<br>
-                        <span>cybersecurity@kpmg.com.sg</span><br>
-                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Cyber Mart</h4>
-                    <ul>
-                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
-                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
-                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
-                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Cyber In A Box</h4>
-                    <ul>
-                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
-                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                        <li><a href="http://www.kpmg.com">KPMG</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row b_footer">
-                <div class="col-md-12">
-                    <p><a href="@Url.Action("Legal", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="@Url.Action("Privacy", "Home")" onclick='location.href=this.getAttribute("href")'>Privacy</a></p>
-                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
-                </div>
             </div>
 
         </div>
-    </div><!-- footer -->
-    @*@(Html.Telerik().ScriptRegistrar().jQuery(false))
+    </div>
+</div><!-- /sub_header -->
+<!--this javascript is to trigger grid errors-->
 
-
-
-
-        <script src="~/Scripts/kendo/kendo.web.min.js"></script>*@
-
-    <!-- Modal -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script>
-        $(document).ready(function () {
-            $("#myBtn").click(function () {
-                $("#myModal").modal();
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
             });
+            alert(message);
+        }
+    }
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myBtn").click(function () {
+            $("#myModal").modal();
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+

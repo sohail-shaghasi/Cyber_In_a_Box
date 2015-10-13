@@ -12,7 +12,7 @@ namespace CIAB.Controllers
 {
     public class OrderController : Controller
     {
-
+        //public string ProductID { get; set; }
 
         string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
         public ActionResult Index()
@@ -49,11 +49,12 @@ namespace CIAB.Controllers
         //-----------------------------------------------------------------------------
 
         
-        public ActionResult CreateOrder(string ProductHandle)
+        public ActionResult CreateOrder(string productHandle)
         {
 
-
-            if (ProductHandle == "CIABWD")
+            Session["productHandle"] = productHandle;
+           
+            if (productHandle == "CIABWD")
             {
                 // ViewData["Product"] = CustomerOrderConfirmation;
                 Session["ProductName"] = "WebSite Defacement Monitoring Starting from: $333/Month*";
@@ -63,7 +64,7 @@ namespace CIAB.Controllers
             }
 
 
-            else if (ProductHandle == "CIABETP")
+            else if (productHandle == "CIABETP")
             {
                 Session["ProductName"] = "Email Threat Prevention Starting from: $583/Month*";
                 Session["ProductDuration"] = "*Min 12 Months";
@@ -72,7 +73,7 @@ namespace CIAB.Controllers
             }
 
 
-            else if (ProductHandle == "CIABVS")
+            else if (productHandle == "CIABVS")
             {
                 Session["ProductName"] = "Vulnerability Scan Starting from: $599 Per Scan*";
                 Session["ProductDuration"] = "*Blocks of 10 IP Addresses";
@@ -82,7 +83,7 @@ namespace CIAB.Controllers
 
 
 
-            else if (ProductHandle == "CIABCSC")
+            else if (productHandle == "CIABCSC")
             {
                 Session["ProductName"] = "Cybersecurity Health Check*";
                 Session["ProductDuration"] = "*Starting from: $599 for detailed report";
@@ -100,6 +101,12 @@ namespace CIAB.Controllers
 
         public ActionResult DisplayThankYou()
         {
+            string strProductHandle = string.Empty;
+            if (Session["productHandle"] != null)
+            {
+                strProductHandle = Session["productHandle"].ToString();
+            }
+
             int userIDFromSession = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"]);
 
             CIAB.Models.ConfirmOrderCustomer CustomerOrderConfirmation = UserDetails();
@@ -112,7 +119,7 @@ namespace CIAB.Controllers
             CIABcommand.Connection = CIABconnection;
             CIABcommand.CommandText = "sp_CreateOrder";
             CIABcommand.Parameters.AddWithValue("@UserID", userIDFromSession);
-            CIABcommand.Parameters.AddWithValue("@parameter", "CIABVS");
+            CIABcommand.Parameters.AddWithValue("@parameter", strProductHandle);
             CIABcommand.ExecuteNonQuery();
 
             SendOrderConfirmationEmail();//send email confirmation to customer
@@ -174,7 +181,7 @@ namespace CIAB.Controllers
                 smtp.Send(message);
 
             }
-            catch (Exception ex)
+            catch
             {
                 ViewData["smtpError"] = "Unable to send an email";
             }

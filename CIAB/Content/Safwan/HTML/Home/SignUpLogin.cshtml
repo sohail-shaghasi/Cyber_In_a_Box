@@ -1,0 +1,254 @@
+﻿@model CIAB.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>About Us | KPMG Cyber Security</title>
+    <meta name="desc" content="">
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">
+    <!-- Static navbar -->
+    <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
+        <div id="menu" class="sticky" role="navigation" style="width: 100%; position: fixed; top: 0px;">
+
+            <div class="top_header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 search-top">
+                            <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" alt="" class="pull-left"></a>
+                        </div>
+                        <div class="col-md-9 col-md-offset-1 top-nav">
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
+                                    <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                                    <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
+                                    <li class="flag"><a href="#">SGD</a></li>
+
+                                    @if (HttpContext.Current.Session["UserName"] != null)
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i>
+
+
+                                                <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+
+                                    }
+                                </ul>
+                            </div><!--/.nav-collapse -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /top_header -->
+
+
+        </div><!-- /menu -->
+    </div><!-- /menu-sticky-wrapper -->
+
+    <div id="about_top">
+        <div class="container">
+            <div class="row signup_login">
+                <div class="col-md-6 signup_left">
+                    <div class="header_wrap">
+                        <h3>New <span>User?</span></h3>
+                        <p>Enter your account information below</p>
+                    </div>
+
+
+                    <!-- Register Form Starts Here-->
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="">Full Name <span class="req">*</span></label>
+                            <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Your name will be public" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Username <span class="req">*</span></label>
+                            <input type="text" class="form-control" id="UserName" required name="UserName" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email <span class="req">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password <span class="req">*</span></label>
+                            <input type="password" class="form-control" id="Password" name="Password" required placeholder="Password">
+                            <span id="helpBlock" class="help-block">5 characters minimum, no spaces, no special characters</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Confirm Password <span class="req">*</span></label>
+                            <input type="password" class="form-control" id="Password" name="Password" required placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-block btn-cta">Create My Account!</button>
+                        <span id="helpBlock" class="help-block" style="text-align:center;font-size:12px;">By clicking "Create My Account", you're agreeing to the Term of Use &amp; Privacy Policy</span>
+                    }
+                    <!--Register Form Ends Here-->
+                </div><!-- /about_header -->
+                <div class="col-md-6 login_right">
+                    <div class="header_wrap">
+                        <h3>Returning <span>User?</span></h3>
+                        <p>Already a member? Enter your details below to login</p>
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Type your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <small><a href="3">Forget password</a>.</small>
+
+                            <h4 style="color:red"> @Html.ValidationMessage("LoginError")</h4>
+                        </div>
+                        <button type="submit" class="btn btn-default btn-block btn-success">Login Now!</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bottom_cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>KPMG Cyber Security Health Check</h2>
+                </div>
+                <div class="col-md-4">
+                    <a href="@Url.Action("CyberHealthSignUp", "Home")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-default btn-cta btn-block"><i class="fa fa-search"></i> &nbsp;Get Your FREE Scan Now!</a>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- bottom_cta -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row t_footer">
+                <div class="col-md-5">
+                    <img src="~/Images/kpmg-logo.png" class="" />
+                    <p>
+                        (+65) 6213 3388<br>
+                        <span>cybersecurity@kpmg.com.sg</span><br>
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Cyber Mart</h4>
+                    <ul>
+                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
+                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
+                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
+                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Cyber In A Box</h4>
+                    <ul>
+                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                        <li><a href="http://www.kpmg.com">KPMG</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row b_footer">
+                <div class="col-md-12">
+                    <p><a href="@Url.Action("Legal", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="@Url.Action("Privacy", "Home")" onclick='location.href=this.getAttribute("href")'>Privacy</a></p>
+                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- footer -->
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content sign_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Log In to Your Cyber In A Box Account</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+
+                    <!-- Login Form -->
+
+                    <form data-toggle="validator" role="form" action="/Home/Login" name="LoginForm">
+                        <div class="form-group">
+                            <label for="usrname"><i class="fa fa-user"></i> Username</label>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Enter username" data-error="Username invalid" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"><i class="fa fa-unlock"></i> Password</label>
+                            <input type="password" data-minlength="6" class="form-control" id="Password" name="Password" placeholder="Enter password" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="cbPersist" name="cbPersist" value="" checked><small>Keep in logged in</small></label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login Now</button>
+                        <small class="reg_acc">Don’t have an account? <a href="#">Register Now!</a></small>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--<script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>-->
+
+</body>
+</html>

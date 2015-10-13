@@ -50,6 +50,11 @@ namespace CIAB.Controllers
         }
 
 
+        public ActionResult Marketplace()
+        {
+            return View();
+        }
+
 
         //------------------------------------------------------------------
 
@@ -225,7 +230,7 @@ namespace CIAB.Controllers
                 return Redirect("https://cmasurvey2015.questionpro.com");
 
             }
-            catch (Exception ex)
+            catch 
             {
                 ViewData["smtpError"] = "Unable to send an email";
                 return View();

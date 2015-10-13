@@ -1,0 +1,327 @@
+﻿@*@model IEnumerable<CIAB.Models.Products>*@
+
+@{
+    ViewBag.Title = "CyberMart";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Threat Prevention at The Highest Level | KPMG Cyber Security</title>
+    <meta name="desc" content="">
+    <!-- Bootstrap -->
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Animate Css -->
+
+
+    <link href="css/animate.css" rel="stylesheet">
+
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-static-top">
+    <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
+        <div id="menu" class="sticky" role="navigation" style="width: 100%; position: fixed; top: 0px;">
+
+            <div class="top_header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 search-top">
+                            <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" alt="" class="pull-left"></a>
+
+                        </div>
+                        <div class="col-md-8 top-nav">
+
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
+                                    <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                                    <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
+                                    <li class="flag"><a href="#">SGD</a></li>
+
+
+                                    @if (HttpContext.Current.Session["UserName"] != null)
+                                    {
+
+                                        if ((string)HttpContext.Current.Session["UserName"] == "admin")
+                                        {
+
+
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
+
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="@Url.Action("adminview", "admin")" onclick='location.href=this.getAttribute("href")'>Panel</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
+
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+
+                                    }
+
+                                </ul>
+                            </div><!--/.nav-collapse -->
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /top_header -->
+
+
+        </div><!-- /menu -->
+    </div><!-- /menu-sticky-wrapper -->
+
+
+    <div id="sub_header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mart_header">
+                    <h1>Cyber Mart</h1>
+                    <a href="@Url.Action("CyberHealthSignUp", "Home")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-default btn-cta btn-sm">FREE Cyber Health Check Scan Now!</a>
+                </div><!-- /mart_header -->
+            </div>
+        </div>
+    </div><!-- /sub_header -->
+
+    <div id="sub_content">
+        <div class="container">
+            <div class="row cyber_listing">
+                <div class="col-md-3">
+                    <div class="cyber_item">
+                        <div class="list_thumb">
+                            <img src="~/Images/thumb-cyber-security.png" alt="" />
+                        </div><!-- /list_thumb -->
+                        <img src="~/Images/kpmg-product.jpg" alt="" class="center-block" />
+                        <a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'><h3>Online Cyber Security Health Check</h3></a>
+                        <p>To know more about the health state of your organisation’s systems.<br />&nbsp;</p>
+
+                        <div class="pricing">
+                            <p><strong>Quick Diagnostic:</strong><span class="purple">FREE</span><span class="ext_price">&nbsp;</span></p>
+                        </div><!-- /pricing -->
+                        <a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-block">Details</a>
+                    </div>
+                </div><!-- /cyber_item -->
+
+
+                <div class="col-md-3">
+                    <div class="cyber_item">
+                        <div class="list_thumb">
+                            <img src="~/Images/thumb-vulnerability-scan.png" alt="" class="center-block" />
+                        </div><!-- /list_thumb -->
+                        <img src="~/Images/kpmg-product.jpg" alt="" class="center-block" />
+                        <a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'><h3>Vulnerability Scan<br />&nbsp;</h3></a>
+                        <p>Vulnerability scan allows you to find security weaknesses within your system early.<br />&nbsp;</p>
+
+                        <div class="pricing">
+                            <p><strong>Starting from:</strong><span class="g_price">$599 Per Scan*</span><span class="ext_price">*Blocks of 10 IP Addresses</span></p>
+                        </div><!-- /pricing -->
+
+                        <a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-block">Details</a>
+                    </div>
+                </div><!-- /cyber_item -->
+
+
+                <div class="col-md-3">
+                    <div class="cyber_item">
+                        <div class="list_thumb">
+                            <img src="~/Images/thumb-web-defacement-monitoring.png" alt="" class="center-block" />
+                        </div><!-- /list_thumb -->
+                        <img src="~/Images/banf.jpg" alt="" class="center-block" />
+                        <a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'><h3>Website Defacement Monitoring</h3></a>
+                        <p>Defacement Monitor provides early and proactive monitoring of dynamic websites using 3 advanced engines.</p>
+
+
+
+
+                        <div class="pricing">
+
+                            <p>Starting from:<span class="g_price">$333/Month*</span><span class="ext_price">*Min 6 Months</span></p>
+
+                        </div><!-- /pricing -->
+
+
+
+
+
+
+
+                        <a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-block">Details</a>
+                    </div>
+                </div><!-- /cyber_item -->
+
+
+                <div class="col-md-3">
+                    <div class="cyber_item">
+                        <div class="list_thumb">
+                            <img src="~/Images/thumb-email-threat-prevention.png" alt="" class="center-block" />
+                        </div><!-- /list_thumb -->
+                        <img src="~/Images/fireeye.jpg" alt="" class="center-block" />
+                        <a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'><h3>Email Threat Prevention<br />&nbsp;</h3></a>
+                        <p>Email threat prevention service provides comprehensive email protection against advanced and traditional email threats.</p>
+
+
+
+                        <div class="pricing">
+                            <p>Starting from:<span class="g_price">$583/Month*</span><span class="ext_price">*Min 12 Months</span></p>
+                        </div><!-- /pricing -->
+
+
+
+
+
+
+                        <a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-block">Details</a>
+                    </div>
+                </div><!-- /cyber_item -->
+            </div><!-- /cyber_listing -->
+        </div>
+    </div><!-- /sub_header -->
+
+
+
+    <div id="bottom_cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>KPMG Cyber Security Health Check</h2>
+                </div>
+                <div class="col-md-4">
+
+                    <a href="@Url.Action("CyberHealthSignUp", "Home")" onclick='location.href=this.getAttribute("href")' type="button" type="button" class="btn btn-default btn-cta btn-block"><i class="fa fa-search"></i> &nbsp;Get Your FREE Scan Now!</a>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- bottom_cta -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row t_footer">
+                <div class="col-md-5">
+                    <img src="~/Images/kpmg-logo.png" class="" />
+                    <p>
+                        (+65) 6213 3388<br>
+                        <span>cybersecurity@kpmg.com.sg</span><br>
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Cyber Mart</h4>
+                    <ul>
+                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
+                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
+                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Prevention</a></li>
+                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Cyber In A Box</h4>
+                    <ul>
+                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                        <li><a href="http://www.kpmg.com">KPMG</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row b_footer">
+                <div class="col-md-12">
+                    <p><a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="privacy.html">Privacy</a></p>
+                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- footer -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content sign_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Log In to Your Cyber In A Box Account</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form data-toggle="validator" role="form">
+                        <div class="form-group">
+                            <label for="usrname"><i class="fa fa-user"></i> Username</label>
+                            <input type="text" class="form-control" id="usrname" placeholder="Enter username" data-error="Username invalid" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"><i class="fa fa-unlock"></i> Password</label>
+                            <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Enter password" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" checked><small>Keep in logged in</small></label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login Now</button>
+                        <small class="reg_acc">Don’t have an account? <a href="#">Register Now!</a></small>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
+</body>
+</html>

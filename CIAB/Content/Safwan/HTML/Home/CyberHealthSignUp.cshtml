@@ -1,0 +1,261 @@
+﻿@model CIAB.Models.CyberHealthCheckSignUp
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Check Out | KPMG Cyber Security</title>
+    <meta name="desc" content="">
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-static-top">
+    <!-- Static navbar -->
+    <div id="menu" class="sticky" role="navigation" style="width: 100%; position: fixed; top: 0px;">
+
+        <div class="top_header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 search-top">
+                        <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" /></a>
+                    </div>
+                    <div class="col-md-9 col-md-offset-1 top-nav top-nav">
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
+                                <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                                <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")' ">About Us</a></li>
+                                <li class="flag"><a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'>SGD</a></li>
+
+                                @if (HttpContext.Current.Session["UserName"] != null)
+                                {
+
+                                    if ((string)HttpContext.Current.Session["UserName"] == "admin")
+                                    {
+
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i>
+
+
+                                                <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="@Url.Action("adminview", "admin")" onclick='location.href=this.getAttribute("href")'>Panel</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i>
+
+
+                                                <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+
+                                }
+
+                                <!-- <li><a id="myBtn"><i class="fa fa-user"></i> Login</a></li> -->
+                            </ul>
+                        </div><!--/.nav-collapse -->
+
+                    </div>
+                </div>
+            </div><!-- /top_header -->
+
+
+        </div><!-- /menu -->
+    </div><!-- /menu-sticky-wrapper -->
+    <div id="sub_header" class="single_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 cyber_header">
+                    <h1>Cyber Health Form</h1>
+                </div><!-- /cyber_header -->
+            </div>
+        </div>
+    </div><!-- /sub_header -->
+
+    <div id="sub_content">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="signupbox">
+                        <h3>Sign Up Form</h3>
+
+                        @using (Html.BeginForm("CyberHealthSignUp", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <form data-toggle="validator" role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Full Name <span class="req">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="FullName" id="FullName" placeholder="Full Name" data-error="Enter your full name" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Last Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Job Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="JobTitle" id="JobTitle" placeholder="Job Title">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Company Name <span class="req">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="CompanyName" id="CompanyName" placeholder="Company Name" data-error="Enter your company name" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Email <span class="req">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="email" name="InputEmail" id="InputEmail" class="form-control" placeholder="Email" data-error="Email address is invalid" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Contact Number <span class="req">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" data-error="Enter your contact number" placeholder="Contact Number" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="RecievemarketingEmails" id="RecievemarketingEmails" required> I do not wish to receive unsolicited marketing communications about your products and services.
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" required name="iAgree" id="iAgree"> I agree to the <a href="#">Terms and Conditions.</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default btn-cta btn-block">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /sub_header -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row t_footer">
+                <div class="col-md-5">
+                    <img src="~/Images/kpmg-logo.png" class="" />
+                    <p>
+                        (+65) 6213 3388<br>
+                        <span>cybersecurity@kpmg.com.sg</span><br>
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Cyber Mart</h4>
+                    <ul>
+                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
+                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
+                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
+                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Cyber In A Box</h4>
+                    <ul>
+                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                        <li><a href="http://www.kpmg.com">KPMG</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row b_footer">
+                <div class="col-md-12">
+                    <p><a href="@Url.Action("Legal", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="@Url.Action("Privacy", "Home")" onclick='location.href=this.getAttribute("href")'>Privacy</a></p>
+                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- footer -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Scripts/validator.js")"></script>
+
+
+
+    @if (ViewData["TempUser"] != null)
+    {
+        <script type="text/javascript">
+
+            $(function () {
+
+                alert('@ViewData["TempUser"]');
+
+
+            });
+        </script>
+    }
+    else
+    {
+
+    }
+
+
+</body>
+</html>

@@ -29,10 +29,7 @@ namespace CIAB.Controllers
 
 
         string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
-
-
         //---------------------------------------------------------------------
-
 
         public ActionResult Index()
         {
@@ -41,11 +38,7 @@ namespace CIAB.Controllers
             return View();
         }
 
-
-
         //---------------------------------------------------------------------
-
-
 
         public ActionResult Contact()
         {
@@ -56,8 +49,6 @@ namespace CIAB.Controllers
 
 
         //---------------------------------------------------------------------
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,14 +125,12 @@ namespace CIAB.Controllers
                 return RedirectToAction("sent");
 
             }
-            catch (Exception ex)
+            catch
             {
                 ViewData["smtpError"] = "Unable to send an email";
                 return View();
             }
         }
-
-
 
         //---------------------------------------------------------------------
 
@@ -153,37 +142,35 @@ namespace CIAB.Controllers
             return View();
         }
 
-
-
         //---------------------------------------------------------------------
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CyberHealthSignUp(CIAB.Models.CyberHealthCheckSignUp cyberHealthcheck)
         {
+
             string fullName, LastName, JobTitle, companyName, inputEmail;
-            bool? RecievemarketingEmails, iAgree;
+            bool? RecievemarketingEmails, TermsAndConditions;
             int contactNumber;
 
-            fullName = cyberHealthcheck.fullName.ToString();
+            fullName = cyberHealthcheck.FullName.ToString();
             LastName = cyberHealthcheck.LastName.ToString();
             JobTitle = cyberHealthcheck.JobTitle.ToString();
-            companyName = cyberHealthcheck.companyName.ToString();
-            inputEmail = cyberHealthcheck.inputEmail.ToString();
-            contactNumber = cyberHealthcheck.contactNumber;
-            RecievemarketingEmails = cyberHealthcheck.RecievemarketingEmails;
-            iAgree = cyberHealthcheck.iAgree;
+            companyName = cyberHealthcheck.CompanyName.ToString();
+            inputEmail = cyberHealthcheck.InputEmail.ToString();
+            contactNumber = cyberHealthcheck.ContactNumber;
+            RecievemarketingEmails = cyberHealthcheck.RecieveMarketingEmails;
+            TermsAndConditions = cyberHealthcheck.TermsAndConditions;
 
 
 
             try
             {
+
+
+                TempUser(cyberHealthcheck); //Function call to store the Temporary User information to TempUser Table
+
                 var body = "<p>Email From : {0}  </p> <p>Email Address: {1} </p> <p>Job Title: {2} </p> <p>Company Name: {3} </p> <p>Contact Number: {4}</p>";
-
-
                 //SMTP parameters starts here
                 string strReciever = System.Configuration.ConfigurationManager.AppSettings["smtpReciever"];
                 string strSubject = System.Configuration.ConfigurationManager.AppSettings["SubjectForHealthCeck"];
@@ -245,42 +232,64 @@ namespace CIAB.Controllers
 
 
             }
-            catch (Exception ex)
+            catch
             {
                 ViewData["smtpError"] = "Unable to send an email";
                 return View();
             }
         }
 
+        //---------------------store the Temporary User Information to TempUser Table------------------------------------------------
+        private void TempUser(CIAB.Models.CyberHealthCheckSignUp CyberHealthCheck)
+        {
 
+            try
+            {
+
+
+
+
+                SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
+                SqlCommand CIABcommand = new SqlCommand();
+                CIABconnection.Open();
+                CIABcommand.CommandType = CommandType.StoredProcedure;
+                CIABcommand.Connection = CIABconnection;
+                CIABcommand.CommandText = "sp_TempUser";
+
+
+                CIABcommand.Parameters.AddWithValue("@FullName", CyberHealthCheck.FullName);
+                CIABcommand.Parameters.AddWithValue("@LastName", CyberHealthCheck.LastName);
+                CIABcommand.Parameters.AddWithValue("@JobTitle", CyberHealthCheck.JobTitle);
+                CIABcommand.Parameters.AddWithValue("@CompanyName", CyberHealthCheck.CompanyName);
+                CIABcommand.Parameters.AddWithValue("@Email", CyberHealthCheck.InputEmail);
+                CIABcommand.Parameters.AddWithValue("@ContactNumber", CyberHealthCheck.ContactNumber);
+                CIABcommand.ExecuteNonQuery();
+                ViewData["TempUser"] = "Successfull";//message for pop up Alert().
+
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+
+
+        }
 
         //---------------------------------------------------------------------
-
-
-
         public ActionResult sent()
         {
             return View();
         }
 
 
-
-
         //---------------------------------------------------------------------
-
-
 
         public ActionResult AboutUs()
         {
             return View();
         }
 
-
-
         //---------------------------------------------------------------------
-
-
-
 
         public ActionResult Legal()
         {
@@ -288,19 +297,14 @@ namespace CIAB.Controllers
             return View();
         }
 
-
         //---------------------------------------------------------------------
-
-
 
         public ActionResult Privacy()
         {
             return View();
         }
 
-
         //---------------------------------------------------------------------
-
 
         public ActionResult SignUpLogin()
         {
@@ -308,10 +312,7 @@ namespace CIAB.Controllers
         }
 
 
-
         //---------------------------------------------------------------------
-
-
 
         [HttpGet]
         public ActionResult Login()
@@ -323,42 +324,25 @@ namespace CIAB.Controllers
         //---------------------------------------------------------------------
 
 
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(User CIABuser)
         {
 
-            bool? cbPersist = CIABuser.cbPersist;
-            string adminUserID = WebConfigurationManager.AppSettings["AdminLoginID"];
-            string adminPass = WebConfigurationManager.AppSettings["AdminPassword"];
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)//Check if Model properties are Valid
             {
 
-
-
-                if (CIABuser.UserName == adminUserID && CIABuser.Password == adminPass)
-                {
-                    Session["UserName"] = CIABuser.UserName;//Username store in the session
-                    //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);//To make User's login credentials persistent.
-
-                    Session["Password"] = CIABuser.HashPassword;
-                    return RedirectToAction("Index", "Home");
-
-                }
-
-
-                else if (CIABuser.IsValid(CIABuser.UserName, CIABuser.Password))
+                if (CIABuser.IsValid(CIABuser.LoginUserName, CIABuser.LoginPassword))//Check the credentials against the database
                 {
 
 
                     //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);
                     //FormsAuthentication.RedirectFromLoginPage(CIABuser.UserName, false);//To make User's login credentials persistent.
-                    Session["UserName"] = CIABuser.UserName;//Username store in the session
+                    Session["UserName"] = CIABuser.LoginUserName ;//Username store in the session
                     Session["Password"] = CIABuser.HashPassword;
                     Session["UserId"] = CIABuser.UserID;
-                    Session["email"] = CIABuser.email;
-                    // Session["UserID"] = CIABuser.UserID;
+                    Session["email"] = CIABuser.LoginEmail;
+                    Session["UserRole"] = CIABuser.Role;
                     return RedirectToAction("Index", "Home");
 
 
@@ -366,21 +350,18 @@ namespace CIAB.Controllers
                 else
                 {
                     ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
-
+                    return View("SignUpLogin", CIABuser);
                 }
             }
-
-
-
-            return View("SignUpLogin");
+            else
+            {
+                ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
+                return View("SignUpLogin", CIABuser);
+            }
         }
 
 
-
-
         //---------------------------------------------------------------------
-
-
 
 
         [HttpGet]
@@ -391,28 +372,26 @@ namespace CIAB.Controllers
         }
 
 
-
-
         //---------------------------------------------------------------------
 
 
-
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(CIAB.Models.User NewUser)
         {
             string strFullName = NewUser.FullName;
             string strUserName = NewUser.UserName;
-            string strEmail = NewUser.email;
+            string strEmail = NewUser.RegisterationEmail;
             string strPass = NewUser.Password;
 
             SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
             SqlCommand CIABcommand = new SqlCommand();
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
+
                     CIABconnection.Open();
                     CIABcommand.CommandType = CommandType.StoredProcedure;
                     CIABcommand.Connection = CIABconnection;
@@ -433,28 +412,27 @@ namespace CIAB.Controllers
                     int NumberOfRecords = CIABcommand.ExecuteNonQuery();
 
 
+                    return RedirectToAction("RegistrationConfirmation");
+
                 }
 
-                catch (Exception ex)
+
+                else
                 {
-                    ex.ToString();
+
+                    return View("SignUpLogin", NewUser);
                 }
             }
 
-            else
+            catch
             {
-                RedirectToAction("Register");
+
+                return View("SignUpLogin", NewUser);
             }
-
-
-            return RedirectToAction("RegistrationConfirmation");
         }
 
 
-
         //---------------------------------------------------------------------
-
-
 
         public static string ByteArrayToString(byte[] byteArray)
         {
@@ -464,23 +442,14 @@ namespace CIAB.Controllers
             return hex.ToString();
         }
 
-
-
         //---------------------------------------------------------------------
-
-
 
         public ActionResult RegistrationConfirmation()
         {
             return View();
         }
 
-
-
-
         //---------------------------------------------------------------------
-
-
 
 
         [HttpGet]
@@ -531,12 +500,7 @@ namespace CIAB.Controllers
             return View();
         }
 
-
-
-
         //---------------------------------------------------------------------
-
-
 
 
         [HttpPost]
@@ -549,14 +513,7 @@ namespace CIAB.Controllers
             return View(userProfileEdit);
         }
 
-
-
-
         //---------------------------------------------------------------------
-
-
-
-
 
         private void GetUserProfile()
         {
@@ -594,14 +551,7 @@ namespace CIAB.Controllers
             }
         }
 
-
-
-
         //---------------------------------------------------------------------
-
-
-
-
 
 
         /// <summary>
@@ -621,10 +571,13 @@ namespace CIAB.Controllers
 
         }
 
-
-
         //---------------------------------------------------------------------
 
 
+        [NonAction]//This is to specify that, Result() function is not invokable.
+        public string Result()
+        {
+            return "";
+        }
     }
 }

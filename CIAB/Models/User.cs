@@ -2,42 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace CIAB.Models
 {
     public class User
     {
-        //Reading Connection string from Web.Config File 
         string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
 
         public User()
         {
 
         }
-        //------------------------------------------------------------------------
-        //Properties that Represent columns of the Database Table.
+
+        //--Login Properties Starts--
         public int UserID { get; set; }
+        public string LoginUserName { get; set; }
+        public string LoginPassword { get; set; }
+        public string Role { get; set; }
+        public bool? cbPersist { get; set; }
+        public string LoginEmail { get; set; }
+
+        //--Login Properties Ends--
+
+
+        //--Registeration Properties Starts--
         public string FullName { get; set; }
         public string UserName { get; set; }
-        [Required]
+
+        [StringLength(10, MinimumLength = 5, ErrorMessage =
+           "5 characters minimum, no spaces, no special characters")]
         public string Password { get; set; }
-        public string email { get; set; }
+
+        [Compare("Password", ErrorMessage = "The Password and Confirm Password do not match")]//to compare the password fields.
+        public string ConfirmPassword { get; set; }
+        public string RegisterationEmail { get; set; }
         public string HashPassword { get; set; }
-
-        public bool? cbPersist { get; set; }
-
-
-
-
-
-
-        //------------------------------------------------------------------------
+        //--Registeration Properties Ends-----
 
 
         /// <summary>
@@ -48,11 +54,6 @@ namespace CIAB.Models
         /// <returns>True if User Exists and Password is Correct</returns>
         public bool IsValid(string _UserName, string _Password)
         {
-
-
-            bool isValid = false;
-
-
             try
             {
 
@@ -62,11 +63,6 @@ namespace CIAB.Models
                 CIABcommand.CommandType = CommandType.StoredProcedure;
                 CIABcommand.Connection = CIABconnection;
                 CIABcommand.CommandText = "sp_Login";
-
-
-
-
-                //apply Hashing on password.
 
                 Encoding encoder = new UTF8Encoding();
                 SHA1 sha = new SHA1Managed();
@@ -84,7 +80,8 @@ namespace CIAB.Models
                 while (reader.Read())
                 {
                     UserID = (int)reader["UserID"];
-                    email = reader["Email"].ToString();
+                    LoginEmail = reader["Email"].ToString();
+                    Role = reader["Role"].ToString();
 
                     reader.Dispose();
                     CIABcommand.Dispose();
@@ -93,7 +90,7 @@ namespace CIAB.Models
 
                 return false;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

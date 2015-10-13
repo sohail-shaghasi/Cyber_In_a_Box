@@ -1,103 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "sent";
-    Layout = null;
+    Layout = "~/Views/_LayoutCIAB.cshtml";
 }
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Threat Prevention at The Highest Level | KPMG Cyber In A Box</title>
-    <meta name="desc" content="">
-    <!-- Bootstrap -->
-
-
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/custom.css" rel="stylesheet" />
-    <link href="~/Content/style.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
-    <link href="~/Content/colorbox.css" rel="stylesheet" />
-    <link href="~/Content/royalslider.css" rel="stylesheet" />
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
-    <script src="~/Scripts/jquery.bxslider.js"></script>
-    <script src="~/Scripts/jquery.royalslider.min.js"></script>
-    <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
-</head>
-<body>
-    <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
-        <div id="menu" role="navigation" style="width: 100%; position: fixed; top: 0px;z-index:777;">
-
-            <div class="top_header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 search-top">
-                            <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" /></a>
-                        </div>
-                        <div class="col-md-7 col-md-offset-2 top-nav">
-                            <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
-                                    <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                                    <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")' ">About Us</a></li>
-                                    <li class="flag"><a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'>SGD</a></li>
-                                    
-                                    @if (HttpContext.Current.User != null)
-                                    {
-                                        if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                        {
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-user"></i>  @if (HttpContext.Current.User != null)
-                                                    {
-                                                        if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                                        {
-                                                            <span>Hi</span> @Html.Encode(HttpContext.Current.User.Identity.Name)
-                                                        }
-                                                    }
-                                                    <span class="caret"></span>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
-                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
-                                                </ul>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
-                                            //<li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Log In</a></li>
-                                        }
-
-
-                                    }
-  
-                                    
-                                    <!-- <li><a id="myBtn"><i class="fa fa-user"></i> Login</a></li> -->
-                                </ul>
-                            </div><!--/.nav-collapse -->
-
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /top_header -->
-
-
-        </div><!-- /menu -->
-    </div><!-- /menu-sticky-wrapper -->
-
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-top:100px">
@@ -109,51 +14,6 @@
     </div>
 
     <div>
-        <br />
-        <br />
-        <br />
-        <br />
+        <br /><br /> <br /> <br />
     </div>
-
-    <div id="footer">
-        <div class="container">
-            <div class="row t_footer">
-                <div class="col-md-5">
-                    <img src="~/Images/kpmg-logo.png" class="" />
-                    <p>
-                        (+65) 6213 3388<br>
-                        <span>cybersecurity@kpmg.com.sg</span><br>
-                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Cyber Mart</h4>
-                    <ul>
-                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
-                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
-                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
-                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Cyber In A Box</h4>
-                    <ul>
-                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
-                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                        <li><a href="http://www.kpmg.com">KPMG</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row b_footer">
-                <div class="col-md-12">
-                    <p><a href="@Url.Action("Legal", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="@Url.Action("Privacy", "Home")" onclick='location.href=this.getAttribute("href")'>Privacy</a></p>
-                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
-                </div>
-            </div>
-
-        </div>
-    </div><!-- footer -->
-
-</body>
-</html>
 

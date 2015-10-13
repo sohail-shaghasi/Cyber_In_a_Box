@@ -65,7 +65,7 @@ namespace CIAB.Models
 
             }
 
-            catch(Exception ex)
+            catch
             {
 
             }

@@ -60,7 +60,7 @@ section {
 /** 02. Headers
 *************************************************** **/
 section#hero {
-    background: url("../Images/kpmg-homebanner.png")no-repeat center center scroll; 
+    background: url("../Images/kpmg-homebanner.jpg")no-repeat center center scroll; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -271,7 +271,7 @@ body.v2 section#hero {
     color: #f03a6e;
 }
 .moustach {
-    background: url("../Images/elements/moustach.png") no-repeat center;
+    background: url("~/Images/elements/moustach.png") no-repeat center;
     width: 100px;
     height: 40px;
     display: inline-block;
@@ -405,7 +405,7 @@ body.v2 section#hero {
 }
 /** Services **/
 section#services {
-    background-image: url("../Images/services.jpg");
+    background-image: url("~/Images/services.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -428,7 +428,7 @@ section#services {
     content: '';
     width: 100%;
     height: 20px;
-    background: url("../Images/elements/moustach-white.png") no-repeat center;
+    background: url("~/Images/elements/moustach-white.png") no-repeat center;
     display: inline-block;
 }
 .services {
@@ -542,7 +542,7 @@ section#services {
     background: #434343;
 }
 #about .container {
-    background: url("../Images/elements/watermark.png") no-repeat right center;
+    background: url("~/Images/elements/watermark.png") no-repeat right center;
 }
 .war {
     font-size: 22px;
@@ -837,7 +837,7 @@ div.pp_overlay {
 }
 /** Clients **/
 section#clients {
-    background-image: url("../Images/clients.jpg");
+    background-image: url("~/Images/clients.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -1575,7 +1575,7 @@ blockquote.style2:after {
 .spacer-4 {
     float: left;
     width: 100%;
-    background: url("../Images/elements/separator.png") repeat-x center;
+    background: url("~/Images/elements/separator.png") repeat-x center;
     height: 20px;
     margin: 15px 0px;
 }

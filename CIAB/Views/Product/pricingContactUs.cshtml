@@ -1,79 +1,22 @@
 ﻿@model CIAB.Models.EmailFrom
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutCIAB.cshtml";
 }
-
-<!DOCTYPE html>
-
-<h2>Pricing </h2>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Pricing | KPMG Cyber Security</title>
-    <meta name="desc" content="">
-
-
-    <!-- Bootstrap -->
-    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/custom.css")" rel="stylesheet" />
-
-    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" />
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"></script>
-</head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">
-    <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
-        <div id="menu" class="sticky" role="navigation" style="width: 100%; position: fixed; top: 0px;">
-
-            <div class="top_header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 search-top">
-                            <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-logo.png" alt="" class="pull-left"></a>
-
-                        </div>
-                        <div class="col-md-6 top-nav">
-
-                            <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li><a href="@Url.Action("CyberMart", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Mart</a></li>
-                                    <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                                    <li class="active"><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
-                                    <li class="flag"><a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'>SGD</a></li>
-                                    <!-- <li><a id="myBtn"><i class="fa fa-user"></i> Login</a></li> -->
-                                </ul>
-                            </div><!--/.nav-collapse -->
-
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /top_header -->
-
-
-        </div><!-- /menu -->
-    </div><!-- /menu-sticky-wrapper -->
+<div>
 
     <div id="sub_header" style="margin-top:-10px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mart_header">
-                    <h1 class="contact_new">Contact Us
+                    <h1 class="contact_new">
+                        Contact Us
                         <span>For more information about the pricing of the product, kindly leave your particulars below and we will contact you shortly.</span>
                     </h1>
-                    <a href="@Url.Action("CyberHealthSignUp", "Home")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-default btn-cta btn-sm">FREE Cyber Health Check Scan Now!</a>
                 </div><!-- /about_header -->
             </div>
         </div>
     </div><!-- /sub_header -->
-
+</div>
     <div id="sub_content">
         <div class="container">
             <div class="row">
@@ -136,11 +79,7 @@
                        {
                            Response.Write(ViewData["smtpError"]);
                        }
-                     
-                          
-                      
-                      
-                    
+  
 
                 </div>
                 <div class="col-md-6 contact_details">
@@ -215,57 +154,4 @@
         </div>
     </div><!-- bottom_cta -->
 
-    <div id="footer">
-        <div class="container">
-            <div class="row t_footer">
-                <div class="col-md-5">
-                    <img src="~/Images/kpmg-logo.png" class="" />
-                    <p>
-                        (+65) 6213 3388<br>
-                        <span>cybersecurity@kpmg.com.sg</span><br>
-                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Cyber Mart</h4>
-                    <ul>
-                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
-                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
-                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
-                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Cyber In A Box</h4>
-                    <ul>
-                        <li><a href="@Url.Action("AboutUs", "Home")" onclick='location.href=this.getAttribute("href")'>About Us</a></li>
-                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                        <li><a href="http://www.kpmg.com">KPMG</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row b_footer">
-                <div class="col-md-12">
-                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="@Url.Content("~/Scripts/validator.js")"></script>
-    <script>
-        $(document).ready(function () {
-            $("#myBtn").click(function () {
-                $("#myModal").modal();
-            });
-        });
-    </script>
-</body>
-
-</html>
+   

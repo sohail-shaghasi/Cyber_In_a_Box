@@ -229,7 +229,7 @@ p.testi_content span {
 
 #cyber_intro .nav-tabs>li {
     width: 100%;
-    max-width: 33%;
+    max-width: 25%;
 }
 
 #cyber_intro .nav-tabs>li>a {
@@ -364,7 +364,7 @@ span.ext_price {
 }
 
 #about_top {
-    /* background: url(../Images/circuit-repeat-ng.jpg) repeat; */
+    /* background: url(~/Images/circuit-repeat-ng.jpg) repeat; */
     background: #D6EAF2;
     color: #444;
     padding: 80px 0;
@@ -489,24 +489,24 @@ h3.confirm_title {
 }
 
 .cyber_header {
-    background: url(~/Images/header_cybersecurity.jpg) right center no-repeat;
+    background: url(../Images/header_cybersecurity.jpg) right center no-repeat;
 }
 
 .defacement_header {
-    background: url(~/Images/header_defacement.jpg) right top no-repeat;
+    background: url(../Images/header_defacement.jpg) right top no-repeat;
 }
 
 .vulnerability_header {
-    background: url(~/Images/header_vulnerability.jpg) right bottom no-repeat;
+    background: url(../Images/header_vulnerability.jpg) right bottom no-repeat;
 }
 
 .emailthreat_header {
-    background: url(~/Images/header_emailtreat.jpg) right top no-repeat;
+    background: url(../Images/header_emailtreat.jpg) right top no-repeat;
 }
 
 .mart_header,
 .about_header.admin_header  {
-    background: url(/Images/cybermart-bg.jpg) right top no-repeat; 
+  
 }
 
 
@@ -524,12 +524,12 @@ h3.confirm_title {
 
 .confirm_header {
     padding: 0 0 46px 0; margin: 0;
-    background: url(/Images/header_confirm.jpg) right center no-repeat;
+    
 }
 
 
 #cyber_intro {
-    background: url(/Images/globe-bg.jpg) center bottom no-repeat #1e4c6d;
+    /* background: url(/Images/globe-bg.jpg) center bottom no-repeat #1e4c6d; */
     text-align: center;
     color: #fff;
     padding: 60px 0 250px 0;
@@ -629,7 +629,7 @@ a.toplink:hover {
     font-weight:bold;
     border: none;
     text-transform: uppercase;
-    padding: 7px 50px;
+    padding: 7px 20px;
     line-height: 30px;
     text-shadow: 0 1px 0 #000;
     letter-spacing: .9px;
@@ -2338,7 +2338,7 @@ body.v2 .top_header {
 
 .mart_header h1.contact_new {
     line-height:30px !important;
-    padding-top:35px;
+    padding-top:60px;
 }
 
 h1.contact_new span {
@@ -2389,4 +2389,139 @@ h1.contact_new span {
 .header_wrap {
     padding:30px 40px;
     padding-bottom:0px;
+}
+
+
+/* Hong Yip */
+.thumbnail.home_box {
+	height:400px;
+	position:relative;
+	padding:0;
+}
+
+.thumbnail.home_box img {
+	margin-top:50px;
+}
+
+.thumbnail.home_box .caption {
+	position:absolute;
+	bottom:0;
+	display:block;
+	background:#bd4036;
+	width:100%;
+	color:#fff !important;
+}
+
+.thumbnail.home_box .caption h3 {
+	color:#fff;
+	padding:0;
+	line-height:18px;
+}
+
+.thumbnail.home_box .caption h3 a {
+	color:#fff;
+}
+
+.thumbnail.home_box .caption h3 a:hover {
+	text-decoration:underline;
+}
+
+.thumbnail.home_box.red_box {
+  	background:url(../Images/new/red_bg.jpg) repeat #ce483d;
+}
+
+.thumbnail.home_box.green_box {
+
+	background:url(../Images/new/green_bg.jpg) repeat #ce483d;
+
+}
+
+.thumbnail.home_box.green_box .caption {
+	background-color: #5eb990;
+}
+
+.thumbnail.home_box.yellow_box {
+
+
+	background:url(../Images/new/yellow_bg.jpg) repeat #ce483d;
+}
+
+.thumbnail.home_box.yellow_box .caption {
+	background-color: #f2b51c;
+}
+
+/*.btn-thanks {
+   background: #33a6e9 ;
+   border-bottom: 5px solid #0c2d47 ;
+}*/
+
+.top-nav #navbar li a {
+
+}
+
+.search-top img {
+    height:35px;
+}
+
+.top-nav #navbar li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#home_about h3 {
+    font-size:25px;
+}
+
+#home_about {
+    padding: 30px 0;
+}
+
+#sub_header {
+    height: 91px;
+    margin-top: 50px;
+}
+
+#sub_header h1 {
+    line-height:inherit;
+    font-size:35px;
+    margin: 12px 0;
+}
+
+#cyber_intro {
+    background-color:#1e4c6d;
+    padding: 50px 0 100px 0;
+}
+
+#cyber_intro .nav-tabs>li>a {
+    letter-spacing: -0.1px;
+    font-size: 13px;
+}
+
+.cyber_header_new {
+    background: url(../Images/cyber_header_bg.jpg) 70px 40px no-repeat;
+    background-color:#ff0000;
+}
+
+.email_header_new {
+    background: url(../Images/email_header_bg.jpg) 70px 20px no-repeat;
+    background-color:#ff0000;
+}
+
+.vulne_header_new {
+    background: url(../Images/vulne_header_bg.jpg) 70px 10px no-repeat;
+    background-color:#ff0000;
+}
+
+.defa_header_new {
+    background: url(../Images/defa_header_bg.jpg) 70px 20px no-repeat;
+    background-color:#ff0000;
+}
+
+.top-nav a:hover,
+.top-nav a:focus {
+    background: transparent !important;
+}
+
+#A_43:hover, #A_87:hover, #A_130:hover {
+    background:#941444 !important;
 }

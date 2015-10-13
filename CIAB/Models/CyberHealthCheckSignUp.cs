@@ -7,13 +7,13 @@ namespace CIAB.Models
 {
     public class CyberHealthCheckSignUp
     {
-        public string fullName{get; set;}
+        public string FullName{get; set;}
         public string LastName{get; set;}
         public string JobTitle{get; set;}
-        public string companyName{get; set;}
-        public string inputEmail{get; set;}
-        public int contactNumber { get; set; }
-        public bool? RecievemarketingEmails{get; set;}
-        public bool? iAgree { get; set; }
+        public string CompanyName{get; set;}
+        public string InputEmail{get; set;}
+        public int ContactNumber { get; set; }
+        public bool? RecieveMarketingEmails{get; set;}
+        public bool? TermsAndConditions { get; set; }
     }
 }
