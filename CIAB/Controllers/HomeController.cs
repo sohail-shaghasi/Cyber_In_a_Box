@@ -419,7 +419,7 @@ namespace CIAB.Controllers
 
                 else
                 {
-
+                    ModelState.AddModelError("test", "testing");
                     return View("SignUpLogin", NewUser);
                 }
             }

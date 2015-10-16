@@ -9,6 +9,8 @@
     <meta name="desc" content="">
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo/css")
     @Scripts.Render("~/bundles/kendo")
@@ -29,6 +31,7 @@
     <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
+    @{Html.EnableClientValidation(true);}
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">

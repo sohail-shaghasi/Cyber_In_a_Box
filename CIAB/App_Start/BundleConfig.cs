@@ -64,7 +64,10 @@ namespace CIAB
                                         "~/Content/kendo/kendo.common.min.css",
                                         "~/Content/kendo/kendo.default.min.css"));
 
-
+           
+            
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/Scripts/jquery.validate*")); 
 
 
 
