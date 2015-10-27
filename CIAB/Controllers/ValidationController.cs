@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CIAB.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 
 namespace CIAB.Controllers
@@ -19,64 +21,94 @@ namespace CIAB.Controllers
             return View();
         }
 
-        //[HttpPost]
-       // [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        
-        [HttpGet]
-        
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult IsUserNameAvailable(string UserName)
         {
 
-            if (UserName != "sohail")
+            SqlConnection con = new SqlConnection(CIABconnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_CheckUserName";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@UserName", UserName);
+            con.Open();
+            
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while(reader.Read())
             {
-                return Json(true, JsonRequestBehavior.AllowGet);
+                if((int)reader["ReturnCode"] == 1)
+                {
+                    return Json(string.Format("{0} is in Use", UserName), JsonRequestBehavior.AllowGet);
+                  
+                }
             }
-
-            return Json(string.Format("{0} is invalid", UserName),
-                    JsonRequestBehavior.AllowGet);
-
-
-
-            //int _count = 0;
-            //SqlConnection con = new SqlConnection(CIABconnectionString);
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.Connection = con;
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.CommandText = "sp_CheckUsers";
-            //cmd.Parameters.Clear();
-
-            //cmd.Parameters.AddWithValue("@UserName", UserName);
-            //SqlParameter param = new SqlParameter("@IsExists", System.Data.SqlDbType.Int);
-            //param.Direction = System.Data.ParameterDirection.Output;
-            //cmd.Parameters.Add(param);
-            //cmd.ExecuteNonQuery();
-            //_count = Convert.ToInt32(param.Value);
-            //return Json(_count);
-            //// return _count;
-            //// return Json( == null);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
 
-         //[HttpPost]
-        //[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        [HttpGet]
-        public JsonResult IsEmailAvailable(string RegisterationEmail)
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult IsEmailAvailable(string RegisterationEmail)
         {
-        
 
-             return Json(!RegisterationEmail.Equals("this@email.com"), JsonRequestBehavior.AllowGet);
+            SqlConnection con = new SqlConnection(CIABconnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_CheckRegisterEmailAddress";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@Email", RegisterationEmail);
+            con.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if ((int)reader["ReturnCode"] == 1)
+                {
+                    return Json(string.Format("{0} is in Use", RegisterationEmail), JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
 
 
 
-        //[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        [HttpGet]
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+
         public JsonResult IsCurrentPasswordAvailable(string CurrentPass)
         {
-            var result = false;
 
-            if (CurrentPass == "sohail")
+            string CurrentPassWithSalt = CurrentPass + "d3katk00";
+            StringBuilder SB_Hexadecimal = new StringBuilder();
+            var result = false;
+            string strOldPassword = "";
+
+
+
+            SHA1CryptoServiceProvider sha1Provider = new SHA1CryptoServiceProvider();
+            sha1Provider.ComputeHash(ASCIIEncoding.ASCII.GetBytes(CurrentPassWithSalt));
+            byte[] hashArray = sha1Provider.Hash;
+
+
+
+            foreach (byte passByte in hashArray)
+            {
+                SB_Hexadecimal.AppendFormat("{0:x2}", passByte);
+            }
+
+            //check if Password session is empty.
+            if (HttpContext.Session["Password"] != null)
+            {
+                strOldPassword = HttpContext.Session["Password"].ToString();
+            }
+
+            //check if Old Password is same as the current password.
+            if (SB_Hexadecimal.ToString() == strOldPassword)
             {
                 result = true;
             }

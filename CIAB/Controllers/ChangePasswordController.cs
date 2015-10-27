@@ -37,10 +37,6 @@ namespace CIAB.Controllers
         [HttpPost]
         public ActionResult ChangeUserPassword(CIAB.Models.ResetPassword ResetPass)
         {
-
-
-
-
             if (ModelState.IsValid)
             {
                 string strCurrentPass = GetSHA1(ResetPass.CurrentPass + "d3katk00");
@@ -48,32 +44,33 @@ namespace CIAB.Controllers
 
 
 
-                string strOldPasswordTobeCompared = "";
+                string strOldPassword = "";
 
                 if (HttpContext.Session["Password"] != null)
                 {
-                    strOldPasswordTobeCompared = HttpContext.Session["Password"].ToString();
-                    if (strCurrentPass != strOldPasswordTobeCompared)
+                    strOldPassword = HttpContext.Session["Password"].ToString();
+                    if (strCurrentPass != strOldPassword)
                     {
                         ViewBag.ErrorMessage = "Current Password is not Valid!";
                         return View("ChangeUserPassword");
                     }
 
+                    else if (strOldPassword == strNewPass)
+                    {
+                        ViewBag.Error = "New password cannot be the same as old password";
+                        return View("ChangeUserPassword");
+                    }
+
                 }
                 //check if old password and new hashed password resembles.
-
                 int returnValue = AddNewPassword(ResetPass, strCurrentPass, strNewPass);
-
-
                 if (returnValue == 1)
                 {
                     return RedirectToAction("PasswordResetSuccess");
-                    // Or show in messagebox using: ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Password has been changed successfully');", true);
                 }
                 else
                 {
                     return View(ResetPass);
-                    // Or show in messagebox using: ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Wrong username/password. Please re-enter.');", true);
                 }
             }
 
@@ -148,8 +145,6 @@ namespace CIAB.Controllers
 
             return SB_Hexadecimal.ToString();
         }
-
-
 
 
 

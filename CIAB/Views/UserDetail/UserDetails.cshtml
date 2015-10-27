@@ -5,26 +5,30 @@
     Layout = "~/Views/_LayoutCIAB.cshtml";
 }
 
+<script src="~/Scripts/jszip.min.js"></script>
 
-    <div id="sub_content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="bs-example" data-example-id="striped-table" style="background:#fff;padding:40px 20px 20px 20px;">
+<div id="sub_content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bs-example" data-example-id="striped-table" style="background:#fff;padding:40px 20px 20px 20px;">
 
 
 
-                        @(Html.Kendo().Grid(Model).Name("UserDetailsGrid").Columns(columns =>{
+                    @(Html.Kendo().Grid(Model).Name("UserDetailsGrid").Columns(columns =>
+                    {
 
-                                columns.Bound(p => p.FullName).Title("Full Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
-                                columns.Bound(p => p.UserName).Title("User Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
-                                columns.Bound(p => p.Email).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
-                                columns.Bound(p => p.pass).Title("Password").Format("*****").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
-                                columns.Command(command => command.Edit().Text("Update")).Title("Action");
-                            })
-                         
+                        columns.Bound(p => p.FullName).Title("Full Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                        columns.Bound(p => p.UserName).Title("User Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                        columns.Bound(p => p.Email).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                        //columns.Bound(p => p.pass).Title("Password").Format("*****").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                        columns.Command(command => command.Edit().Text("Update")).Title("Action");
+                    })
 
-                                
+
+
+                             .ToolBar(tools => tools.Excel())
+                             .Excel(excel => excel.FileName("CIAB_ListOfUsers.xlsx").AllPages(true))
 
                             .DataSource(dataSource => dataSource
                             .Ajax()
@@ -34,21 +38,22 @@
                             .Read(read => read.Action("UserDetails", "UserDetail"))//read and display the records
                             .Update(update => update.Action("Update", "UserDetail"))
                             //.Destroy(delete => delete.Action("Create", "UserDetail"))
+                           .PageSize(10)
                             )
+
+
                             
-                                
-
-
+                            .ColumnMenu()
                             .Pageable()
                             .Sortable()
-                            .Scrollable()
                             .Filterable()
                             .Selectable()
                             .Editable(editable => editable.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
                             .HtmlAttributes(new { style = "height:330px;" })
                             
 
-                        )
+
+                    )
 
 
 
@@ -59,12 +64,12 @@
 
 
 
-                    </div><!-- /bs-example -->
-                </div>
-
+                </div><!-- /bs-example -->
             </div>
+
         </div>
-    </div><!-- /sub_header -->
+    </div>
+</div><!-- /sub_header -->
 
 
 
@@ -73,23 +78,23 @@
 <script src="~/Scripts/kendo/kendo.web.min.js"></script>
 
 
-    <script type="text/javascript">
-        function error_handler(e) {
-            if (e.errors) {
-                var message = "Errors:\n";
-                $.each(e.errors, function (key, value) {
-                    if ('errors' in value) {
-                        $.each(value.errors, function () {
-                            message += this + "\n";
-                        });
-                    }
-                });
-                alert(message);
-            }
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
         }
-    </script>
+    }
+</script>
 
-    @*<script>
+@*<script>
         $(document).ready(function () {
             $("#myBtn").click(function () {
                 $("#myModal").modal();

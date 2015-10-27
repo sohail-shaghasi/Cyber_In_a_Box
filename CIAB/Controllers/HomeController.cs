@@ -311,18 +311,14 @@ namespace CIAB.Controllers
             return View();
         }
 
-
         //---------------------------------------------------------------------
-
         [HttpGet]
         public ActionResult Login()
         {
             return View("Register");
         }
 
-
         //---------------------------------------------------------------------
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -338,7 +334,7 @@ namespace CIAB.Controllers
 
                     //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);
                     //FormsAuthentication.RedirectFromLoginPage(CIABuser.UserName, false);//To make User's login credentials persistent.
-                    Session["UserName"] = CIABuser.LoginUserName ;//Username store in the session
+                    Session["UserName"] = CIABuser.LoginUserName;//Username store in the session
                     Session["Password"] = CIABuser.HashPassword;
                     Session["UserId"] = CIABuser.UserID;
                     Session["email"] = CIABuser.LoginEmail;
@@ -375,8 +371,8 @@ namespace CIAB.Controllers
         //---------------------------------------------------------------------
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+      [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        //[ValidateAntiForgeryToken]
         public ActionResult Register(CIAB.Models.User NewUser)
         {
             string strFullName = NewUser.FullName;
@@ -409,11 +405,28 @@ namespace CIAB.Controllers
 
 
                     CIABcommand.Parameters.AddWithValue("@Pass", SqlDbType.NVarChar).Value = hashPass.ToString();// parameter for pass
-                    int NumberOfRecords = CIABcommand.ExecuteNonQuery();
+                    int UserIDReturnedFromSP = Convert.ToInt32(CIABcommand.ExecuteScalar());
+
+                    //logic for checking whether UserName and Email already exists.
+
+                    switch (UserIDReturnedFromSP)
+                    {
+
+                        case -1:
+                            ModelState.AddModelError("UserNameExists", "Username Is in Use.");
+                            return View("SignUpLogin", NewUser);
 
 
-                    return RedirectToAction("RegistrationConfirmation");
+                        case -2:
+                            ModelState.AddModelError("EmailExists", "Email Address Is in Use.");
+                            return View("SignUpLogin", NewUser);
 
+
+
+                        default:
+                            return RedirectToAction("RegistrationConfirmation");
+
+                    }
                 }
 
 

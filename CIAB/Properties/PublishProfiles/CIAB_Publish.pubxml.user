@@ -16,16 +16,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:28</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/13/2015 16:36:36</publishTime>
+      <publishTime>10/16/2015 15:34:43</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/13/2015 16:36:36</publishTime>
+      <publishTime>10/16/2015 15:34:43</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>10/13/2015 16:36:36</publishTime>
+      <publishTime>10/16/2015 15:34:43</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>10/13/2015 16:36:36</publishTime>
+      <publishTime>10/16/2015 15:34:43</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>09/22/2015 12:05:33</publishTime>
@@ -34,13 +34,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/22/2015 12:05:33</publishTime>
     </File>
     <File Include="bin/bg-BG/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:33</publishTime>
+      <publishTime>10/16/2015 15:34:40</publishTime>
     </File>
     <File Include="bin/bg-BG/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/CIAB.dll">
-      <publishTime>10/13/2015 12:52:24</publishTime>
+      <publishTime>10/16/2015 15:14:46</publishTime>
     </File>
     <File Include="bin/CIAB.pdb">
       <publishTime>09/21/2015 15:19:32</publishTime>
@@ -49,19 +49,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/da-DK/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:35</publishTime>
+      <publishTime>10/16/2015 15:34:42</publishTime>
     </File>
     <File Include="bin/da-DK/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/de-DE/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:28</publishTime>
+      <publishTime>10/16/2015 15:34:39</publishTime>
     </File>
     <File Include="bin/de-DE/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/en-US/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:32</publishTime>
+      <publishTime>10/16/2015 15:34:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/19/2015 17:50:00</publishTime>
@@ -70,13 +70,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/19/2015 17:50:00</publishTime>
     </File>
     <File Include="bin/es-ES/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:34</publishTime>
+      <publishTime>10/16/2015 15:34:41</publishTime>
     </File>
     <File Include="bin/es-ES/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/fr-FR/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:31</publishTime>
+      <publishTime>10/16/2015 15:34:39</publishTime>
     </File>
     <File Include="bin/fr-FR/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -94,25 +94,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:28</publishTime>
     </File>
     <File Include="bin/nl-NL/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:34</publishTime>
+      <publishTime>10/16/2015 15:34:41</publishTime>
     </File>
     <File Include="bin/nl-NL/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
+    <File Include="bin/NLog.config">
+      <publishTime>10/14/2015 20:54:43</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>10/14/2015 16:57:36</publishTime>
+    </File>
     <File Include="bin/pl-PL/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:35</publishTime>
+      <publishTime>10/16/2015 15:34:42</publishTime>
     </File>
     <File Include="bin/pl-PL/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/pt-BR/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:33</publishTime>
+      <publishTime>10/16/2015 15:34:40</publishTime>
     </File>
     <File Include="bin/pt-BR/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/pt-PT/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:33</publishTime>
+      <publishTime>10/16/2015 15:34:40</publishTime>
     </File>
     <File Include="bin/pt-PT/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -121,7 +127,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/ru-RU/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:34</publishTime>
+      <publishTime>10/16/2015 15:34:41</publishTime>
     </File>
     <File Include="bin/ru-RU/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -160,7 +166,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/uk-UA/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:29</publishTime>
+      <publishTime>10/16/2015 15:34:39</publishTime>
     </File>
     <File Include="bin/uk-UA/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -169,7 +175,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:30</publishTime>
     </File>
     <File Include="bin/zh-CN/App_GlobalResources.resources.dll">
-      <publishTime>10/13/2015 16:36:35</publishTime>
+      <publishTime>10/16/2015 15:34:42</publishTime>
     </File>
     <File Include="bin/zh-CN/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -2857,7 +2863,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/20/2015 17:10:42</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>10/13/2015 16:14:09</publishTime>
+      <publishTime>10/15/2015 14:44:15</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>08/16/2015 22:54:16</publishTime>
@@ -3156,11 +3162,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/yellow_bg.jpg">
       <publishTime>10/07/2015 17:30:05</publishTime>
     </File>
+    <File Include="NLog.config">
+      <publishTime>10/14/2015 20:54:43</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>09/22/2015 12:05:49</publishTime>
+      <publishTime>10/15/2015 00:50:37</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/13/2015 16:36:24</publishTime>
+      <publishTime>10/16/2015 15:34:36</publishTime>
     </File>
     <File Include="Scripts/2013.2.611/jquery-1.7.1.min.js">
       <publishTime>09/22/2015 10:43:57</publishTime>
@@ -4556,6 +4565,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery.sticky.js">
       <publishTime>08/20/2015 17:11:06</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>10/15/2015 00:50:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>10/15/2015 00:50:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>10/15/2015 00:50:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>10/15/2015 00:50:37</publishTime>
     </File>
     <File Include="Scripts/jszip.min.js">
       <publishTime>10/13/2015 12:22:17</publishTime>
@@ -8140,10 +8161,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/20/2015 17:11:06</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/13/2015 14:17:37</publishTime>
+      <publishTime>10/15/2015 00:52:48</publishTime>
     </File>
     <File Include="Views/Admin/AdminView.cshtml">
       <publishTime>10/12/2015 19:15:44</publishTime>
+    </File>
+    <File Include="Views/ChangePassword/ChangeUserPassword.cshtml">
+      <publishTime>10/16/2015 12:48:07</publishTime>
+    </File>
+    <File Include="Views/ChangePassword/PasswordResetSuccess.cshtml">
+      <publishTime>10/16/2015 11:26:00</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>08/16/2015 22:54:31</publishTime>
@@ -8173,10 +8200,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 00:57:38</publishTime>
     </File>
     <File Include="Views/Home/SignUpLogin.cshtml">
-      <publishTime>10/11/2015 17:57:55</publishTime>
+      <publishTime>10/15/2015 02:06:58</publishTime>
     </File>
     <File Include="Views/Home/UserProfileEdit.cshtml">
-      <publishTime>10/08/2015 01:06:07</publishTime>
+      <publishTime>10/15/2015 15:04:27</publishTime>
     </File>
     <File Include="Views/Order/CreateOrder.cshtml">
       <publishTime>10/08/2015 01:11:45</publishTime>
@@ -8284,7 +8311,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 20:40:27</publishTime>
     </File>
     <File Include="Views/_LayoutCIAB.cshtml">
-      <publishTime>10/13/2015 12:57:45</publishTime>
+      <publishTime>10/15/2015 01:02:02</publishTime>
     </File>
     <File Include="Views/_LayoutForHomePage.cshtml">
       <publishTime>10/13/2015 12:58:23</publishTime>
@@ -8293,7 +8320,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2015 10:29:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/13/2015 15:13:36</publishTime>
+      <publishTime>10/16/2015 15:14:54</publishTime>
     </File>
   </ItemGroup>
 </Project>

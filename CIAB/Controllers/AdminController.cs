@@ -14,12 +14,9 @@ namespace CIAB.Controllers
 {
     public class AdminController : Controller
     {
-        //
         string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
         public ActionResult Index()
         {
-
-
             return View();
         }
 
@@ -31,13 +28,9 @@ namespace CIAB.Controllers
 
         public ViewResult AdminView([DataSourceRequest]DataSourceRequest request)
         {
-
-
             try
             {
-
                 var lstAdminModel = new List<AdminViewModel>();//List of Object
-
                 SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
                 SqlCommand CIABcommand = new SqlCommand();
                 CIABconnection.Open();
@@ -46,7 +39,6 @@ namespace CIAB.Controllers
                 CIABcommand.CommandText = "sp_ReadOrders";
 
                 SqlDataReader reader = CIABcommand.ExecuteReader();
-
                 while (reader.Read())
                 {
                     var objAdminModel = new AdminViewModel();
@@ -59,10 +51,7 @@ namespace CIAB.Controllers
                     if (decimal.TryParse(reader["UnitPrice"].ToString(), out Result))
                     {
                         objAdminModel.UnitPrice = Result;
-
                     }
-                    
-                    
                     objAdminModel.UserCompany = reader["CompanyName"].ToString();
                     objAdminModel.UserContactNumber = reader["ContactNumber"].ToString();
                     objAdminModel.UserEmail = reader["Email"].ToString();

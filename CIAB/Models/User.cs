@@ -42,17 +42,13 @@ namespace CIAB.Models
         [RegularExpression(@"(\S)+", ErrorMessage = "White space in User Name is not allowed.")]
         public string UserName { get; set; }
 
-
-
-        
         [StringLength(10, MinimumLength = 5, ErrorMessage ="5 characters minimum, no spaces, no special characters")]
         public string Password { get; set; }
-
         
         [Compare("Password", ErrorMessage = "The Password and Confirm Password do not match")]//to compare the password fields.
         public string ConfirmPassword { get; set; }
-       
-        [System.Web.Mvc.Remote("IsEmailAvailable", "Validation", ErrorMessage = "User name already exists. Please enter a different user name.")]
+
+        [System.Web.Mvc.Remote("IsEmailAvailable", "Validation", ErrorMessage = "Email Address is in use. Please enter a different Email.")]
         public string RegisterationEmail { get; set; }
         
         public string HashPassword { get; set; }
@@ -111,11 +107,7 @@ namespace CIAB.Models
 
         }
 
-
-
         //------------------------------------------------------------------------
-
-
 
         /// <summary>
         /// This function is to convert byte returned from password to hexa decimal.
