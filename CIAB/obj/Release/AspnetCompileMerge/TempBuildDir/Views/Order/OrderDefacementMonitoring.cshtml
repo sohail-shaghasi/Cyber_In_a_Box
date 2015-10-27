@@ -1,0 +1,61 @@
+﻿@model CIAB.Models.ConfirmOrderCustomer
+
+@{
+    
+    Layout = "~/Views/_LayoutCIAB.cshtml";
+
+   
+}
+
+    <div id="sub_header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 about_header confirm_header">
+                    <h1>Confirm Order</h1>
+                    @*<h3>Website Defacement Monitoring</h3>*@
+                </div><!-- /about_header -->
+            </div>
+        </div>
+    </div><!-- /sub_header -->
+
+    <div id="sub_content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="confirm_title">Kindly confirm your purchase details as follows:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="confirm_box">
+                        <div class="confirm_head">
+                            <i class="fa fa-cube fa-3x pull-left"></i>
+                            <h3>Starting from: $333/Month*<span>*Min 6 Months</span></h3>
+                        </div>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Full Name: <strong>@Model.FullName</strong></td>
+                                    <td>Last Name: <strong>@Model.LastName</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Job Title: <strong>@Model.JobTitle</strong></td>
+                                    <td>Company Name: <strong>@Model.CompanyName</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Email: <strong>@Model.Email</strong></td>
+                                    <td>Contact Number: <strong>@Model.ContactNumber</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <a href="@Url.Action("CreateOrder", "Order", new { ProductHandle = "CIABWD"})" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-default btn-cta btn-block"><i class="fa fa-check-square"></i> &nbsp;Confirm and Place Order</a>
+                </div>
+            </div>
+        </div><!-- /sub_header -->
+    </div>

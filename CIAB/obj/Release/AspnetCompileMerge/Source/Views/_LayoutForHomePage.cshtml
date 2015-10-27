@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Threat Prevention at The Highest Level | KPMG Cyber In A Box</title>
+    <meta name="desc" content="">
+    <!-- Bootstrap -->
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/colorbox.css" rel="stylesheet" />
+    <link href="~/Content/royalslider.css" rel="stylesheet" />
+
+
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script src="~/Scripts/jquery.bxslider.js"></script>
+    <script src="~/Scripts/jquery.royalslider.min.js"></script>
+    <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <style>
+        .visibleNearby {
+            width: 100%;
+            background: transparent;
+            color: #FFF;
+        }
+
+        .visibleNearby {
+            -webkit-backface-visibility: hidden;
+        }
+
+            .visibleNearby .rsGCaption {
+                font-size: 16px;
+                line-height: 18px;
+                padding: 12px 0 16px;
+                background: #141414;
+                width: 100%;
+                position: static;
+                float: left;
+                left: auto;
+                bottom: auto;
+                text-align: center;
+            }
+
+                .visibleNearby .rsGCaption span {
+                    display: block;
+                    clear: both;
+                    color: #bbb;
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+
+        .royalSlider > .rsImg {
+            visibility: hidden;
+        }
+
+
+        /* Scaling transforms */
+        .visibleNearby .rsSlide {
+            opacity: 0.45;
+            -webkit-transition: all 0.3s ease-out;
+            -moz-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            -o-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+        .visibleNearby .rsActiveSlide {
+            /* IE 8 */
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            /* IE 5-7 */
+            filter: alpha(opacity=100);
+            /* Netscape */
+            -moz-opacity: 1;
+            /* Safari 1.x */
+            -khtml-opacity: 1;
+            /* Good browsers */
+            opacity: 1;
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+        }
+    </style>
+
+
+</head>
+<body id="page-top" data-spy="scroll" class="v2">
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <!-- Logo -->
+            <div class="clearfix"></div>
+            <div class="col-md-8 welcome-text text-center">
+                <h3>Cyber-In-A-Box &#8482;</h3>
+                <h1>Simplifiying Cyber Security</h1>
+                <div>
+                    <p>
+                        Get a peace of mind with our security essentials to defend yourself
+                        <br />
+                        against fast evolving cyber threats
+                    </p>
+                </div>
+                <a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-lg btn-cta btn-thanks" style="margin-right:650px;">Find Out More</a>
+            </div>
+        </div>
+    </section>
+    <!-- Static navbar -->
+    <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
+        <div id="menu" role="navigation" style="width: 100%; position: fixed; top: 0px;z-index:777;">
+
+            <div class="top_header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 search-top">
+                            <a href="@Url.Action("Index", "Home")" onclick='location.href=this.getAttribute("href")'><img src="~/Images/kpmg-blue.jpg" /></a>
+                        </div>
+                        <div class="col-md-10 top-nav top-nav">
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+
+                                    <li><a href="@Url.Action("index", "Home" )" onclick='location.href=this.getAttribute("href")'>Home</a></li>
+                                    <li><a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")'>Marketplace</a></li>
+                                    <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                                    <li><a href="~/#aboutSection">About Us</a></li>
+
+                                    @if (HttpContext.Current.Session["UserName"] != null)
+                                    {
+
+                                        if ((string)HttpContext.Current.Session["UserRole"] == "A" || (string)HttpContext.Current.Session["UserRole"] == "a")
+                                        {
+
+
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
+
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+
+
+
+
+
+
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-cog"></i>
+
+
+                                                    <span>Panel</span>
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("adminview", "admin")" onclick='location.href=this.getAttribute("href")'>Order Details</a></li>
+                                                    <li><a href="@Url.Action("UserDetails", "UserDetail")" onclick='location.href=this.getAttribute("href")'>User Details</a></li>
+                                                </ul>
+                                            </li>
+
+
+
+
+
+
+                                        }
+                                        else
+                                        {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i>
+
+
+                                                    <span>Hi</span> @HttpContext.Current.Session["UserName"]
+
+
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="@Url.Action("UserProfileEdit", "Home")" onclick='location.href=this.getAttribute("href")'>Account Setting</a></li>
+                                                    <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>Login / Register</a></li>
+
+                                    }
+                                </ul>
+                            </div><!--/.nav-collapse -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /top_header -->
+
+
+        </div><!-- /menu -->
+    </div><!-- /menu-sticky-wrapper -->
+    @RenderBody()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="footer">
+        <div class="container">
+            <div class="row t_footer">
+                <div class="col-md-5">
+                    <img src="~/Images/kpmg-logo.png" class="" />
+                    <p>
+
+                        <span>cybersecurity@kpmg.com.sg</span><br>
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    @*<h4>Cyber In A Box</h4>*@
+                    <ul>
+                        <li><a href="~/#aboutSection">About CYBER-IN-A-BOX</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
+                        <li><a href="http://www.kpmg.com">KPMG Cyber Security Centre</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="col-md-4">
+                    @*<h4>Cyber Mart</h4>*@
+                    <ul>
+                        <li><a href="@Url.Action("vulnerabilityScan", "Product")" onclick='location.href=this.getAttribute("href")'>Vulnerability Scan</a></li>
+                        <li><a href="@Url.Action("DefacementMonitoring", "Product")" onclick='location.href=this.getAttribute("href")'>Website Defacement Monitoring</a></li>
+                        <li><a href="@Url.Action("EmailThreatPrevention", "Product")" onclick='location.href=this.getAttribute("href")'>Email Threat Monitoring</a></li>
+                        <li><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Cyber Security Health Check</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row b_footer">
+                <div class="col-md-12">
+                    <p><a href="@Url.Action("Legal", "Home")" onclick='location.href=this.getAttribute("href")'>Legal</a> | <a href="@Url.Action("Privacy", "Home")" onclick='location.href=this.getAttribute("href")'>Privacy</a></p>
+                    <p>© 2015 KPMG Services Pte. Ltd. (Registration No: 200003956G), a Singapore incorporated company and a member firm of the KPMG network of independent member firms affiliated with KPMG International Cooperative ("KPMG International"), a Swiss entity. All rights reserved.</p>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- footer -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('.bxslider2').bxSlider({
+            minSlides: 1,
+            maxSlides: 1,
+            controls: false,
+            infiniteLoop: false,
+            slideMargin: 30
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
+    <script id="new-royalslider-init-code" type="text/javascript">
+        $(document).ready(function ($) {
+            $('.new-royalslider-13').royalSlider({ template: 'default', image_generation: { imageWidth: '', imageHeight: '', thumbImageWidth: '', thumbImageHeight: '' }, thumbs: { thumbWidth: 96, thumbHeight: 72 }, visibleNearby: { enabled: !0, centerArea: 0.5, breakpoint: 650, breakpointCenterArea: 0.64, navigateByCenterClick: !0 }, video: { autoHideBlocks: !0 }, block: { moveOffset: 20, speed: 400, delay: 200 }, width: '100%', height: '400px', autoScaleSlider: !0, autoScaleSliderWidth: 960, autoScaleSliderHeight: 340, globalCaption: !0, loop: !0, keyboardNavEnabled: !0, fadeinLoadedSlide: !1, addActiveClass: !0 });
+        });
+    </script>
+    <!-- Custom JavaScript -->
+    <script src="~/Scripts/jquery.sticky.js"></script>
+    <script src="~/Scripts/validator.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+

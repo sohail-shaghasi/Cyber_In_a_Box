@@ -1,0 +1,146 @@
+﻿@using Telerik.Web.Mvc.UI
+@using Kendo.Mvc.UI
+@*@using CIAB.Models*@
+
+@model IEnumerable<CIAB.Models.AdminViewModel>
+
+@{
+    Layout = "~/Views/_LayoutCIAB.cshtml";
+
+}
+
+<script src="~/Scripts/jszip.min.js"></script>
+
+
+<div id="sub_header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 about_header admin_header">
+                <h1>Admin Panel</h1>
+            </div><!-- /about_header -->
+        </div>
+    </div>
+</div><!-- /sub_header -->
+
+
+<div id="sub_content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bs-example" data-example-id="striped-table" style="background:#fff;padding:40px 20px 20px 20px;">
+
+
+                    <!--Grid Starts-->
+                    @(Html.Kendo().Grid(Model).Name("OrdersGrid").Columns(columns =>
+                            {
+                                columns.Bound(p => p.OrderID).Title("Request ID").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(130);//.ClientTemplate("<a href='" + Url.Action("ProductDetails", "Product") + "/#= OrderID #'" + "></a>");
+                                //columns.Bound(p => p.OrderID).Title("Request ID").ClientTemplate(@Html.ActionLink("this", "that", "trt", new { ID = 2 }));
+                                columns.Bound(p => p.OrderDate).Title("Date").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Format("{0:MMMM dd, yyyy}");//Format("{0:MMMM dd, yyyy}");
+                                columns.Bound(p => p.UserEmail).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                                columns.Bound(p => p.UserCompany).Title("Company").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(120);
+                                columns.Bound(p => p.UserContactNumber).Title("Contact Number").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(145);
+                                columns.Bound(p => p.ProductName).Title("Product Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(140);
+                                columns.Bound(p => p.AdminOrderStatus).ClientTemplate("#: AdminOrderStatus.StatusValue #").Title("Status").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
+                                columns.Command(command => command.Edit().Text("Update")).Title("Action");
+                                columns.Command(command => command.Custom("Upload").Click("showDetails"));
+                            })
+
+
+                                .ToolBar(tools => tools.Excel())
+                                .Excel(excel => excel.FileName("CIAB_ProductOrders.xlsx").AllPages(true))
+                                .DataSource(dataSource => dataSource.Ajax().Model(model =>
+                               {
+                                   model.Id(config => config.OrderID);
+                                   model.Field(product => product.AdminOrderStatus);
+                               })
+                            .PageSize(10)
+                            .ServerOperation(false)//No server-side postback , Do it in client side
+                            .Read(read => read.Action("AdminView", "Admin"))//read and display the records
+                            .Update(update => update.Action("Update", "Admin"))//update the record
+
+                            .Events(events => events.Error("error_handler"))
+                            )
+                            .Reorderable(reorder => reorder.Columns(true))
+                            .Resizable(resize => resize.Columns(true))
+                            .Pageable()
+                            .Sortable()
+                            .Filterable()
+                            .Selectable()
+                            .ColumnMenu()
+                            .Editable(m => m.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
+                            .HtmlAttributes(new { style = "height:330px; width: 1100px" })
+                    )  <!--Grid Finished-->
+                </div>
+
+                @(Html.Kendo().Window()
+               .Name("Details")
+               .Title("Purchase Request Details")
+               .Visible(false)
+               .Modal(true)
+               .Draggable(true)
+               .Width(950)
+               .Height(500)
+               .Iframe(true)
+              // .LoadContentFrom("OrderDetail", "OrderDetails", new { OrderNumber = 10 }) //define the Action and Controller name
+
+                )
+
+                <script>
+                    function showDetails(e) {
+                        e.preventDefault();
+                        debugger;
+                        var pathname = window.location.host;
+                       
+                        //var dataItem = $("#OrdersGrid").data("kendoGrid").dataSource.get();
+                        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));//to find the nearest <tr> for the selected cell.
+                       
+                        var url = "http://" + pathname + "/OrderDetails/OrderDetail?OrderNumber=" + dataItem.OrderID;
+                        var wnd = $("#Details").kendoWindow({
+                            title: "Purchase Request Details",
+                            actions: ["Minimize", "Maximize", "Close"],
+                            content: url,
+                            visible: false,
+                            modal: true
+                        }).data("kendoWindow");
+
+                        wnd.center();
+                        wnd.open();
+
+                    }
+                </script>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div><!-- /sub_header -->
+<!--this javascript is to trigger grid errors-->
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            //alert(message);
+        }
+    }
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myBtn").click(function () {
+            $("#myModal").modal();
+        });
+    });
+</script>
+
