@@ -4,7 +4,8 @@
 @{
     Layout = "~/Views/_LayoutCIAB.cshtml";
 }
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/kendo/kendo.web.min.js"></script>
 <script src="~/Scripts/jszip.min.js"></script>
 
 <div id="sub_content">
@@ -23,13 +24,11 @@
                         columns.Bound(p => p.Email).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
                         //columns.Bound(p => p.pass).Title("Password").Format("*****").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
                         columns.Command(command => command.Edit().Text("Update")).Title("Action");
+                        columns.Command(command => command.Custom("Reset Password").Click("showDetails"));
                     })
 
-
-
-                             .ToolBar(tools => tools.Excel())
-                             .Excel(excel => excel.FileName("CIAB_ListOfUsers.xlsx").AllPages(true))
-
+                            .ToolBar(tools => tools.Excel())
+                            .Excel(excel => excel.FileName("CIAB_ListOfUsers.xlsx").AllPages(true))
                             .DataSource(dataSource => dataSource
                             .Ajax()
                             .ServerOperation(false)//No server-side postback , Do it in client side
@@ -37,33 +36,15 @@
                             .Model(model => model.Id(p => p.UserId))
                             .Read(read => read.Action("UserDetails", "UserDetail"))//read and display the records
                             .Update(update => update.Action("Update", "UserDetail"))
-                            //.Destroy(delete => delete.Action("Create", "UserDetail"))
-                           .PageSize(10)
-                            )
-
-
-                            
+                                //.Destroy(delete => delete.Action("Create", "UserDetail"))
+                            .PageSize(10))
                             .ColumnMenu()
                             .Pageable()
                             .Sortable()
                             .Filterable()
                             .Selectable()
                             .Editable(editable => editable.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
-                            .HtmlAttributes(new { style = "height:330px;" })
-                            
-
-
-                    )
-
-
-
-
-
-
-
-
-
-
+                            .HtmlAttributes(new { style = "height:330px;" }))
                 </div><!-- /bs-example -->
             </div>
 
@@ -71,11 +52,35 @@
     </div>
 </div><!-- /sub_header -->
 
+<script>
+    //capture the click event
+    function showDetails(e) {
+        e.preventDefault();
+        debugger;
+
+        var pathname = window.location.host;
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));//to find the nearest <tr> for the selected cell.
+        var path = "http://" + pathname + '@Url.Action("SendEmailFromUserListingPage", "ForgotPassword");/*?UserId=' + dataItem.UserId;
 
 
 
+        //Ajax call to controller action method
 
-<script src="~/Scripts/kendo/kendo.web.min.js"></script>
+        $.ajax({
+            url: path,
+            datatype: "json",
+            data: { 'UserId': dataItem.UserId},
+            type: "POST",
+            success: function (data) {
+                alert(data);
+            },
+            error: function () {
+                alert("ERROR");
+            }
+        });
+    }
+</script>
+
 
 
 <script type="text/javascript">
@@ -94,10 +99,3 @@
     }
 </script>
 
-@*<script>
-        $(document).ready(function () {
-            $("#myBtn").click(function () {
-                $("#myModal").modal();
-            });
-        });
-    </script>*@

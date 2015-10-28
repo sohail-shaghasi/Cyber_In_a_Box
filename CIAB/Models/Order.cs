@@ -7,13 +7,6 @@ namespace CIAB.Models
 {
     public class Order
     {
-
-        public Order()
-        {
-                
-        }
-
-
         public int OrderID{get; set;}
         public int Quantity{get; set;}
         public double UnitPrice{get; set;}

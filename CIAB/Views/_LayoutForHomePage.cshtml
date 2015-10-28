@@ -136,8 +136,7 @@
 
                                     @if (HttpContext.Current.Session["UserName"] != null)
                                     {
-
-                                        if ((string)HttpContext.Current.Session["UserRole"] == "A" || (string)HttpContext.Current.Session["UserRole"] == "a")
+                                        if (Convert.ToString(HttpContext.Current.Session["UserRole"]).ToLower() == "a")
                                         {
 
 
@@ -245,9 +244,8 @@
                 <div class="col-md-5">
                     <img src="~/Images/kpmg-logo.png" class="" />
                     <p>
-
-                        <span>cybersecurity@kpmg.com.sg</span><br>
-                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                        <span><a href="mailto:cybersecurity@kpmg.com.sg" target="_top">cybersecurity@kpmg.com.sg</a></span><br>
+                                 16 Raffles Quay #22-00, Hong Leong Building, Singapore 048581
                     </p>
                 </div>
 
@@ -256,7 +254,7 @@
                     <ul>
                         <li><a href="~/#aboutSection">About CYBER-IN-A-BOX</a></li>
                         <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                        <li><a href="http://www.kpmg.com">KPMG Cyber Security Centre</a></li>
+                        <li><a href="http://www.kpmg.com/sg/en/topics/cyber-security-centre/pages/default.aspx">KPMG Cyber Security Centre</a></li>
                     </ul>
                 </div>
 

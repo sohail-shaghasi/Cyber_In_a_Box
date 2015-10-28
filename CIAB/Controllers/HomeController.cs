@@ -13,13 +13,14 @@ using System.Web.Security;
 using System.Text;
 using System.Security.Cryptography;
 using System.Web.Configuration;
+using CIAB.DataLayer;
 
 
 namespace CIAB.Controllers
 {
 
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         public HomeController()
@@ -27,9 +28,6 @@ namespace CIAB.Controllers
 
         }
 
-
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
-        //---------------------------------------------------------------------
 
         public ActionResult Index()
         {
@@ -87,20 +85,6 @@ namespace CIAB.Controllers
                     }
                 }
 
-
-                //cc email 
-                //if (strEmailCC.ToString() != string.Empty)
-                //{
-                //    foreach (string ccs in strEmailCC.Split(';'))
-                //    {
-                //        MailAddress cc = new MailAddress(ccs);
-                //        message.CC.Add(cc);
-                //    }
-                //}
-
-
-
-
                 message.From = new MailAddress(inputEmail);
                 message.Subject = strSubject; //Subject;
                 message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
@@ -125,9 +109,10 @@ namespace CIAB.Controllers
                 return RedirectToAction("sent");
 
             }
-            catch
+            catch (Exception ex)
             {
                 ViewData["smtpError"] = "Unable to send an email";
+                base.Logger.Error(ex, "Contact_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
                 return View();
             }
         }
@@ -194,17 +179,6 @@ namespace CIAB.Controllers
                     }
                 }
 
-
-                //cc email 
-                //if (strEmailCC.ToString() != string.Empty)
-                //{
-                //    foreach (string ccs in strEmailCC.Split(';'))
-                //    {
-                //        MailAddress cc = new MailAddress(ccs);
-                //        message.CC.Add(cc);
-                //    }
-                //}
-
                 message.From = new MailAddress(inputEmail);
                 message.Subject = strSubject; //Subject;
                 message.Body = string.Format(body, fullName + " " + LastName, inputEmail, JobTitle, companyName, contactNumber);
@@ -228,13 +202,11 @@ namespace CIAB.Controllers
                 await smtp.SendMailAsync(message);
                 return Redirect("https://cmasurvey2015.questionpro.com");
 
-
-
-
             }
-            catch
+            catch (Exception ex)
             {
                 ViewData["smtpError"] = "Unable to send an email";
+                base.Logger.Error(ex, "CyberHealthSignUp_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
                 return View();
             }
         }
@@ -242,37 +214,22 @@ namespace CIAB.Controllers
         //---------------------store the Temporary User Information to TempUser Table------------------------------------------------
         private void TempUser(CIAB.Models.CyberHealthCheckSignUp CyberHealthCheck)
         {
-
-            try
-            {
-
-
-
-
-                SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
-                SqlCommand CIABcommand = new SqlCommand();
-                CIABconnection.Open();
-                CIABcommand.CommandType = CommandType.StoredProcedure;
-                CIABcommand.Connection = CIABconnection;
-                CIABcommand.CommandText = "sp_TempUser";
+            SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
+            SqlCommand CIABcommand = new SqlCommand();
+            CIABconnection.Open();
+            CIABcommand.CommandType = CommandType.StoredProcedure;
+            CIABcommand.Connection = CIABconnection;
+            CIABcommand.CommandText = "sp_TempUser";
 
 
-                CIABcommand.Parameters.AddWithValue("@FullName", CyberHealthCheck.FullName);
-                CIABcommand.Parameters.AddWithValue("@LastName", CyberHealthCheck.LastName);
-                CIABcommand.Parameters.AddWithValue("@JobTitle", CyberHealthCheck.JobTitle);
-                CIABcommand.Parameters.AddWithValue("@CompanyName", CyberHealthCheck.CompanyName);
-                CIABcommand.Parameters.AddWithValue("@Email", CyberHealthCheck.InputEmail);
-                CIABcommand.Parameters.AddWithValue("@ContactNumber", CyberHealthCheck.ContactNumber);
-                CIABcommand.ExecuteNonQuery();
-                ViewData["TempUser"] = "Successfull";//message for pop up Alert().
-
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-            }
-
-
+            CIABcommand.Parameters.AddWithValue("@FullName", CyberHealthCheck.FullName);
+            CIABcommand.Parameters.AddWithValue("@LastName", CyberHealthCheck.LastName);
+            CIABcommand.Parameters.AddWithValue("@JobTitle", CyberHealthCheck.JobTitle);
+            CIABcommand.Parameters.AddWithValue("@CompanyName", CyberHealthCheck.CompanyName);
+            CIABcommand.Parameters.AddWithValue("@Email", CyberHealthCheck.InputEmail);
+            CIABcommand.Parameters.AddWithValue("@ContactNumber", CyberHealthCheck.ContactNumber);
+            CIABcommand.ExecuteNonQuery();
+            ViewData["TempUser"] = "Successfull";//message for pop up Alert().
         }
 
         //---------------------------------------------------------------------
@@ -325,40 +282,46 @@ namespace CIAB.Controllers
         public ActionResult Login(User CIABuser)
         {
 
-            if (ModelState.IsValid)//Check if Model properties are Valid
+            try
             {
-
-                if (CIABuser.IsValid(CIABuser.LoginUserName, CIABuser.LoginPassword))//Check the credentials against the database
+                if (ModelState.IsValid)//Check if Model properties are Valid
                 {
+                    var user = new User();
+                    var userDL = new UserDataLayer();
+
+                    user.UserName = CIABuser.LoginUserName;
+                    user.Password = CIABuser.LoginPassword;
+
+                    Encoding encoder = new UTF8Encoding();
+                    SHA1 sha = new SHA1Managed();
+                    byte[] passwordHash = sha.ComputeHash(encoder.GetBytes(user.Password + "d3katk00"));
+
+                    user.HashPassword = base.ByteArrayToString(passwordHash);
+
+                    if (userDL.IsValid(user))//Check the credentials against the database
+                    {
+                        //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);
+                        //FormsAuthentication.RedirectFromLoginPage(CIABuser.UserName, false);//To make User's login credentials persistent.
+                        Session["UserName"] = user.UserName;//Username store in the session
+                        Session["Password"] = user.HashPassword;
+                        Session["UserId"] = user.UserID;
+                        Session["email"] = user.LoginEmail;
+                        Session["UserRole"] = user.Role;
+                        return RedirectToAction("Index", "Home");
 
 
-                    //FormsAuthentication.SetAuthCookie(CIABuser.UserName, false);
-                    //FormsAuthentication.RedirectFromLoginPage(CIABuser.UserName, false);//To make User's login credentials persistent.
-                    Session["UserName"] = CIABuser.LoginUserName;//Username store in the session
-                    Session["Password"] = CIABuser.HashPassword;
-                    Session["UserId"] = CIABuser.UserID;
-                    Session["email"] = CIABuser.LoginEmail;
-                    Session["UserRole"] = CIABuser.Role;
-                    return RedirectToAction("Index", "Home");
-
-
+                    }
+                    
                 }
-                else
-                {
-                    ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
-                    return View("SignUpLogin", CIABuser);
-                }
+               
             }
-            else
-            {
-                ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
-                return View("SignUpLogin", CIABuser);
+            catch (Exception ex)
+            { 
+                base.Logger.Error(ex, "Login_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
+            ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
+            return View("SignUpLogin", CIABuser);
         }
-
-
-        //---------------------------------------------------------------------
-
 
         [HttpGet]
         public ActionResult Register()
@@ -368,10 +331,7 @@ namespace CIAB.Controllers
         }
 
 
-        //---------------------------------------------------------------------
-
-
-      [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         //[ValidateAntiForgeryToken]
         public ActionResult Register(CIAB.Models.User NewUser)
         {
@@ -437,25 +397,14 @@ namespace CIAB.Controllers
                 }
             }
 
-            catch
+            catch (Exception ex)
             {
+                base.Logger.Error(ex, "Register_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
 
                 return View("SignUpLogin", NewUser);
             }
         }
 
-
-        //---------------------------------------------------------------------
-
-        public static string ByteArrayToString(byte[] byteArray)
-        {
-            StringBuilder hex = new StringBuilder(byteArray.Length * 2);
-            foreach (byte b in byteArray)
-                hex.AppendFormat("{0:x2}", b);
-            return hex.ToString();
-        }
-
-        //---------------------------------------------------------------------
 
         public ActionResult RegistrationConfirmation()
         {
@@ -468,48 +417,15 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult UserProfileEdit()
         {
+            try
+            {
+                GetUserProfile();
+            }
+            catch (Exception ex)
+            {
+                base.Logger.Error(ex, "UserProfileEdit_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
+            }
 
-            GetUserProfile();
-            //string strUserName = "";
-            //string strPassword = "";
-            //if (Session["UserName"] != null)
-            //{
-            //    strUserName = Session["UserName"].ToString();
-            //    strPassword = Session["Password"].ToString();
-            //}
-
-
-
-
-            //SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
-            //SqlCommand CIABcommand = new SqlCommand();
-            //CIABconnection.Open();
-            //CIABcommand.CommandType = CommandType.StoredProcedure;
-            //CIABcommand.Connection = CIABconnection;
-            //CIABcommand.CommandText = "sp_UpdateProfile";
-
-
-            ////Input Parameters for Stored Procedure
-            //CIABcommand.Parameters.AddWithValue("@Parameter", "select");
-            //CIABcommand.Parameters.AddWithValue("@UserName", strUserName);
-            //CIABcommand.Parameters.AddWithValue("@Password", strPassword);
-
-
-
-
-
-
-            //SqlDataReader reader = CIABcommand.ExecuteReader();
-
-            //while (reader.Read())
-            //{
-            //    // Output Parameters from stored Procedure
-            //    ViewData["Email"] = reader["Email"].ToString();
-            //    ViewData["FullName"] = reader["FullName"].ToString();
-            //    ViewData["Website"] = reader["Website"].ToString();
-            //    ViewData["CompanyName"] = reader["CompanyName"].ToString();
-            //    ViewData["CompanyAddress"] = reader["CompanyAddress"].ToString();
-            //}
             return View();
         }
 
@@ -519,9 +435,22 @@ namespace CIAB.Controllers
         [HttpPost]
         public ActionResult UserProfileEdit(CIAB.Models.UserProfileEdit userProfileEdit)
         {
-            userProfileEdit.UpdateProfile();
-            ViewData["ProfileUpdated"] = "Successfully Updated Your Profile. ";//message for pop up Alert().
-            GetUserProfile();
+            try
+            {
+                var profileDL = new ProfileDataLayer();
+
+                userProfileEdit.UserName = Session["UserName"].ToString();
+                userProfileEdit.Password = Session["Password"].ToString();
+
+                profileDL.UpdateProfile(userProfileEdit);
+                ViewData["ProfileUpdated"] = "Successfully Updated Your Profile. ";//message for pop up Alert().
+                GetUserProfile();
+
+            }
+            catch (Exception ex)
+            {
+                base.Logger.Error(ex, "UserProfileEdit_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
+            }
 
             return View(userProfileEdit);
         }

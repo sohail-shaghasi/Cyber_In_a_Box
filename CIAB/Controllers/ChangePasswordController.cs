@@ -12,18 +12,13 @@ using System.Text;
 
 namespace CIAB.Controllers
 {
-    public class ChangePasswordController : Controller
+    public class ChangePasswordController : BaseController
     {
         //
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
         public ActionResult Index()
         {
             return View();
         }
-
-
-
-
 
         [HttpGet]
         public ActionResult ChangeUserPassword()
@@ -31,72 +26,68 @@ namespace CIAB.Controllers
             return View();
         }
 
-
-
-
         [HttpPost]
         public ActionResult ChangeUserPassword(CIAB.Models.ResetPassword ResetPass)
         {
-            if (ModelState.IsValid)
+            try
             {
-                string strCurrentPass = GetSHA1(ResetPass.CurrentPass + "d3katk00");
-                string strNewPass = GetSHA1(ResetPass.NewPass + "d3katk00");
-
-
-
-                string strOldPassword = "";
-
-                if (HttpContext.Session["Password"] != null)
+                if (ModelState.IsValid)
                 {
-                    strOldPassword = HttpContext.Session["Password"].ToString();
-                    if (strCurrentPass != strOldPassword)
-                    {
-                        ViewBag.ErrorMessage = "Current Password is not Valid!";
-                        return View("ChangeUserPassword");
-                    }
+                    string strCurrentPass = GetSHA1(ResetPass.CurrentPass + "d3katk00");
+                    string strNewPass = GetSHA1(ResetPass.NewPass + "d3katk00");
 
-                    else if (strOldPassword == strNewPass)
-                    {
-                        ViewBag.Error = "New password cannot be the same as old password";
-                        return View("ChangeUserPassword");
-                    }
 
-                }
-                //check if old password and new hashed password resembles.
-                int returnValue = AddNewPassword(ResetPass, strCurrentPass, strNewPass);
-                if (returnValue == 1)
-                {
-                    return RedirectToAction("PasswordResetSuccess");
+
+                    string strOldPassword = "";
+
+                    if (HttpContext.Session["Password"] != null)
+                    {
+                        strOldPassword = HttpContext.Session["Password"].ToString();
+                        if (strCurrentPass != strOldPassword)
+                        {
+                            ViewBag.ErrorMessage = "Current Password is not Valid!";
+                            return View("ChangeUserPassword");
+                        }
+
+                        else if (strOldPassword == strNewPass)
+                        {
+                            ViewBag.Error = "New password cannot be the same as old password";
+                            return View("ChangeUserPassword");
+                        }
+
+                    }
+                    //check if old password and new hashed password resembles.
+                    int returnValue = AddNewPassword(ResetPass, strCurrentPass, strNewPass);
+                    if (returnValue == 1)
+                    {
+                        return RedirectToAction("PasswordResetSuccess");
+                    }
+                    else
+                    {
+                        return View(ResetPass);
+                    }
                 }
                 else
                 {
-                    return View(ResetPass);
+                    ModelState.AddModelError("resetpass", "Process failed.");
+                    return View("ChangeUserPassword", ResetPass);
                 }
             }
-
-            else
+            catch (Exception ex)
             {
-                ModelState.AddModelError("resetpass", "testing");
+                base.Logger.Error(ex, "ChangeUserPassword_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
+                ModelState.AddModelError("resetpass", "Process failed.");
                 return View("ChangeUserPassword", ResetPass);
             }
-
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Oops!! following error occured : " + ex.Message.ToString() + "');", true);
-            // Response.Write("Oops!! following error occured: " +ex.Message.ToString());           
-
-
-
         }
-
 
         public ViewResult PasswordResetSuccess()
         {
             return View();
         }
 
-
         private int AddNewPassword(CIAB.Models.ResetPassword ResetPass, string strCurrentPass, string strNewPass)
         {
-
             if (HttpContext.Session["UserName"] != null)
             {
                 ResetPass.UserName = HttpContext.Session["UserName"].ToString();
@@ -119,17 +110,11 @@ namespace CIAB.Controllers
             CIABcommand.ExecuteNonQuery();
             CIABcommand.Dispose();
             //read the return value (i.e status) from the stored procedure
-            int returnValue = Convert.ToInt32(CIABcommand.Parameters["@Status"].Value);
-            return returnValue;
+            return Convert.ToInt32(CIABcommand.Parameters["@Status"].Value);
         }
 
-
-
-
-
-        public string GetSHA1(string password)
+        private string GetSHA1(string password)
         {
-
             SHA1CryptoServiceProvider sha1Provider = new SHA1CryptoServiceProvider();
             sha1Provider.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
             byte[] hashArray = sha1Provider.Hash;

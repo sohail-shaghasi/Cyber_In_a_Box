@@ -1,0 +1,5 @@
+2015-10-28 21:45:51.9757 ERROR Login_Input string was not in a correct format. | StackTrace:    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at CIAB.DataLayer.UserDataLayer.IsValid(User user) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\DataLayer\UserDataLayer.cs:line 25
+   at CIAB.Controllers.HomeController.Login(User CIABuser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\HomeController.cs:line 301

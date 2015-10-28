@@ -17,8 +17,6 @@ namespace CIAB.Models
 {
     public class AdminViewModel
     {
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
-
 
         [HiddenInput(DisplayValue = true)]
         public int? OrderID { get; set; }

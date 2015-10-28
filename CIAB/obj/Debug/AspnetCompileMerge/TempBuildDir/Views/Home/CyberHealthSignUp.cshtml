@@ -1,0 +1,129 @@
+﻿@model CIAB.Models.CyberHealthCheckSignUp
+@{
+    Layout = "~/Views/_LayoutCIAB.cshtml";
+}
+
+
+
+
+<div id="sub_header" class="single_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 cyber_header">
+                <h1>Cyber Health Form</h1>
+            </div><!-- /cyber_header -->
+        </div>
+    </div>
+</div><!-- /sub_header -->
+
+<div id="sub_content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-md-offset-2">
+                <div class="signupbox">
+                    <h3>Sign Up Form</h3>
+
+                    @using (Html.BeginForm("CyberHealthSignUp", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <form data-toggle="validator" role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">Full Name <span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="FullName" id="FullName" placeholder="Full Name" data-error="Enter your full name" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Last Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Job Title</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="JobTitle" id="JobTitle" placeholder="Job Title">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Company Name <span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="CompanyName" id="CompanyName" placeholder="Company Name" data-error="Enter your company name" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email <span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="email" name="InputEmail" id="InputEmail" class="form-control" placeholder="Email" data-error="Email address is invalid" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Contact Number <span class="req">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" data-error="Enter your contact number" placeholder="Contact Number" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="RecievemarketingEmails" id="RecievemarketingEmails" required> I do not wish to receive unsolicited marketing communications about your products and services.
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" required name="iAgree" id="iAgree"> I agree to the <a href="#">Terms and Conditions.</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-default btn-cta btn-block">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div><!-- /sub_header -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="@Url.Content("~/Scripts/validator.js")"></script>
+
+
+
+@if (ViewData["TempUser"] != null)
+{
+    <script type="text/javascript">
+
+        $(function () {
+
+            alert('@ViewData["TempUser"]');
+
+
+        });
+    </script>
+}
+else
+{
+
+}
+
+

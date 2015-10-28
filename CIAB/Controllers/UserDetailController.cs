@@ -10,22 +10,21 @@ using Kendo.Mvc.Extensions;
 
 namespace CIAB.Controllers
 {
-    public class UserDetailController : Controller
+    public class UserDetailController : BaseController
     {
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
 
         public ActionResult Index()
         {
             return View();
         }
 
-
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult UserDetails([DataSourceRequest]DataSourceRequest request)
         {
+                var lstUserModel = new List<UserDetail>();//List of Object
             try
             {
 
-                var lstUserModel = new List<UserDetail>();//List of Object
                 SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
                 SqlCommand CIABcommand = new SqlCommand();
                 CIABconnection.Open();
@@ -47,17 +46,14 @@ namespace CIAB.Controllers
 
                     lstUserModel.Add(objUserDetails);//add an object to the list of type object
                 }
-                var data = lstUserModel.ToList();
 
-
-
-                return View(data);
             }
 
             catch (Exception ex)
             {
-                throw ex;
+                base.Logger.Error(ex, "UserDetails_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
+                return View(lstUserModel);
 
         }
 
@@ -69,7 +65,7 @@ namespace CIAB.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Update([DataSourceRequest] DataSourceRequest request, CIAB.Models.UserDetail userDetails)
         {
             try
@@ -93,7 +89,7 @@ namespace CIAB.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                base.Logger.Error(ex, "Update_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
 
             return Json(new[] { userDetails }.ToDataSourceResult(request, ModelState));

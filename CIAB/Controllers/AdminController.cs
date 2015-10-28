@@ -12,9 +12,8 @@ using System.Data.SqlClient;
 
 namespace CIAB.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
         public ActionResult Index()
         {
             return View();
@@ -28,9 +27,9 @@ namespace CIAB.Controllers
 
         public ViewResult AdminView([DataSourceRequest]DataSourceRequest request)
         {
+            var lstAdminModel = new List<AdminViewModel>();//List of Object
             try
             {
-                var lstAdminModel = new List<AdminViewModel>();//List of Object
                 SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
                 SqlCommand CIABcommand = new SqlCommand();
                 CIABconnection.Open();
@@ -63,26 +62,31 @@ namespace CIAB.Controllers
                     lstAdminModel.Add(objAdminModel);//add an object to the list of type object
                 }
 
-
-                var data = lstAdminModel.ToList();
-
-                return View(data);
             }
             catch (Exception ex)
             {
-                throw ex;
+                base.Logger.Error(ex, "AdminView_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
+
+            return View(lstAdminModel);
 
         }
 
         public ActionResult AdminViewOrderStatus()
         {
-            var result = new List<CIAB.Models.AdminOrderStatus>();
-            result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "Open", Code = 1 });
-            result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "Close", Code = 2 });
-            result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "In Progress", Code = 3 });
+            var result = new List<AdminOrderStatus>();
+            try
+            {
+                result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "Open", Code = 1 });
+                result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "Close", Code = 2 });
+                result.Add(new CIAB.Models.AdminOrderStatus() { StatusValue = "In Progress", Code = 3 });
+            }
+            catch (Exception ex)
+            {
+                base.Logger.Error(ex, "AdminViewOrderStatus_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
+            }
 
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -119,9 +123,8 @@ namespace CIAB.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                base.Logger.Error(ex, "Update_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
-
             return Json(new[] { adminModel }.ToDataSourceResult(request, ModelState));
         }
 

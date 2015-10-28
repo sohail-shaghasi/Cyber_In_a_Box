@@ -94,7 +94,10 @@
                         //var dataItem = $("#OrdersGrid").data("kendoGrid").dataSource.get();
                         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));//to find the nearest <tr> for the selected cell.
                        
-                        var url = "http://" + pathname + "/OrderDetails/OrderDetail?OrderNumber=" + dataItem.OrderID;
+
+
+                        var url = "http://" + pathname + @Url.Action("OrderDetail", "OrderDetails")+ "?OrderNumber=" + dataItem.OrderID;
+                        //var url = "http://" + pathname + "/OrderDetails/OrderDetail?OrderNumber=" + dataItem.OrderID;
                         var wnd = $("#Details").kendoWindow({
                             title: "Purchase Request Details",
                             actions: ["Minimize", "Maximize", "Close"],

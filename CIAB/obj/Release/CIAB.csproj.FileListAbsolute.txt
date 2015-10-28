@@ -55,3 +55,4 @@ E:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\bin\
 E:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\bin\zh-CN\Kendo.Mvc.resources.dll
 E:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\obj\Release\CIAB.dll
 E:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\obj\Release\CIAB.pdb
+E:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\obj\Release\CIAB.csprojResolveAssemblyReference.cache

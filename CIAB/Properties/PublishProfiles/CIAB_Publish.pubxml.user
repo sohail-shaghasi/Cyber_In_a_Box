@@ -6,9 +6,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Dekatku\wwwpub\New folder</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Dekatku\New folder</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/email_threat_new.jpg">
+      <publishTime>10/27/2015 16:18:48</publishTime>
+    </File>
     <File Include="App_GlobalResources/EditorLocalization.bg-BG.designer.cs">
       <publishTime>09/22/2015 10:44:10</publishTime>
     </File>
@@ -238,16 +241,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:28</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/27/2015 16:51:45</publishTime>
+      <publishTime>10/28/2015 10:38:28</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/27/2015 16:51:45</publishTime>
+      <publishTime>10/28/2015 10:38:28</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>10/27/2015 16:51:44</publishTime>
+      <publishTime>10/27/2015 18:28:16</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>10/27/2015 16:51:44</publishTime>
+      <publishTime>10/27/2015 18:28:16</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>09/22/2015 12:05:33</publishTime>
@@ -256,34 +259,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/22/2015 12:05:33</publishTime>
     </File>
     <File Include="bin/bg-BG/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:42</publishTime>
+      <publishTime>10/27/2015 18:28:13</publishTime>
     </File>
     <File Include="bin/bg-BG/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/CIAB.dll">
-      <publishTime>10/27/2015 16:51:22</publishTime>
+      <publishTime>10/28/2015 10:38:09</publishTime>
     </File>
     <File Include="bin/CIAB.pdb">
-      <publishTime>09/21/2015 15:19:32</publishTime>
+      <publishTime>10/28/2015 10:38:09</publishTime>
     </File>
     <File Include="bin/cs-CZ/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/da-DK/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:43</publishTime>
+      <publishTime>10/27/2015 18:28:15</publishTime>
     </File>
     <File Include="bin/da-DK/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/de-DE/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:41</publishTime>
+      <publishTime>10/27/2015 18:28:12</publishTime>
     </File>
     <File Include="bin/de-DE/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/en-US/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:43</publishTime>
+      <publishTime>10/27/2015 18:28:14</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/19/2015 17:50:00</publishTime>
@@ -292,13 +295,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/19/2015 17:50:00</publishTime>
     </File>
     <File Include="bin/es-ES/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:43</publishTime>
+      <publishTime>10/27/2015 18:28:14</publishTime>
     </File>
     <File Include="bin/es-ES/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/fr-FR/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:41</publishTime>
+      <publishTime>10/27/2015 18:28:13</publishTime>
     </File>
     <File Include="bin/fr-FR/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -319,7 +322,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:28</publishTime>
     </File>
     <File Include="bin/nl-NL/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:42</publishTime>
+      <publishTime>10/27/2015 18:28:14</publishTime>
     </File>
     <File Include="bin/nl-NL/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -331,19 +334,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/14/2015 16:57:36</publishTime>
     </File>
     <File Include="bin/pl-PL/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:43</publishTime>
+      <publishTime>10/27/2015 18:28:15</publishTime>
     </File>
     <File Include="bin/pl-PL/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/pt-BR/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:42</publishTime>
+      <publishTime>10/27/2015 18:28:13</publishTime>
     </File>
     <File Include="bin/pt-BR/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/pt-PT/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:42</publishTime>
+      <publishTime>10/27/2015 18:28:13</publishTime>
     </File>
     <File Include="bin/pt-PT/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -352,7 +355,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/ru-RU/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:44</publishTime>
+      <publishTime>10/27/2015 18:28:15</publishTime>
     </File>
     <File Include="bin/ru-RU/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -391,7 +394,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 03:06:18</publishTime>
     </File>
     <File Include="bin/uk-UA/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:41</publishTime>
+      <publishTime>10/27/2015 18:28:12</publishTime>
     </File>
     <File Include="bin/uk-UA/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -400,7 +403,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2015 22:54:30</publishTime>
     </File>
     <File Include="bin/zh-CN/App_GlobalResources.resources.dll">
-      <publishTime>10/27/2015 16:51:44</publishTime>
+      <publishTime>10/27/2015 18:28:16</publishTime>
     </File>
     <File Include="bin/zh-CN/Kendo.Mvc.resources.dll">
       <publishTime>06/25/2015 03:06:18</publishTime>
@@ -3394,7 +3397,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/22/2015 23:42:31</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/27/2015 16:51:35</publishTime>
+      <publishTime>10/28/2015 10:38:25</publishTime>
     </File>
     <File Include="Scripts/2013.2.611/jquery-1.7.1.min.js">
       <publishTime>09/22/2015 10:43:57</publishTime>
@@ -8392,7 +8395,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/15/2015 00:52:48</publishTime>
     </File>
     <File Include="Views/Admin/AdminView.cshtml">
-      <publishTime>10/26/2015 17:39:22</publishTime>
+      <publishTime>10/27/2015 18:10:25</publishTime>
     </File>
     <File Include="Views/ChangePassword/ChangeUserPassword.cshtml">
       <publishTime>10/19/2015 11:46:59</publishTime>
@@ -8400,17 +8403,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/ChangePassword/PasswordResetSuccess.cshtml">
       <publishTime>10/16/2015 11:26:00</publishTime>
     </File>
+    <File Include="Views/ForgotPassword/ForgotPasswordMessages.cshtml">
+      <publishTime>10/28/2015 07:00:30</publishTime>
+    </File>
     <File Include="Views/ForgotPassword/PasswordLinkExpired.cshtml">
       <publishTime>10/27/2015 10:42:18</publishTime>
     </File>
     <File Include="Views/ForgotPassword/PasswordReset.cshtml">
-      <publishTime>10/27/2015 16:18:50</publishTime>
+      <publishTime>10/27/2015 20:14:32</publishTime>
     </File>
     <File Include="Views/ForgotPassword/RequestPasswordReset.cshtml">
       <publishTime>10/26/2015 15:25:07</publishTime>
     </File>
     <File Include="Views/ForgotPassword/ResetMessage.cshtml">
-      <publishTime>10/27/2015 16:18:50</publishTime>
+      <publishTime>10/27/2015 17:31:48</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>08/16/2015 22:54:31</publishTime>
@@ -8467,7 +8473,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/13/2015 10:29:51</publishTime>
     </File>
     <File Include="Views/OrderDetails/OrderDetail.cshtml">
-      <publishTime>10/26/2015 17:42:55</publishTime>
+      <publishTime>10/27/2015 18:22:23</publishTime>
     </File>
     <File Include="Views/Product/CyberMart.cshtml">
       <publishTime>10/09/2015 11:03:33</publishTime>
@@ -8566,7 +8572,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2015 10:29:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/27/2015 16:51:25</publishTime>
+      <publishTime>10/28/2015 09:51:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

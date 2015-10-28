@@ -10,13 +10,6 @@ namespace CIAB.Models
     public class EmailFrom
     {
 
-        public EmailFrom()
-        {
-
-        }
-
-
-
         [Required, Display(Name="Input Your Name ")]
         public string inputName { get; set; }
 

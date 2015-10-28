@@ -8,8 +8,6 @@ namespace CIAB.Models
 {
     public class ResetPassword
     {
-        string CIABconnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CIABConnectionString"].ConnectionString;
-
         public string UserName { get; set; }
 
         [Required]
