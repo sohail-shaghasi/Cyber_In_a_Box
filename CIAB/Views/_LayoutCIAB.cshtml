@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>@ViewBag.Title</title>
     <meta name="desc" content="">
-
+    @{Html.EnableClientValidation(true);}
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -22,8 +22,6 @@
     <script src="~/Scripts/kendo/kendo.web.min.js"></script>
     <script src="~/Scripts/kendo.aspnetmvc.min.js"></script>
     <script src="~/Scripts/kendo.all.min.js"></script>
-
-
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/colorbox.css" rel="stylesheet" />
@@ -31,7 +29,7 @@
     <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
-    @{Html.EnableClientValidation(true);}
+
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">

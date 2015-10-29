@@ -152,6 +152,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="DataLayer\BaseDataLayer.cs" />
@@ -161,6 +162,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ChangePasswordFromUserDetailsPage.cs" />
     <Compile Include="Models\ConfirmOrderCustomer.cs" />
     <Compile Include="Models\CyberHealthCheckSignUp.cs" />
     <Compile Include="Models\EmailFrom.cs" />
@@ -2333,6 +2335,8 @@
     <Content Include="Views\ForgotPassword\RequestPasswordReset.cshtml" />
     <Content Include="Views\ForgotPassword\PasswordReset.cshtml" />
     <Content Include="Views\ForgotPassword\ForgotPasswordMessages.cshtml" />
+    <Content Include="Views\ResetPassword\PasswordResetPage.cshtml" />
+    <Content Include="Views\ResetPassword\GetMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

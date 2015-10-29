@@ -13,38 +13,37 @@ namespace CIAB.Controllers
 {
     public class OrderController : BaseController
     {
-        //public string ProductID { get; set; }
-
         public ActionResult Index()
         {
             return View();
         }
-
-
-
         public ActionResult DispalyOrder(string ProductHandle)
         {
+            Session["productHandle"] = ProductHandle;
+
+
+            if (Convert.ToString(Session["UserName"]).ToLower() == null || Convert.ToString(Session["UserName"]).ToLower() == string.Empty)
+            {
+                return RedirectToAction("SignUpLogin", "Home");
+            }
+
             ConfirmOrderCustomer confirmOrderCustomer = UserDetails();
+
             try
             {
-
-                if (ProductHandle == "CIABWD")
+                switch (ProductHandle)
                 {
-                    return View("OrderDefacementMonitoring", confirmOrderCustomer);
+                    case "CIABWD":
+                        return View("OrderDefacementMonitoring", confirmOrderCustomer);
+                    case "CIABETP":
+                        return View("OrderEmailThreatPrevention", confirmOrderCustomer);
+                    case "CIABVS":
+                        return View("OrderVulnerabilityScan", confirmOrderCustomer);
+                    case "CIABCSC":
+                        return View("OrderCyberSecurityHealthCheck", confirmOrderCustomer);
+                    default: 
+                        return RedirectToAction("index", "Home");
                 }
-                else if (ProductHandle == "CIABETP")
-                {
-                    return View("OrderEmailThreatPrevention", confirmOrderCustomer);
-                }
-                else if (ProductHandle == "CIABVS")
-                {
-                    return View("OrderVulnerabilityScan", confirmOrderCustomer);
-                }
-                else if (ProductHandle == "CIABCSC")
-                {
-                    return View("OrderCyberSecurityHealthCheck", confirmOrderCustomer);
-                }
-                return RedirectToAction("index", "Home");
             }
             catch (Exception ex)
             {
@@ -52,16 +51,11 @@ namespace CIAB.Controllers
             }
             return RedirectToAction("index", "Home");
         }
-
-
-        //-----------------------------------------------------------------------------
-
-
-        public ActionResult CreateOrder(string productHandle)
+        public ActionResult CreateOrder()
         {
             try
             {
-                Session["productHandle"] = productHandle;
+                var productHandle = Convert.ToString(Session["productHandle"]);
 
                 if (productHandle == "CIABWD")
                 {
@@ -107,11 +101,6 @@ namespace CIAB.Controllers
             }
             return View();
         }
-
-
-        //-----------------------------------------------------------------------------
-
-
         public ActionResult DisplayThankYou()
         {
             try
@@ -147,11 +136,6 @@ namespace CIAB.Controllers
                 return View(new ConfirmOrderCustomer());
             }
         }
-
-
-
-
-
         private void SendOrderConfirmationEmail()//This function sends email for each placed orders
         {
             try
@@ -204,7 +188,6 @@ namespace CIAB.Controllers
                 base.Logger.Error(ex, "SendOrderConfirmationEmail_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
         }
-
         private ConfirmOrderCustomer UserDetails()//This Function returns User information from User Table.
         {
             var UserIDFromSession = "";
@@ -254,7 +237,7 @@ namespace CIAB.Controllers
                 base.Logger.Error(ex, "UserDetails_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
                 return new ConfirmOrderCustomer();
             }
-            
+
         }
 
     }

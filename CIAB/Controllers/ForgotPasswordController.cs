@@ -20,7 +20,6 @@ namespace CIAB.Controllers
             return View();
         }
 
-
         [HttpGet]
         public ActionResult RequestPasswordReset()
         {
@@ -153,15 +152,5 @@ namespace CIAB.Controllers
         {
             return View();
         }
-
-
-
-
-        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
-        public ActionResult SendEmailFromUserListingPage()
-        {
-            return View();
-        }
-
     }
 }

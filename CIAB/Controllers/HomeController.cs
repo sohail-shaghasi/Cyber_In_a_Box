@@ -22,32 +22,22 @@ namespace CIAB.Controllers
 
     public class HomeController : BaseController
     {
-
         public HomeController()
         {
 
         }
-
-
         public ActionResult Index()
         {
 
 
             return View();
         }
-
-        //---------------------------------------------------------------------
-
         public ActionResult Contact()
         {
 
 
             return View();
         }
-
-
-        //---------------------------------------------------------------------
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(CIAB.Models.EmailFrom emailFrom)
@@ -116,19 +106,12 @@ namespace CIAB.Controllers
                 return View();
             }
         }
-
-        //---------------------------------------------------------------------
-
-
         public ActionResult CyberHealthSignUp()
         {
 
 
             return View();
         }
-
-        //---------------------------------------------------------------------
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CyberHealthSignUp(CIAB.Models.CyberHealthCheckSignUp cyberHealthcheck)
@@ -210,8 +193,6 @@ namespace CIAB.Controllers
                 return View();
             }
         }
-
-        //---------------------store the Temporary User Information to TempUser Table------------------------------------------------
         private void TempUser(CIAB.Models.CyberHealthCheckSignUp CyberHealthCheck)
         {
             SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
@@ -231,52 +212,33 @@ namespace CIAB.Controllers
             CIABcommand.ExecuteNonQuery();
             ViewData["TempUser"] = "Successfull";//message for pop up Alert().
         }
-
-        //---------------------------------------------------------------------
         public ActionResult sent()
         {
             return View();
         }
 
-
-        //---------------------------------------------------------------------
-
         public ActionResult AboutUs()
         {
             return View();
         }
-
-        //---------------------------------------------------------------------
-
         public ActionResult Legal()
         {
 
             return View();
         }
-
-        //---------------------------------------------------------------------
-
         public ActionResult Privacy()
         {
             return View();
         }
-
-        //---------------------------------------------------------------------
-
         public ActionResult SignUpLogin()
         {
             return View();
         }
-
-        //---------------------------------------------------------------------
         [HttpGet]
         public ActionResult Login()
         {
             return View("Register");
         }
-
-        //---------------------------------------------------------------------
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(User CIABuser)
@@ -307,30 +269,32 @@ namespace CIAB.Controllers
                         Session["UserId"] = user.UserID;
                         Session["email"] = user.LoginEmail;
                         Session["UserRole"] = user.Role;
-                        return RedirectToAction("Index", "Home");
 
+                        var productHandle = Convert.ToString(Session["productHandle"]);
+
+                        if (string.IsNullOrEmpty(productHandle))
+                            return RedirectToAction("Index", "Home");
+                        else
+                            return RedirectToAction("DispalyOrder", "Order", new { ProductHandle = productHandle });
 
                     }
-                    
+
                 }
-               
+
             }
             catch (Exception ex)
-            { 
+            {
                 base.Logger.Error(ex, "Login_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
             ModelState.AddModelError("LoginError", "Incorrect UserName / Password");
             return View("SignUpLogin", CIABuser);
         }
-
         [HttpGet]
         public ActionResult Register()
         {
             return View();
 
         }
-
-
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         //[ValidateAntiForgeryToken]
         public ActionResult Register(CIAB.Models.User NewUser)
@@ -404,15 +368,10 @@ namespace CIAB.Controllers
                 return View("SignUpLogin", NewUser);
             }
         }
-
-
         public ActionResult RegistrationConfirmation()
         {
             return View();
         }
-
-        //---------------------------------------------------------------------
-
 
         [HttpGet]
         public ActionResult UserProfileEdit()
@@ -428,9 +387,6 @@ namespace CIAB.Controllers
 
             return View();
         }
-
-        //---------------------------------------------------------------------
-
 
         [HttpPost]
         public ActionResult UserProfileEdit(CIAB.Models.UserProfileEdit userProfileEdit)
@@ -454,8 +410,6 @@ namespace CIAB.Controllers
 
             return View(userProfileEdit);
         }
-
-        //---------------------------------------------------------------------
 
         private void GetUserProfile()
         {
@@ -493,9 +447,6 @@ namespace CIAB.Controllers
             }
         }
 
-        //---------------------------------------------------------------------
-
-
         /// <summary>
         /// Log out the Logged in User
         /// </summary>
@@ -512,9 +463,6 @@ namespace CIAB.Controllers
             return RedirectToAction("Index");
 
         }
-
-        //---------------------------------------------------------------------
-
 
         [NonAction]//This is to specify that, Result() function is not invokable.
         public string Result()

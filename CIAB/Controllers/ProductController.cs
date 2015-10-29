@@ -16,22 +16,19 @@ namespace CIAB.Controllers
         {
                 return View();
         }
-
         public ActionResult Marketplace()
         {
+            Session["productHandle"] = string.Empty;
             return View();
         }
         public ActionResult CyberSecurityHealthCheck()
         {
             return View();
         }
-
         public ActionResult vulnerabilityScan()
         {
             return View();
         }
-
-
         public ActionResult DefacementMonitoring()
         {
             return View();
@@ -43,18 +40,11 @@ namespace CIAB.Controllers
 
             return View();
         }
-
-
-
         [HttpGet]
         public ActionResult pricingContactUs()
         {
             return View();
         }
-
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> pricingContactUs(CIAB.Models.EmailFrom emailFrom)

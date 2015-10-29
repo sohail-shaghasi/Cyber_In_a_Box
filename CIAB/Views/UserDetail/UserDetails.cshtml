@@ -60,19 +60,16 @@
 
         var pathname = window.location.host;
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));//to find the nearest <tr> for the selected cell.
-        var path = "http://" + pathname + '@Url.Action("SendEmailFromUserListingPage", "ForgotPassword");/*?UserId=' + dataItem.UserId;
-
-
+        var path = "http://" + pathname + '@Url.Action("PasswordResetFromUserListingPage", "ResetPassword")';
 
         //Ajax call to controller action method
-
         $.ajax({
             url: path,
             datatype: "json",
-            data: { 'UserId': dataItem.UserId},
-            type: "POST",
+            data: { 'Email': dataItem.Email, 'UserName': dataItem.UserName},
+            type: "GET",
             success: function (data) {
-                alert(data);
+                alert('Successfully sent email to the User.');
             },
             error: function () {
                 alert("ERROR");
