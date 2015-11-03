@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "GetMessages";
+    Layout = "~/Views/_LayoutCIAB.cshtml";
+}
+
+<div id="about_top" style="padding:150px">
+    <div class="container">
+        <div class="row signup_login">
+            <div class="col-md-8 col-md-offset-1">
+                <h4>
+                    @if (TempData["PasswordChangedConfirmation"] != null)
+                    {
+                        <strong> @TempData["PasswordChangedConfirmation"].ToString()  <a href="@Url.Action("SignUpLogin", "Home")" onclick='location.href=this.getAttribute("href")'>This Link</a> </strong>
+                    }
+
+                    else if (TempData["PasswordLinkExpired"] != null)
+                    {
+                        <strong>@TempData["PasswordLinkExpired"].ToString()</strong>
+                    }
+
+
+                    else if (TempData["ResetMessage"] != null)
+                    {
+                        <strong>@TempData["ResetMessage"].ToString()</strong>
+                    }
+
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>

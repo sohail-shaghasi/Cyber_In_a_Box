@@ -1,7 +1,7 @@
 ﻿@model CIAB.Models.OrderDetailsPage
 @{
     ViewBag.Title = "OrderDetail";
-
+    Layout = null;
 }
 
 @Scripts.Render("~/bundles/jquery")
@@ -33,7 +33,7 @@
 <div class="modal-header">
     <h4>Purchase Request Details</h4>
 </div>
-<div class="modal-body" style="padding:40px 50px;">
+<div class="modal-body" style="background-color:white; padding:40px 50px;">
     @{
         TempData["OrderDetail"] = Model;// pass the Model to controller
     }
@@ -144,4 +144,4 @@
                     </div>
                 </div>     <!--Upload File 3 Ends-->
             </div>
-        </div>
+        </div></div></div>

@@ -181,7 +181,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\email_threat_new.jpg" />
     <Content Include="Content\2013.2.611\Black\editor.png" />
     <Content Include="Content\2013.2.611\Black\imagebrowser.png" />
     <Content Include="Content\2013.2.611\Black\loading.gif" />
@@ -392,6 +391,44 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\lato-bold-webfont.svg" />
+    <Content Include="Content\fonts\lato-bolditalic-webfont.svg" />
+    <Content Include="Content\fonts\lato-italic-webfont.svg" />
+    <Content Include="Content\fonts\lato-regular-webfont.svg" />
+    <Content Include="Content\fonts\stylesheet.css" />
     <Content Include="Content\images\border.png" />
     <Content Include="Content\images\controls.png" />
     <Content Include="Content\images\loading.gif" />
@@ -728,8 +765,6 @@
     <Content Include="Content\style-admin.css" />
     <Content Include="Content\style-ie.css" />
     <Content Include="Content\style.css" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\about-image.png" />
     <Content Include="Images\about-mission.jpg" />
@@ -814,18 +849,9 @@
     <Content Include="Images\web-defacement-monitoring.png" />
     <Content Include="Images\yellow_bg.jpg" />
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Images\signup-images.zip" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
@@ -844,40 +870,274 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\fonts\lato-bold-webfont.eot" />
+    <Content Include="Content\fonts\lato-bold-webfont.ttf" />
+    <Content Include="Content\fonts\lato-bold-webfont.woff" />
+    <Content Include="Content\fonts\lato-bold-webfont.woff2" />
+    <Content Include="Content\fonts\lato-bolditalic-webfont.eot" />
+    <Content Include="Content\fonts\lato-bolditalic-webfont.ttf" />
+    <Content Include="Content\fonts\lato-bolditalic-webfont.woff" />
+    <Content Include="Content\fonts\lato-bolditalic-webfont.woff2" />
+    <Content Include="Content\fonts\lato-italic-webfont.eot" />
+    <Content Include="Content\fonts\lato-italic-webfont.ttf" />
+    <Content Include="Content\fonts\lato-italic-webfont.woff" />
+    <Content Include="Content\fonts\lato-italic-webfont.woff2" />
+    <Content Include="Content\fonts\lato-regular-webfont.eot" />
+    <Content Include="Content\fonts\lato-regular-webfont.ttf" />
+    <Content Include="Content\fonts\lato-regular-webfont.woff" />
+    <Content Include="Content\fonts\lato-regular-webfont.woff2" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Scripts\2015.2.624\jquery.min.map" />
+    <Content Include="Scripts\2015.2.624\kendo.all.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.angular.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.aspnetmvc.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.autocomplete.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.binder.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.button.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.calendar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.color.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.colorpicker.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.columnmenu.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.columnsorter.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.combobox.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.core.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.data.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.data.odata.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.data.signalr.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.data.xml.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.barcode.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.funnel.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.polar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.core.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.diagram.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.gauge.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.map.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.mobile.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.qrcode.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.sparkline.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.stock.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.themes.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.treemap.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.datepicker.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.datetimepicker.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dom.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.draganddrop.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.drawing.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.dropdownlist.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.editable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.editor.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.excel.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.filebrowser.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.filtercell.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.filtermenu.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.fx.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.list.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.timeline.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.grid.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.groupable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.imagebrowser.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.list.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.listview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.maskedtextbox.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.menu.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.actionsheet.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.application.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.button.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.buttongroup.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.collapsible.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.drawer.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.listview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.loader.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.modalview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.navbar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.pane.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.popover.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.scroller.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.scrollview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.shim.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.splitview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.switch.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.tabstrip.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.view.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.multiselect.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.notification.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.numerictextbox.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.ooxml.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.pager.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.panelbar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.pdf.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.pivot.configurator.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.pivot.fieldmenu.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.pivotgrid.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.popup.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.progressbar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.reorderable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.resizable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.responsivepanel.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.router.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.agendaview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.dayview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.monthview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.recurrence.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.timelineview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.view.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.selectable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.slider.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.sortable.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.splitter.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.tabstrip.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.timepicker.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.toolbar.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.tooltip.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.touch.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.treelist.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.treeview.draganddrop.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.treeview.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.upload.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.userevents.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.validator.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.view.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.virtuallist.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.web.min.js.map" />
+    <Content Include="Scripts\2015.2.624\kendo.window.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\2013.2.611\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\2013.2.611\jquery.validate.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.all.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.autocomplete.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.calendar.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.chart.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.combobox.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.common.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.datepicker.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.datetimepicker.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.draganddrop.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.editor.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.editing.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.filtering.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.grouping.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.reordering.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.grid.resizing.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.imagebrowser.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.list.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.menu.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.panelbar.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.slider.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.splitter.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.tabstrip.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.textbox.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.timepicker.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.treeview.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.upload.min.js" />
-    <Content Include="Scripts\2013.2.611\telerik.window.min.js" />
+    <Content Include="Scripts\2015.2.624\angular.min.js" />
+    <Content Include="Scripts\2015.2.624\jquery.min.js" />
+    <Content Include="Scripts\2015.2.624\jszip.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.all-vsdoc.js" />
+    <None Include="Scripts\2015.2.624\kendo.all.min.intellisense.js" />
+    <Content Include="Scripts\2015.2.624\kendo.all.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.angular.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.autocomplete.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.binder.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.button.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.calendar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.color.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.colorpicker.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.columnmenu.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.columnsorter.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.combobox.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.core.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.data.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.data.odata.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.data.signalr.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.data.xml.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.dataviz-vsdoc.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.barcode.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.funnel.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.chart.polar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.core.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.diagram.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.gauge.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.map.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.dataviz.min.intellisense.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.mobile.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.qrcode.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.sparkline.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.stock.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.themes.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dataviz.treemap.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.datepicker.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.datetimepicker.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dom.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.draganddrop.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.drawing.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.dropdownlist.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.editable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.editor.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.excel.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.filebrowser.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.filtercell.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.filtermenu.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.fx.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.list.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.gantt.timeline.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.grid.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.groupable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.imagebrowser.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.list.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.listview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.maskedtextbox.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.menu.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.mobile-vsdoc.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.actionsheet.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.application.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.button.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.buttongroup.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.collapsible.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.drawer.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.listview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.loader.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.mobile.min.intellisense.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.modalview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.navbar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.pane.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.popover.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.scroller.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.scrollview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.shim.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.splitview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.switch.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.tabstrip.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.mobile.view.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.multiselect.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.notification.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.numerictextbox.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.ooxml.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.pager.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.panelbar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.pdf.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.pivot.configurator.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.pivot.fieldmenu.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.pivotgrid.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.popup.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.progressbar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.reorderable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.resizable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.responsivepanel.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.router.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.agendaview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.dayview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.monthview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.recurrence.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.timelineview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.scheduler.view.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.selectable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.slider.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.sortable.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.splitter.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.tabstrip.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.timepicker.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.timezones.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.toolbar.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.tooltip.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.touch.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.treelist.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.treeview.draganddrop.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.treeview.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.upload.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.userevents.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.validator.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.view.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.virtuallist.min.js" />
+    <None Include="Scripts\2015.2.624\kendo.web-vsdoc.js" />
+    <None Include="Scripts\2015.2.624\kendo.web.min.intellisense.js" />
+    <Content Include="Scripts\2015.2.624\kendo.web.min.js" />
+    <Content Include="Scripts\2015.2.624\kendo.window.min.js" />
+    <Content Include="Scripts\2015.2.624\pako_deflate.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2052,7 +2312,6 @@
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
@@ -2080,9 +2339,9 @@
     <Content Include="Views\Home\UserProfileEdit.cshtml" />
     <Content Include="Views\Home\SignUpLogin.cshtml" />
     <Content Include="Views\Home\RegistrationConfirmation.cshtml" />
-    <Content Include="Views\_LayoutForHomePage.cshtml" />
+    <Content Include="Views\Shared\_LayoutHomePage.cshtml" />
     <Content Include="Views\Order\CreateOrder.cshtml" />
-    <Content Include="Views\_LayoutCIAB.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Order\DisplayThankYou.cshtml" />
     <Content Include="Views\Order\OrderCyberSecurityHealthCheck.cshtml" />
     <Content Include="Views\Order\OrderDefacementMonitoring.cshtml" />
@@ -2334,9 +2593,10 @@
     <Content Include="Views\Home\AsyncKendoUploader.cshtml" />
     <Content Include="Views\ForgotPassword\RequestPasswordReset.cshtml" />
     <Content Include="Views\ForgotPassword\PasswordReset.cshtml" />
-    <Content Include="Views\ForgotPassword\ForgotPasswordMessages.cshtml" />
     <Content Include="Views\ResetPassword\PasswordResetPage.cshtml" />
     <Content Include="Views\ResetPassword\GetMessages.cshtml" />
+    <Content Include="Views\ForgotPassword\GetMessages.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -2346,9 +2606,7 @@
     <Content Include="Images\heroAccent.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CIABlogs\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Validation\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

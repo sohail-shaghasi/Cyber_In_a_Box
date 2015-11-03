@@ -9,30 +9,26 @@
     <meta name="desc" content="">
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script src="~/Scripts/jquery.bxslider.js"></script>
+    <script src="~/Scripts/jquery.royalslider.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo/css")
     @Scripts.Render("~/bundles/kendo")
     @Styles.Render("~/Content/css")
-
-    @*<script src="~/Scripts/jquery-1.8.3.min.js"></script>
-        <script src="~/Scripts/jquery.bxslider.js"></script>
-        <script src="~/Scripts/jquery.royalslider.min.js"></script>*@
+    @{Html.EnableClientValidation(true);}
     <script src="~/Scripts/kendo/kendo.web.min.js"></script>
     <script src="~/Scripts/kendo.aspnetmvc.min.js"></script>
     <script src="~/Scripts/kendo.all.min.js"></script>
-
-
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/colorbox.css" rel="stylesheet" />
     <link href="~/Content/royalslider.css" rel="stylesheet" />
     <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
-    @{Html.EnableClientValidation(true);}
-
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">
     <!-- Static navbar -->
@@ -140,15 +136,15 @@
                 <div class="col-md-5">
                     <img src="~/Images/kpmg-logo.png" class="" />
                     <p>
-                        <span>cybersecurity@kpmg.com.sg</span><br>
-                        16 Raffles Quay #22-00, Hong Leong Building, Singapore
+                        <span><a href="mailto:cybersecurity@kpmg.com.sg" target="_top">cybersecurity@kpmg.com.sg</a></span><br>
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore 048581
                     </p>
                 </div>
                 <div class="col-md-3">
                     <ul>
                         <li><a href="~/#aboutSection">About CYBER-IN-A-BOX</a></li>
                         <li><a href="@Url.Action("Contact", "Home")" onclick='location.href=this.getAttribute("href")'>Contact Us</a></li>
-                        <li><a href="http://www.kpmg.com">KPMG Cyber Security Centre</a></li>
+                        <li><a href="http://www.kpmg.com/sg/en/topics/cyber-security-centre/pages/default.aspx">KPMG Cyber Security Centre</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">

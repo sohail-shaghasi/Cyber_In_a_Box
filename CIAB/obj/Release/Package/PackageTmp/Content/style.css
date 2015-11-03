@@ -214,8 +214,9 @@ p.testi_content span {
 
 #sub_content {
     background: #d6eaf2;
-    padding: 60px 0;
+    padding: 50px 0;
     overflow: visible;
+    height:1000px;
 }
 
 #sub_content.cloud {

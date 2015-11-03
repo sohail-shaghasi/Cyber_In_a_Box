@@ -50,54 +50,46 @@ namespace CIAB.Controllers
             inputEmail = emailFrom.inputEmail;
             Message = emailFrom.Message;
             optProduct = emailFrom.optProduct;
+            var body = "<p>Email From : {0}  </p> <p>Subject : {1} </p> <p>Name : {2} </p> <p>Product : {3} </p> <p>Message: {4} </p>";
 
             try
             {
-                var body = "<p>Email From : {0}  </p> <p>Subject : {1} </p> <p>Name : {2} </p> <p>Product : {3} </p> <p>Message: {4} </p>";
 
                 //SMTP parameters starts here
                 string strReciever = System.Configuration.ConfigurationManager.AppSettings["smtpReciever"];
+                string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
                 string strSubject = System.Configuration.ConfigurationManager.AppSettings["smtpSubject"];
                 string strSMTPUser = System.Configuration.ConfigurationManager.AppSettings["smtpUser"];
                 string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
                 string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
                 int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-                string strEmailCC = System.Configuration.ConfigurationManager.AppSettings["smtpcc"];
 
-                MailMessage message = new MailMessage();
-                //Reciever of the email.
-                if (strReciever.ToString() != string.Empty)
+                using (MailMessage message = new MailMessage())
                 {
-                    foreach (string tos in strReciever.Split(';'))
-                    {
-                        MailAddress to = new MailAddress(tos);
-                        message.To.Add(to);//sent to email address
-                    }
-                }
-
-                message.From = new MailAddress(inputEmail);
-                message.Subject = strSubject; //Subject;
-                message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
-                message.IsBodyHtml = true;
-
+                    message.From = new MailAddress(strEmailFrom);
+                    message.To.Add(inputEmail);
+                    message.Subject = strSubject; //Subject;
+                    message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
+                    message.IsBodyHtml = true;
 
                 // credebtials for smtp client account
-                SmtpClient smtp = new SmtpClient();
-                var credential = new NetworkCredential
-                {
-                    UserName = strSMTPUser,
-                    Password = strSMPTpass
-                };
+                    using (SmtpClient smtp = new SmtpClient())
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = strSMTPUser,
+                            Password = strSMPTpass
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = strSMPTHost;
+                        smtp.Port = SMPTPort;
+                        smtp.EnableSsl = true;
 
+                        await smtp.SendMailAsync(message);
 
-                smtp.Credentials = credential;
-                smtp.Host = strSMPTHost;
-                smtp.Port = SMPTPort;
-                smtp.EnableSsl = true;
-
-                await smtp.SendMailAsync(message);
-                return RedirectToAction("sent");
-
+                    }
+                }
+                    return RedirectToAction("sent");
             }
             catch (Exception ex)
             {

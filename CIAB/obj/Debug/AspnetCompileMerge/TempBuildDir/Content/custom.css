@@ -14,7 +14,7 @@ a {
     transition: 0.3s ease-in-out;
     text-decoration: none;
     outline: none;
-    appearance: none;
+    /*appearance: none;*/
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
@@ -24,7 +24,7 @@ a:hover,a:focus,a:active {
     text-decoration: none;
     color: inherit;
     outline: none;
-    appearance: none;
+    /*appearance: none;*/
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;

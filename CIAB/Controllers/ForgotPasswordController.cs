@@ -14,12 +14,10 @@ namespace CIAB.Controllers
 {
     public class ForgotPasswordController : BaseController
     {
-        // GET: /ForgotPassword/
         public ActionResult Index()
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult RequestPasswordReset()
         {
@@ -58,21 +56,20 @@ namespace CIAB.Controllers
                         //call to function SendPasswordResetEmail
                         CIAB.Models.UserForgotPassword ModelForgotPassword = new Models.UserForgotPassword();
                         ModelForgotPassword.SendPasswordResetEmail(forgotPassword.EmailFromDB, forgotPassword.UserName, forgotPassword.UniqueID);
-                        TempData["ResetMessage"] = "If a user account with that Email address exists, we will have sent a password reset link";
-                        return View("ForgotPasswordMessages", "ForgotPassword");
+                        TempData["ResetMessage"] = "You will receive an email with the password reset link. Follow the instruction in the email to reset your password.";
+                        return RedirectToAction("GetMessages", "ForgotPassword");
                     }
 
                 }
-                TempData["ResetMessage"] = "If a user account with that Email address exists, we will have sent a password reset link";
+                TempData["ResetMessage"] = "You will receive an email with the password reset link. Follow the instruction in the email to reset your password.";
 
             }
             catch (Exception ex)
             {
                 base.Logger.Error(ex, "RequestPasswordReset_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
-            return View("ForgotPasswordMessages", "ForgotPassword");
+            return RedirectToAction("GetMessages", "ForgotPassword");
         }
-
         [HttpGet]
         public ActionResult PasswordReset(string UniqueID)
         {
@@ -92,7 +89,7 @@ namespace CIAB.Controllers
                 if (!result)
                 {
                     TempData["PasswordLinkExpired"] = "Forgot Password link is invalid!";
-                    return RedirectToAction("ForgotPasswordMessages", "ForgotPassword");
+                    return RedirectToAction("GetMessages", "ForgotPassword");
                 }
             }
             catch (Exception ex)
@@ -107,11 +104,6 @@ namespace CIAB.Controllers
             try
             {
                 string strNewPassword = forgotPassword.ConfirmPassword;
-                //if (!ModelState.IsValid)
-                //{
-                //    return View(forgotPassword);
-                //}
-
                 string HashPassword;
                 bool result;
                 //call the store proc to check if the GUID is valid and still exists in the table.
@@ -137,7 +129,7 @@ namespace CIAB.Controllers
                 if (result)
                 {
                     TempData["PasswordChangedConfirmation"] = "Your Password has been changed, please login using";
-                    return RedirectToAction("ForgotPasswordMessages", "ForgotPassword");
+                    return RedirectToAction("GetMessages", "ForgotPassword");
                 }
             }
             catch (Exception ex)
@@ -146,9 +138,7 @@ namespace CIAB.Controllers
             }
             return View();
         }
-
-        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
-        public ActionResult ForgotPasswordMessages()
+        public ActionResult GetMessages()
         {
             return View();
         }

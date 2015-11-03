@@ -43,36 +43,21 @@ namespace CIAB
                                          "~/Scripts/respond.js"));
 
 
-
-
-       
-
-            //---------------CSS Bundles-----------------------------------
-
-
-
-
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                                         "~/Content/bootstrap.css",
                                         "~/Content/site.css"));
 
-
-
-
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
                                         "~/Content/kendo/kendo.common.min.css",
                                         "~/Content/kendo/kendo.default.min.css"));
-
-           
             
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*")); 
+                "~/Scripts/jquery.validate*"));
 
+          //  bundles.Add(new StyleBundle("~/Content/font-awesome.min.css").Include("~/Content/font-awesome.min.css"), new CssRewriteUrlTransform());
 
-
-            bundles.IgnoreList.Clear();
-            BundleTable.EnableOptimizations = true;
+            //bundles.IgnoreList.Clear();
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }
