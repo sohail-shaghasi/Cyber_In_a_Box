@@ -14,6 +14,8 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Web.Configuration;
 using CIAB.DataLayer;
+using System.Text.RegularExpressions;
+using System.Net.Mime;
 
 
 namespace CIAB.Controllers
@@ -88,7 +90,6 @@ namespace CIAB.Controllers
                         smtp.EnableSsl = true;
 
                         await smtp.SendMailAsync(message);
-
                     }
                 }
                     return RedirectToAction("sent");
