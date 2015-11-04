@@ -18,7 +18,6 @@
     <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <style>
         .visibleNearby {
             width: 100%;
@@ -92,24 +91,83 @@
 </head>
 <body id="page-top" data-spy="scroll" class="v2">
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="container">
-            <!-- Logo -->
-            <div class="clearfix"></div>
-            <div class="col-md-8 welcome-text text-center">
-                <h3>Cyber-In-A-Box &#8482;</h3>
-                <h1>Simplifiying Cyber Security</h1>
-                <div>
-                    <p>
-                        Get a peace of mind with our security essentials to defend yourself
-                        <br />
-                        against fast evolving cyber threats
-                    </p>
+
+
+    <header id="myCarousel" class="carousel slide" style="width:100%">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="~/Images/kpmg-homebanner.jpg" alt="KPMG" class="img-responsive" style="width:100%" />
+                <div class="carousel-caption" style="left: 10%;">
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 welcome-text text-center">
+                        <h3>Cyber-In-A-Box &#8482;</h3>
+                        <h1>Simplifiying Cyber Security</h1>
+                        <div>
+                            <p>
+                                Get a peace of mind with our security essentials to defend yourself
+                                <br />
+                                against fast evolving cyber threats
+                            </p>
+                        </div>
+                        <a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-lg btn-cta btn-thanks" style="margin-right:650px;">Find Out More</a>
+                    </div>
                 </div>
-                <a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-lg btn-cta btn-thanks" style="margin-right:650px;">Find Out More</a>
+            </div>
+                    
+            <div class="item">
+                <img src="~/Images/kpmg-homebanner.jpg" alt="KPMG" class="img-responsive" style="width:100%" />
+                <div class="carousel-caption" style="left: 10%;">
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 welcome-text text-center">
+                        <h3>Cyber-In-A-Box &#8482;</h3>
+                        <h1>Simplifiying Cyber Security</h1>
+                        <div>
+                            <p>
+                                Get a peace of mind with our security essentials to defend yourself
+                                <br />
+                                against fast evolving cyber threats
+                            </p>
+                        </div>
+                        <a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-lg btn-cta btn-thanks" style="margin-right:650px;">Find Out More</a>
+                    </div>
+                </div>
+            </div>
+           
+             <div class="item">
+                <img src="~/Images/kpmg-homebanner.jpg" alt="KPMG" class="img-responsive" style="width:100%" />
+                 <div class="carousel-caption" style="left: 10%;">
+                     <div class="clearfix"></div>
+                     <div class="col-md-8 welcome-text text-center">
+                         <h3>Cyber-In-A-Box &#8482;</h3>
+                         <h1>Simplifiying Cyber Security</h1>
+                         <div>
+                             <p>
+                                 Get a peace of mind with our security essentials to defend yourself
+                                 <br />
+                                 against fast evolving cyber threats
+                             </p>
+                         </div>
+                         <a href="@Url.Action("Marketplace", "Product")" onclick='location.href=this.getAttribute("href")' type="button" class="btn btn-primary btn-lg btn-cta btn-thanks" style="margin-right:650px;">Find Out More</a>
+                     </div>
+                 </div>
             </div>
         </div>
-    </section>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
+
     <!-- Static navbar -->
     <div id="menu-sticky-wrapper" class="sticky-wrapper is-sticky">
         <div id="menu" role="navigation" style="width: 100%; position: fixed; top: 0px;z-index:777;">
@@ -150,11 +208,6 @@
                                                 </ul>
                                             </li>
 
-
-
-
-
-
                                             <li class="dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-cog"></i>
@@ -170,12 +223,6 @@
                                                     <li><a href="@Url.Action("UserDetails", "UserDetail")" onclick='location.href=this.getAttribute("href")'>User Details</a></li>
                                                 </ul>
                                             </li>
-
-
-
-
-
-
                                         }
                                         else
                                         {
@@ -218,21 +265,6 @@
     @RenderBody()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div id="footer">
         <div class="container">
             <div class="row t_footer">
@@ -240,7 +272,7 @@
                     <img src="~/Images/kpmg-logo.png" class="" />
                     <p>
                         <span><a href="mailto:cybersecurity@kpmg.com.sg" target="_top">cybersecurity@kpmg.com.sg</a></span><br>
-                                 16 Raffles Quay #22-00, Hong Leong Building, Singapore 048581
+                        16 Raffles Quay #22-00, Hong Leong Building, Singapore 048581
                     </p>
                 </div>
 
@@ -275,7 +307,7 @@
     </div><!-- footer -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
-   
+
     <script type="text/javascript">
         $('.bxslider2').bxSlider({
             minSlides: 1,
@@ -298,17 +330,15 @@
         });
     </script>
     <!-- Custom JavaScript -->
+    <script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/jquery.sticky.js"></script>
     <script src="~/Scripts/validator.js"></script>
     <script src="~/Scripts/custom.js"></script>
-
-
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-

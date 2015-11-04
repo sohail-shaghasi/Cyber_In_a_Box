@@ -71,6 +71,8 @@ namespace CIAB.Controllers
                     message.Subject = strSubject; //Subject;
                     message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
                     message.IsBodyHtml = true;
+                    message.SubjectEncoding = Encoding.UTF8;
+                    message.BodyEncoding = Encoding.UTF8;
 
                 // credebtials for smtp client account
                     using (SmtpClient smtp = new SmtpClient())

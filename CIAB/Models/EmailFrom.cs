@@ -10,17 +10,20 @@ namespace CIAB.Models
     public class EmailFrom
     {
 
-        [Required, Display(Name="Input Your Name ")]
+        [Required(ErrorMessage = "Please input your Name.")]
         public string inputName { get; set; }
 
-        [Required, Display(Name="Input Your Email Address "), EmailAddress]
+        [Required(ErrorMessage = "Please input your Email Address.")]
+        //[DataType(DataType.EmailAddress, ErrorMessage = "Please input a valid email address.")]
+        [EmailAddress(ErrorMessage = "Please input a valid email address.")]
         public string inputEmail { get; set; }
 
+        [Required(ErrorMessage = "Please input the Subject.")]
         public string Subject { get; set; }
 
+        [Required (ErrorMessage="Please Select a product.")]
         public string optProduct { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Please input a message.")]
         public string Message { get; set; }
 
 
