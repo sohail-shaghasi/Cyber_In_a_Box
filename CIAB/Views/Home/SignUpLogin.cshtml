@@ -95,8 +95,6 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password <span class="req">*</span></label>
                         @Html.PasswordFor(p => p.Password, new { @class = "form-control" })
-                        @*<input type="password" class="form-control" id="Password" name="Password" required placeholder="Password">*@
-                        <span id="helpBlock" class="help-block">5 characters minimum, no spaces, no special characters</span>
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
 

@@ -40,7 +40,11 @@ namespace CIAB.Models
         [RegularExpression(@"(\S)+", ErrorMessage = "White space in User Name is not allowed.")]
         public string UserName { get; set; }
 
-        [StringLength(10, MinimumLength = 5, ErrorMessage ="5 characters minimum, no spaces, no special characters")]
+
+        [RegularExpression(@"^(?=[^\d_].*?\d)\w(\w|[!@#$%]){8,20}", ErrorMessage = @"Error. Password must have one capital, one special character and one numerical character. It can not start with a special character or a digit.")]
+       // [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}", ErrorMessage = " Please input minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character:")]
+        
+       // [StringLength(20, MinimumLength = 8, ErrorMessage ="8 characters minimum, no spaces, no special characters")]
         public string Password { get; set; }
         
         [Compare("Password", ErrorMessage = "The Password and Confirm Password do not match")]//to compare the password fields.
