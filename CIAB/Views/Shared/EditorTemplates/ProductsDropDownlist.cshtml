@@ -1,0 +1,8 @@
+﻿@model CIAB.Models.ProductName
+
+@(Html.Kendo().DropDownList().Name("ProductName")
+            .DataTextField("Product_Name")
+            .DataValueField("Product_ID")
+        .DataSource(datasource => datasource.Read(r => r.Action("AdminViewProductName", "Admin")))  
+        .OptionLabel("Select a product")
+)

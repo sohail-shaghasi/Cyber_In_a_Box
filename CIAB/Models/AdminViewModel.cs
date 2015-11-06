@@ -13,7 +13,6 @@ using System.Web.Mvc;
 
 
 namespace CIAB.Models
-
 {
     public class AdminViewModel
     {
@@ -26,8 +25,7 @@ namespace CIAB.Models
         public int? OrderNumber { get; set; }
         [Required]
         [UIHint("Date")]
-        public DateTime?  OrderDate { get; set; }
-        public int? ProductID { get; set; }
+        public DateTime? OrderDate { get; set; }
         [Required]
         public string OrderStatus { get; set; }
         [UIHint("Email")]
@@ -37,17 +35,22 @@ namespace CIAB.Models
         [Required]
         public string UserContactNumber { get; set; }
         [Required]
-        public string ProductName { get; set; }
-        public int MyProperty { get; set; }
+        
+        ProductName productName = new ProductName();
+        [UIHint("ProductsDropDownlist")]
+        public ProductName ProductName
+        { 
+            get { return productName; } 
+            set { productName = value;}
+        }
 
         AdminOrderStatus adminOrderStatus = new AdminOrderStatus();
-       [UIHint("adminViewStatus")]
+        [UIHint("adminViewStatus")]
         public AdminOrderStatus AdminOrderStatus
         {
             get { return adminOrderStatus; }
             set { adminOrderStatus = value; }
         }
-
     }
 
     public class AdminOrderStatus
@@ -55,5 +58,11 @@ namespace CIAB.Models
         public int Code { get; set; }
 
         public string StatusValue { get; set; }
+    }
+    public class ProductName
+    {
+        public int Product_ID { get; set; }
+
+        public string Product_Name { get; set; }
     }
 }

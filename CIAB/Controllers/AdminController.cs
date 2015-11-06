@@ -17,17 +17,8 @@ namespace CIAB.Controllers
     {
         public ActionResult Index()
         {
-           
-            
             return View();
         }
-
-        [HttpPost]
-        public ActionResult test(string ddlValue)
-        {
-            return View();
-        }
-
         public ViewResult AdminView([DataSourceRequest]DataSourceRequest request)
         {
             var lstAdminModel = new List<AdminViewModel>();//List of Object
@@ -57,8 +48,8 @@ namespace CIAB.Controllers
                     objAdminModel.UserCompany = reader["CompanyName"].ToString();
                     objAdminModel.UserContactNumber = reader["ContactNumber"].ToString();
                     objAdminModel.UserEmail = reader["Email"].ToString();
-                    objAdminModel.ProductID = Convert.ToInt32(reader["ProductID"]);
-                    objAdminModel.ProductName = reader["ProductName"].ToString();
+                    //objAdminModel.ProductID = Convert.ToInt32(reader["ProductID"]);
+                    objAdminModel.ProductName.Product_Name = reader["ProductName"].ToString();
                     objAdminModel.UserId = Convert.ToInt32(reader["UserID"]);
 
 
@@ -75,7 +66,7 @@ namespace CIAB.Controllers
 
         }
 
-        public ActionResult AdminViewOrderStatus()
+        public JsonResult AdminViewOrderStatus()
         {
             var result = new List<AdminOrderStatus>();
             try
@@ -92,7 +83,31 @@ namespace CIAB.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+       
+        public JsonResult AdminViewProductName()
+        {
+            SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
+            SqlCommand CIABcommand = new SqlCommand();
+            CIABconnection.Open();
+            CIABcommand.CommandType = System.Data.CommandType.StoredProcedure;
+            CIABcommand.Connection = CIABconnection;
+            CIABcommand.CommandText = "sp_ReadProducts";
+            
+            var result = new List<ProductName>();
+            SqlDataReader reader = CIABcommand.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(new CIAB.Models.ProductName()
+                {
+                    Product_Name = reader["ProductName"].ToString(), 
+                    Product_ID = Convert.ToInt32(reader["ProductID"]) 
+                });
+            }
 
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult Create()
         {
             return View();
@@ -112,7 +127,7 @@ namespace CIAB.Controllers
 
 
                 CIABcommand.Parameters.AddWithValue("@orderid", adminModel.OrderID);
-                CIABcommand.Parameters.AddWithValue("@productID", adminModel.ProductID);
+                //CIABcommand.Parameters.AddWithValue("@productID", adminModel.ProductID);
                 CIABcommand.Parameters.AddWithValue("@userID", adminModel.UserId);
                 CIABcommand.Parameters.AddWithValue("@orderDate", adminModel.OrderDate);
                 CIABcommand.Parameters.AddWithValue("@orderStatus", adminModel.AdminOrderStatus.StatusValue);
@@ -135,6 +150,6 @@ namespace CIAB.Controllers
             return View();
         }
 
-  
+
     }
 }

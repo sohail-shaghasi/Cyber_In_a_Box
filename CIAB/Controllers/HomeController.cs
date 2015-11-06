@@ -290,8 +290,8 @@ namespace CIAB.Controllers
             return View();
 
         }
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]
+       // [ValidateAntiForgeryToken]
         public ActionResult Register(CIAB.Models.User NewUser)
         {
             string strFullName = NewUser.FullName;

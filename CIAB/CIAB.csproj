@@ -2597,6 +2597,7 @@
     <Content Include="Views\ResetPassword\GetMessages.cshtml" />
     <Content Include="Views\ForgotPassword\GetMessages.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProductsDropDownlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

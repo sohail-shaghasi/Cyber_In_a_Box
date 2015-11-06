@@ -1,6 +1,6 @@
 ﻿@using Telerik.Web.Mvc.UI
 @using Kendo.Mvc.UI
-@*@using CIAB.Models*@
+@using System.Collections;
 
 @model IEnumerable<CIAB.Models.AdminViewModel>
 
@@ -34,7 +34,8 @@
                                 columns.Bound(p => p.UserEmail).Title("Email").HeaderHtmlAttributes(new { style = "font-size:10pt;" });
                                 columns.Bound(p => p.UserCompany).Title("Company").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(120);
                                 columns.Bound(p => p.UserContactNumber).Title("Contact Number").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(145);
-                                columns.Bound(p => p.ProductName).Title("Product Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(140);
+                                //columns.Bound(p => p.ProductName).Title("Product Name").HeaderHtmlAttributes(new { style = "font-size:10pt;" }).Width(140);
+                                columns.Bound(p => p.ProductName).ClientTemplate("#: ProductName.Product_Name #").Title("ProductName");
                                 columns.Bound(p => p.AdminOrderStatus).ClientTemplate("#: AdminOrderStatus.StatusValue #").Title("Status");
                                 columns.Command(command => command.Edit().Text("Update")).Title("Action").Width(130);
                                 columns.Command(command => command.Custom("Upload").Click("showDetails")).Width(130);
@@ -53,6 +54,7 @@
                                     {
                                         model.Id(config => config.OrderID);
                                         model.Field(product => product.AdminOrderStatus.StatusValue);
+                                        model.Field(product => product.ProductName.Product_Name);  
                                     })
                             .PageSize(10)
                             .ServerOperation(false)
@@ -67,8 +69,6 @@
 
                             .Pageable()
                             .Sortable()
-                            .Filterable()
-                            .Selectable()
                             .ColumnMenu()
                             .Editable(m => m.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
                             .HtmlAttributes(new { style = "height:800px; width: 1100px" }))
@@ -105,19 +105,22 @@
                         }
                     </script>
 
-                    <!--Export Excel-->
+                    <!--Export Excel starts-->
 
                     <script>
                         function excelExport(e) {
                             debugger;
                             var sheet = e.workbook.sheets[0];
-                            var template = kendo.template(this.columns[6].template);
-                            var data = this.dataSource.data();
-                            for (var i = 0; i < data.length; i++) {
-                                sheet.rows[i + 1].cells[6].value = template(data[i]);
+                            var template2 = kendo.template(this.columns[5].template);//get the template of the column
+                            var template1 = kendo.template(this.columns[6].template);//get the template of the column
+                            var data = this.dataSource.data();//get the datasource
+                            for (var i = 0; i < data.length; i++) {//loop through the records
+                                sheet.rows[i + 1].cells[5].value = template2(data[i]);//get the cells in each row.
+                                sheet.rows[i + 1].cells[6].value = template1(data[i]);//get the cells in each row.
                             }
                         }
                     </script>
+                    <!--Export Excel ends-->
                 </div>
             </div>
         </div>
