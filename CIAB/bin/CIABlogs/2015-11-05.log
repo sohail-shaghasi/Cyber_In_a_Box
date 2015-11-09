@@ -1,1 +1,0 @@
-2015-11-05 11:35:30.9550 ERROR Register_Object reference not set to an instance of an object. | StackTrace:    at CIAB.Controllers.HomeController.Register(User NewUser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\HomeController.cs:line 315
