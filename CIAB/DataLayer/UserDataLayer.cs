@@ -29,16 +29,16 @@ namespace CIAB.DataLayer
             CIABcommand.CommandText = "sp_Login";
 
             //Login Parameters
-            CIABcommand.Parameters.AddWithValue("@UserName", user.UserName);//parameter for User Name
-            CIABcommand.Parameters.AddWithValue("@Password", user.HashPassword);// parameter for Password
+            CIABcommand.Parameters.AddWithValue("@UserName", user.loginViewModel.LoginUserName);//parameter for User Name
+            CIABcommand.Parameters.AddWithValue("@Password", user.loginViewModel.HashPassword);// parameter for Password
             SqlDataReader reader = CIABcommand.ExecuteReader();
 
 
             while (reader.Read())
             {
-                user.UserID = (int)reader["UserID"];
-                user.LoginEmail = reader["Email"].ToString();
-                user.Role = reader["Role"].ToString();
+                user.loginViewModel.UserID = (int)reader["UserID"];
+                user.loginViewModel.LoginEmail = reader["Email"].ToString();
+                user.loginViewModel.Role = reader["Role"].ToString();
 
                 reader.Dispose();
                 CIABcommand.Dispose();

@@ -8,11 +8,10 @@
     <title>Home page</title>
     <meta name="description" content="KPMG cybersecurity cyberinabox" />
     <meta name="keywords" content="KPMG, cybersecurity, cyberinabox" />
+
+
 </head>
 <body>
-
-
-
     <div id="cybermart_slider">
         <div class="container">
             <div class="row">
@@ -21,31 +20,36 @@
                         <img src="~/Images/new/cyber_icon.png" alt="" class="center-block" />
                         <div class="caption">
 
-                            <h3><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Get FREE Scan</a></h3>
-                            <p>Secondary Title Here</p>
+                            <span class="home_icon_link"><a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Get your free health check</a></span>
+                            <p>Know your organisation’s Cyber Security health</p>
                         </div>
                     </div><!-- /thumbnail -->
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail home_box green_box">
+                        <img src="~/Images/analytics_icon.png" alt="" class="center-block" />
                         <div class="caption">
-                            <h3>Get FREE Scan</h3>
-                            <p>Secondary Title Here</p>
+                            <span class="home_icon_link">
+                                <a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Learn more about Cyber Security</a>
+                            </span>
+                            <p>Analytics in Cyber Security</p>
                         </div>
                     </div><!-- /thumbnail -->
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail home_box yellow_box">
+                        <img src="~/Images/CyberThreat_icon.png" alt="" class="center-block" />
                         <div class="caption">
-                            <h3>Get FREE Scan</h3>
-                            <p>Secondary Title Here</p>
+                            <span class="home_icon_link">
+                                <a href="@Url.Action("CyberSecurityHealthCheck", "Product")" onclick='location.href=this.getAttribute("href")'>Read about our investment</a>
+                            </span>
+                            <p>KPMG invests in cyber threat intelligence global leader</p>
                         </div>
                     </div><!-- /thumbnail -->
                 </div>
             </div>
         </div>
     </div><!-- cybermart_slider -->
-
     <div id="aboutSection"></div>
     <div id="home_about">
         <div class="container">

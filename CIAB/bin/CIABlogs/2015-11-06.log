@@ -148,3 +148,7 @@
    at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
    at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
    at CIAB.Controllers.AdminController.Update(DataSourceRequest request, AdminViewModel adminModel) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\AdminController.cs:line 139
+2015-11-06 22:01:28.5501 ERROR Register_Object reference not set to an instance of an object. | StackTrace:    at CIAB.DataLayer.HomeDataLayer.RegisterUser(User NewUser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\DataLayer\HomeDataLayer.cs:line 69
+   at CIAB.Controllers.HomeController.Register(User NewUser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\HomeController.cs:line 134
+2015-11-06 22:17:41.8895 ERROR Register_Object reference not set to an instance of an object. | StackTrace:    at CIAB.DataLayer.HomeDataLayer.RegisterUser(User NewUser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\DataLayer\HomeDataLayer.cs:line 69
+   at CIAB.Controllers.HomeController.Register(User NewUser) in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\HomeController.cs:line 134

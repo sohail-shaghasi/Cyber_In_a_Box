@@ -155,9 +155,12 @@
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="DataLayer\AdminDataLayer.cs" />
     <Compile Include="DataLayer\BaseDataLayer.cs" />
+    <Compile Include="DataLayer\ChangePasswordDataLayer.cs" />
+    <Compile Include="DataLayer\ForgotPasswordDataLayer.cs" />
+    <Compile Include="DataLayer\HomeDataLayer.cs" />
     <Compile Include="DataLayer\ProfileDataLayer.cs" />
-    <Compile Include="DataLayer\UserDataLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -770,6 +773,7 @@
     <Content Include="Images\about-mission.jpg" />
     <Content Include="Images\about-vision.jpg" />
     <Content Include="Images\about_home_image.jpg" />
+    <Content Include="Images\analytics_icon.png" />
     <Content Include="Images\arrow.png" />
     <Content Include="Images\banf.jpg" />
     <Content Include="Images\border.png" />
@@ -782,6 +786,7 @@
     <Content Include="Images\cyber-security-check.png" />
     <Content Include="Images\cybermart-bg.jpg" />
     <Content Include="Images\cybermart-homebg.jpg" />
+    <Content Include="Images\CyberThreat_icon.png" />
     <Content Include="Images\cyber_header_bg.jpg" />
     <Content Include="Images\cyber_icon.png" />
     <Content Include="Images\cyber_new_image.jpg" />

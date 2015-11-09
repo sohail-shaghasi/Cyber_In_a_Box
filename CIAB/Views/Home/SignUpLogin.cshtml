@@ -1,12 +1,7 @@
 ﻿@model CIAB.Models.User
-
-
 @{
     ViewBag.Title = "Login/Registeration";
-
 }
-
-
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -19,20 +14,19 @@
                     <h3>New <span>User?</span></h3>
                     <p>Enter your account information below</p>
                 </div>
-                <!-- Register Form Starts Here-->
                 @using (Html.BeginForm("Register", "Home", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
-                        <label for="">Full Name <span class="req">*</span></label>
-                        @Html.TextBoxFor(x => x.FullName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.FullName)
+                        <label for="RegisterFullName">Full Name <span class="req">*</span></label>
+                        @Html.TextBoxFor(x => x.registerViewModel.RegisterFullName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.registerViewModel.RegisterFullName)
                     </div>
                     <div class="form-group">
-                        <label for="">Username <span class="req">*</span></label>
-                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.UserName)
+                        <label for="RegisterUserName">Username <span class="req">*</span></label>
+                        @Html.TextBoxFor(x => x.registerViewModel.RegisterUserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.registerViewModel.RegisterUserName)
                         @Html.ValidationMessage("UserNameExists")
                         @if (ViewBag.UserNameExists != null)
                         {
@@ -40,24 +34,23 @@
                         }
                     </div>
                     <div class="form-group">
-                        <label for="">Email <span class="req">*</span></label>
-                        @Html.TextBoxFor(x => x.RegisterationEmail, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.RegisterationEmail)
+                        <label for="RegisterEmail">Email <span class="req">*</span></label>
+                        @Html.TextBoxFor(x => x.registerViewModel.RegisterEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.registerViewModel.RegisterEmail)
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password <span class="req">*</span></label>
-                        @Html.PasswordFor(p => p.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password)
+                        <label for="RegisterPassword">Password <span class="req">*</span></label>
+                        @Html.PasswordFor(p=>p.registerViewModel.RegisterPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.registerViewModel.RegisterPassword)
                     </div>
                     <div class="form-group">
-                        <label for="Password">Confirm Password <span class="req">*</span></label>
-                        @Html.PasswordFor(p => p.ConfirmPassword, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        <label for="ConfirmPassword">Confirm Password <span class="req">*</span></label>
+                        @Html.PasswordFor(p => p.registerViewModel.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.registerViewModel.ConfirmPassword)
                     </div>
                     <button type="submit" class="btn btn-default btn-block btn-cta">Create My Account!</button>
                     <span id="helpBlock" class="help-block" style="text-align:center;font-size:12px;">By clicking "Create My Account", you're agreeing to the Term of Use &amp; Privacy Policy</span>
                 }
-                <!--Register Form Ends Here-->
             </div><!-- /about_header -->
             <div class="col-md-6 login_right">
                 <div class="header_wrap">
@@ -70,13 +63,15 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" id="LoginUserName" name="LoginUserName" placeholder="Type your username">
+                        <label for="LoginUserName">Username</label>
+                        @Html.TextBoxFor(x => x.loginViewModel.LoginUserName, new { @class = "form-control", placeholder = "Type your username" })
+                        @Html.ValidationMessageFor(x => x.loginViewModel.LoginUserName)
                         @Html.ValidationMessage("LoginUserName")
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="LoginPassword" name="LoginPassword" placeholder="Password">
+                        <label for="LoginPassword">Password</label>
+                        @Html.PasswordFor(x => x.loginViewModel.LoginPassword, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(x => x.loginViewModel.LoginPassword)
                         @Html.ValidationMessage("LoginPassword")
                         @Html.ValidationMessage("LoginError")
                     </div>
