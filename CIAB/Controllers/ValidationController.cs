@@ -8,43 +8,34 @@ using System.Web.Mvc;
 using CIAB.Models;
 using System.Security.Cryptography;
 using System.Text;
-
-
 namespace CIAB.Controllers
 {
     public class ValidationController : BaseController
     {
-        //
         public ActionResult Index()
         {
             return View();
         }
-
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult IsUserNameAvailable(string UserName)
+        [HttpGet]
+        public ActionResult IsUserNameAvailable(User RegisterUserName)
         {
-
+            string name = Request["registerViewModel.RegisterEmail"];
             try
             {
-
                 SqlConnection con = new SqlConnection(CIABconnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "sp_CheckUserName";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@UserName", UserName);
+                cmd.Parameters.AddWithValue("@UserName", RegisterUserName.registerViewModel.RegisterUserName);
                 con.Open();
-
                 SqlDataReader reader = cmd.ExecuteReader();
-
                 while (reader.Read())
                 {
                     if ((int)reader["ReturnCode"] == 1)
                     {
-                        return Json(string.Format("{0} is in Use", UserName), JsonRequestBehavior.AllowGet);
-
+                        return Json(string.Format("{0} is in Use", RegisterUserName.registerViewModel.RegisterUserName), JsonRequestBehavior.AllowGet);
                     }
                 }
             }
@@ -52,15 +43,12 @@ namespace CIAB.Controllers
             {
                 base.Logger.Error(ex, "IsUserNameAvailable_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
-
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult IsEmailAvailable(string RegisterationEmail)
+        [HttpGet]
+        public ActionResult IsEmailAvailable(User RegisterEmail)
         {
-
+            
             try
             {
 
@@ -70,7 +58,7 @@ namespace CIAB.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "sp_CheckRegisterEmailAddress";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Email", RegisterationEmail);
+                cmd.Parameters.AddWithValue("@Email", RegisterEmail.registerViewModel.RegisterEmail);
                 con.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -79,7 +67,7 @@ namespace CIAB.Controllers
                 {
                     if ((int)reader["ReturnCode"] == 1)
                     {
-                        return Json(string.Format("{0} is in Use", RegisterationEmail), JsonRequestBehavior.AllowGet);
+                        return Json(string.Format("{0} is in Use", RegisterEmail.registerViewModel.RegisterEmail), JsonRequestBehavior.AllowGet);
 
                     }
                 }
@@ -92,12 +80,7 @@ namespace CIAB.Controllers
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-
+        [HttpGet]
         public JsonResult IsCurrentPasswordAvailable(string CurrentPass)
         {
             string CurrentPassWithSalt = CurrentPass + "d3katk00";
@@ -135,7 +118,5 @@ namespace CIAB.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
     }
-
 }

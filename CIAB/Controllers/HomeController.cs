@@ -9,12 +9,8 @@ using System.Data;
 using System.Text;
 using System.Security.Cryptography;
 using CIAB.DataLayer;
-
-
 namespace CIAB.Controllers
 {
-
-
     public class HomeController : BaseController
     {
         public HomeController()
@@ -77,7 +73,7 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View("Register");
+            return View("SignUpLogin");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,13 +81,11 @@ namespace CIAB.Controllers
         {
             try
             {
+                
+
                 if (ModelState.IsValid)//Check if Model properties are Valid
                 {
                     var homeDataLayer = new HomeDataLayer();
-                    //var user = new User();
-                    //var userDL = new UserDataLayer();
-                    //user.UserName = CIABuser.LoginUserName;
-                    //user.Password = CIABuser.LoginPassword;
                     Encoding encoder = new UTF8Encoding();
                     SHA1 sha = new SHA1Managed();
                     byte[] passwordHash = sha.ComputeHash(encoder.GetBytes(CIABuser.loginViewModel.LoginPassword + "d3katk00"));
@@ -121,10 +115,10 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return View("SignUpLogin");
         }
         [HttpPost]
-        public ActionResult Register(User NewUser)
+        public ActionResult Register(User NewUser, string RegisterUserName, string RegisterEmail)
         {
             try
             {

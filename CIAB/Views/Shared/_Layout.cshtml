@@ -4,31 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>@ViewBag.Title</title>
     <meta name="desc" content="">
-
     @Scripts.Render("~/bundles/jquery")
-    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
-    <script src="~/Scripts/jquery.bxslider.js"></script>
-    <script src="~/Scripts/jquery.royalslider.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo/css")
-    @Scripts.Render("~/bundles/kendo")
-    @Styles.Render("~/Content/css")
-    @{Html.EnableClientValidation(true);}
-    <script src="~/Scripts/kendo/kendo.web.min.js"></script>
-    <script src="~/Scripts/kendo.aspnetmvc.min.js"></script>
-    <script src="~/Scripts/kendo.all.min.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/colorbox.css" rel="stylesheet" />
     <link href="~/Content/royalslider.css" rel="stylesheet" />
     <link href="~/Content/skins/default/rs-default.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-static-top" class="about">
     <!-- Static navbar -->
@@ -51,36 +36,20 @@
 
                                     if ((string)HttpContext.Current.Session["UserRole"] == "A" || (string)HttpContext.Current.Session["UserRole"] == "a")
                                     {
-
-
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-user"></i>
-
-
                                                 <span>Hi</span> @HttpContext.Current.Session["UserName"]
-
-
                                                 <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="@Url.Action("LogOut", "Home")" onclick='location.href=this.getAttribute("href")'>Log Out</a></li>
                                             </ul>
                                         </li>
-
-
-
-
-
-
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-cog"></i>
-
-
                                                 <span>Panel</span>
-
-
                                                 <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
@@ -88,23 +57,13 @@
                                                 <li><a href="@Url.Action("UserDetails", "UserDetail")" onclick='location.href=this.getAttribute("href")'>User Details</a></li>
                                             </ul>
                                         </li>
-
-
-
-
-
-
                                     }
                                     else
                                     {
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-user"></i>
-
-
                                                 <span>Hi</span> @HttpContext.Current.Session["UserName"]
-
-
                                                 <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
@@ -113,8 +72,6 @@
                                             </ul>
                                         </li>
                                     }
-
-
                                 }
                                 else
                                 {
@@ -165,11 +122,7 @@
 
         </div>
     </div><!-- footer -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.colorbox-min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("#myBtn").click(function () {
@@ -183,5 +136,10 @@
             $(".group1").colorbox({ rel: 'group1' });
         });
     </script>
+
+    @Scripts.Render("~/bundles/Extended_jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
