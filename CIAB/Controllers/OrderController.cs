@@ -41,7 +41,7 @@ namespace CIAB.Controllers
                         return View("OrderVulnerabilityScan", confirmOrderCustomer);
                     case "CIABCSC":
                         return View("OrderCyberSecurityHealthCheck", confirmOrderCustomer);
-                    default: 
+                    default:
                         return RedirectToAction("index", "Home");
                 }
             }
@@ -143,25 +143,28 @@ namespace CIAB.Controllers
                 string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
                 string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
                 int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-                MailMessage message = new MailMessage();
-                MailAddress to = new MailAddress(strReciever);
-                message.To.Add(to);//sent to email address
-                message.From = new MailAddress(strEmailFrom);
-                message.Subject = strSubject; //Subject;
-                message.Body = string.Format(body, strEmailFrom);
-                message.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                var credential = new NetworkCredential //credebtials for smtp client account
+                if (strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
+                    || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
                 {
-                    UserName = strSMTPUser,
-                    Password = strSMPTpass
-                };
-                smtp.Credentials = credential;
-                smtp.Host = strSMPTHost;
-                smtp.Port = SMPTPort;
-                smtp.EnableSsl = true;
-                smtp.Send(message);
-
+                    MailMessage message = new MailMessage();
+                    MailAddress to = new MailAddress(strReciever);
+                    message.To.Add(to);//sent to email address
+                    message.From = new MailAddress(strEmailFrom);
+                    message.Subject = strSubject; //Subject;
+                    message.Body = string.Format(body, strEmailFrom);
+                    message.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    var credential = new NetworkCredential //credebtials for smtp client account
+                    {
+                        UserName = strSMTPUser,
+                        Password = strSMPTpass
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = strSMPTHost;
+                    smtp.Port = SMPTPort;
+                    smtp.EnableSsl = true;
+                    smtp.Send(message);
+                }
             }
             catch (Exception ex)
             {

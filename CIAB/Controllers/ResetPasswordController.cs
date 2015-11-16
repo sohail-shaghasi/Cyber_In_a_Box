@@ -19,7 +19,7 @@ namespace CIAB.Controllers
         {
             return View();
         }
-   
+
         [HttpGet]
         public ActionResult PasswordResetPage(string UniqueID)
         {
@@ -45,7 +45,7 @@ namespace CIAB.Controllers
                     return RedirectToAction("GetMessages", "ResetPassword");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 base.Logger.Error(ex, "PasswordResetPage_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
@@ -94,7 +94,7 @@ namespace CIAB.Controllers
         public ActionResult GetMessages()
         {
             return View();
-        }   
+        }
         private void SendPasswordFromUserDetailsPage(string strEmailFromDB, string strUserName, string strUniqueID)
         {
             //get the controller and action method
@@ -109,44 +109,48 @@ namespace CIAB.Controllers
             string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
             string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
             int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-            MailMessage message = new MailMessage();
-            //Reciever of the email.
-            if (strEmailFromDB.ToString() != string.Empty || strEmailFromDB.ToString() != null)
+            if (strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
+                || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
             {
-                foreach (string tos in strEmailFromDB.Split(';'))
+                MailMessage message = new MailMessage();
+                //Reciever of the email.
+                if (strEmailFromDB.ToString() != string.Empty || strEmailFromDB.ToString() != null)
                 {
-                    MailAddress to = new MailAddress(tos);
-                    message.To.Add(to);//sent to email address
+                    foreach (string tos in strEmailFromDB.Split(';'))
+                    {
+                        MailAddress to = new MailAddress(tos);
+                        message.To.Add(to);//sent to email address
+                    }
                 }
-            }
-            message.From = new MailAddress(strEmailFrom);
-            message.Subject = strSubject; //Subject;
-            StringBuilder SBEmailBody = new StringBuilder();
-            SBEmailBody.Append("Dear " + strUserName + ", <br/><br/>");
-            SBEmailBody.Append("You (or someone else) have requested to reset your password at " + DateTime.Now);
-            SBEmailBody.Append("<br/><br/>");
-            SBEmailBody.Append("Please Click on the following link to reset Your password");
-            SBEmailBody.Append("<br/><br/>");
-            SBEmailBody.Append("http://" + baseUrl1 + absolutePath);
-            SBEmailBody.Append("<br/><br/><br/><br/>");
-            SBEmailBody.Append("KPMG Singapore");
+                message.From = new MailAddress(strEmailFrom);
+                message.Subject = strSubject; //Subject;
+                StringBuilder SBEmailBody = new StringBuilder();
+                SBEmailBody.Append("Dear " + strUserName + ", <br/><br/>");
+                SBEmailBody.Append("You (or someone else) have requested to reset your password at " + DateTime.Now);
+                SBEmailBody.Append("<br/><br/>");
+                SBEmailBody.Append("Please Click on the following link to reset Your password");
+                SBEmailBody.Append("<br/><br/>");
+                SBEmailBody.Append("http://" + baseUrl1 + absolutePath);
+                SBEmailBody.Append("<br/><br/><br/><br/>");
+                SBEmailBody.Append("KPMG Singapore");
 
-            message.Body = SBEmailBody.ToString();
-            message.IsBodyHtml = true;
-            // credebtials for smtp client account
-            SmtpClient smtp = new SmtpClient();
-            var credential = new NetworkCredential
-            {
-                UserName = strSMTPUser,
-                Password = strSMPTpass
-            };
-            smtp.Credentials = credential;
-            smtp.Host = strSMPTHost;
-            smtp.Port = SMPTPort;
-            smtp.EnableSsl = true;
-            smtp.Send(message);
+                message.Body = SBEmailBody.ToString();
+                message.IsBodyHtml = true;
+                // credebtials for smtp client account
+                SmtpClient smtp = new SmtpClient();
+                var credential = new NetworkCredential
+                {
+                    UserName = strSMTPUser,
+                    Password = strSMPTpass
+                };
+                smtp.Credentials = credential;
+                smtp.Host = strSMPTHost;
+                smtp.Port = SMPTPort;
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+            }
         }
-        
+
         [HttpGet]
         public void PasswordResetFromUserListingPage(string Email, string UserName)
         {
@@ -180,6 +184,6 @@ namespace CIAB.Controllers
                 base.Logger.Error(ex, "PasswordResetFromUserListingPage_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
         }
-       
+
     }
-	}
+}
