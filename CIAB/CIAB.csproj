@@ -63,6 +63,14 @@
       <HintPath>..\packages\GhostScriptSharp.1.3.1.4\lib\net40\GhostscriptSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.7\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp.pdfa, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.pdfa.5.5.7\lib\itextsharp.pdfa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Kendo.Mvc, Version=2015.2.624.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Kendo.Mvc\Kendo.Mvc.dll</HintPath>
@@ -153,6 +161,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
+    <Compile Include="Controllers\UserPurchasesController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="DataLayer\AdminDataLayer.cs" />
     <Compile Include="DataLayer\BaseDataLayer.cs" />
@@ -160,6 +169,7 @@
     <Compile Include="DataLayer\ForgotPasswordDataLayer.cs" />
     <Compile Include="DataLayer\HomeDataLayer.cs" />
     <Compile Include="DataLayer\ProfileDataLayer.cs" />
+    <Compile Include="DataLayer\UserPurchasesDataLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +189,7 @@
     <Compile Include="Models\UserDetail.cs" />
     <Compile Include="Models\UserForgotPassword.cs" />
     <Compile Include="Models\UserProfileEdit.cs" />
+    <Compile Include="Models\UserPurchasesViewModel.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2594,7 +2605,6 @@
     <Content Include="Views\ChangePassword\ChangeUserPassword.cshtml" />
     <Content Include="Views\ChangePassword\PasswordResetSuccess.cshtml" />
     <Content Include="Views\OrderDetails\OrderDetail.cshtml" />
-    <Content Include="Views\Home\AsyncKendoUploader.cshtml" />
     <Content Include="Views\ForgotPassword\RequestPasswordReset.cshtml" />
     <Content Include="Views\ForgotPassword\PasswordReset.cshtml" />
     <Content Include="Views\ResetPassword\PasswordResetPage.cshtml" />
@@ -2602,6 +2612,7 @@
     <Content Include="Views\ForgotPassword\GetMessages.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductsDropDownlist.cshtml" />
+    <Content Include="Views\UserPurchases\ViewUserOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

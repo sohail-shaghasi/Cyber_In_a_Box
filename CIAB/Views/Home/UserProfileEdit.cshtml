@@ -53,14 +53,24 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Company Address<span class="req">*</span></label>
                                 <div class="col-sm-9">
-                                    <textarea type="text" class="form-control" name="CompanyAddress" id="CompanyAddress" placeholder="@ViewData["CompanyAddress"]" rows="5" required></textarea>
+                                    <textarea type="text" class="form-control" name="CompanyAddress" id="CompanyAddress"  placeholder="Input Company Address" rows="5" required>@ViewData["CompanyAddress"]</textarea>
                                 </div>
+                            </div>
+                            
+                            
+                             <div class="form-group">
+                                <label class="col-sm-3 control-label">My Order<span class="req"></span></label>
+                                 <a href="@Url.Action("ViewUserOrders", "UserPurchases")" onclick='location.href=this.getAttribute("href")' class="btn btn-default btn-cta btn-cancel">VIEW ORDERS</a>
+                                 <a href="@Url.Action("ChangeUserPassword", "ChangePassword")" onclick='location.href=this.getAttribute("href")' class="btn btn-default btn-cta btn-cancel">CHANGE PASSWORD</a>
+
+                                <div class="col-sm-9">
+                            </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <button type="submit" class="btn btn-default btn-cta">Save</button>
-                                    @Html.ActionLink("Change Password", "ChangeUserPassword", "ChangePassword")
-                                    <!--<button type="submit" class="btn btn-default btn-cta btn-cancel">Cancel</button>-->
+                                    @*@Html.ActionLink("Change Password", "ChangeUserPassword", "ChangePassword")*@
+                                
                                 </div>
                             </div>
                         }

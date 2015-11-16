@@ -25,6 +25,11 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult ChangeUserPassword()
         {
+            if (Convert.ToString(Session["UserName"]).ToLower() == null || Convert.ToString(Session["UserName"]).ToLower() == string.Empty)
+            {
+                return RedirectToAction("SignUpLogin", "Home");
+            }
+
             return View();
         }
 
@@ -37,11 +42,7 @@ namespace CIAB.Controllers
                 {
                     string strCurrentPass = GetSHA1(ResetPass.CurrentPass + "d3katk00");
                     string strNewPass = GetSHA1(ResetPass.NewPass + "d3katk00");
-
-
-
                     string strOldPassword = "";
-
                     if (HttpContext.Session["Password"] != null)
                     {
                         strOldPassword = HttpContext.Session["Password"].ToString();
@@ -50,13 +51,11 @@ namespace CIAB.Controllers
                             ViewBag.ErrorMessage = "Current Password is not Valid!";
                             return View("ChangeUserPassword");
                         }
-
                         else if (strOldPassword == strNewPass)
                         {
                             ViewBag.Error = "New password cannot be the same as old password";
                             return View("ChangeUserPassword");
                         }
-
                     }
                     //check if old password and new hashed password resembles.
                     int returnValue = AddNewPassword(ResetPass, strCurrentPass, strNewPass);

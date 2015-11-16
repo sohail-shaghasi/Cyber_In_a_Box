@@ -23,6 +23,10 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult PasswordResetPage(string UniqueID)
         {
+            if (Convert.ToString(Session["UserName"]).ToLower() == null || Convert.ToString(Session["UserName"]).ToLower() == string.Empty)
+            {
+                return RedirectToAction("SignUpLogin", "Home");
+            }
             try
             {
                 bool result;

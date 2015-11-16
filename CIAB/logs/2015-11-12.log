@@ -1,0 +1,5 @@
+2015-11-12 20:32:30.0020 ERROR SendOrderConfirmationEmail_Mailbox unavailable. The server response was: 5.7.3 Requested action aborted; user not authenticated | StackTrace:    at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at CIAB.Controllers.OrderController.SendOrderConfirmationEmail() in e:\Dekatku\Customers\KPMG\Projects\Cyber in the box\CIAB .NET 4.5\CIAB\CIAB\Controllers\OrderController.cs:line 182

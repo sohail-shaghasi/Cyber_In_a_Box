@@ -14,13 +14,11 @@ namespace CIAB.Controllers
 {
     public class OrderDetailsController : BaseController
     {
-        //
         public ActionResult Index()
         {
 
             return View();
         }
-
         public ActionResult OrderDetail(string OrderNumber)
         {
             var orderDetailsPage = new OrderDetailsPage();
@@ -35,8 +33,6 @@ namespace CIAB.Controllers
                 CIABcommand.CommandText = "sp_OrdersDetailPage";
                 CIABcommand.Parameters.AddWithValue("@OrderID", OrderNumber);//pass order number to sql server
                 SqlDataReader reader = CIABcommand.ExecuteReader();
-
-
                 while (reader.Read())
                 {
                     orderDetailsPage.OrderId = Convert.ToInt32(reader["OrderID"]);
@@ -52,7 +48,6 @@ namespace CIAB.Controllers
 
             return View(orderDetailsPage);
         }
-
         [HttpPost]
         public ActionResult OrderReport1(HttpPostedFileBase OrderReportFile1, int? orderNumber)
         {
@@ -83,6 +78,8 @@ namespace CIAB.Controllers
                         CIABcommand.Parameters.AddWithValue("@fileName", SqlDbType.NVarChar).Value = strFileName;
                         CIABcommand.Parameters.AddWithValue("@OrderID", SqlDbType.Int).Value = orderNumber;//pass orderNumber to sql server
                         CIABcommand.Parameters.AddWithValue("@Data", SqlDbType.VarBinary).Value = orderReportFileToUpload;
+                        CIABcommand.Parameters.AddWithValue("@ActualFileName", SqlDbType.NVarChar).Value = orderDetails.FileName;
+
                         SqlDataReader reader = CIABcommand.ExecuteReader();
 
                         ViewBag.UploadMessageFile1 = "File uploaded successfully";
@@ -100,7 +97,6 @@ namespace CIAB.Controllers
 
             return View("OrderDetail", viewModel);
         }
-
         [HttpPost]
         public ActionResult OrderReport2(HttpPostedFileBase OrderReportFile2, int? orderNumber)
         {
@@ -129,6 +125,8 @@ namespace CIAB.Controllers
                         CIABcommand.Parameters.AddWithValue("@fileName", SqlDbType.NVarChar).Value = strFileName;
                         CIABcommand.Parameters.AddWithValue("@OrderID", SqlDbType.Int).Value = orderNumber;//pass orderNumber to sql server
                         CIABcommand.Parameters.AddWithValue("@Data", SqlDbType.VarBinary).Value = orderReportFileToUpload;
+                        CIABcommand.Parameters.AddWithValue("@ActualFileName", SqlDbType.NVarChar).Value = orderDetails.FileName;
+
                         SqlDataReader reader = CIABcommand.ExecuteReader();
 
 
@@ -146,7 +144,6 @@ namespace CIAB.Controllers
             }
             return View("OrderDetail", viewModel);
         }
-
         [HttpPost]
         public ActionResult OrderReport3(HttpPostedFileBase OrderReportFile3, int? orderNumber)
         {
@@ -175,8 +172,8 @@ namespace CIAB.Controllers
                         CIABcommand.Parameters.AddWithValue("@fileName", SqlDbType.NVarChar).Value = strFileName;
                         CIABcommand.Parameters.AddWithValue("@OrderID", SqlDbType.Int).Value = orderNumber;//pass orderNumber to sql server
                         CIABcommand.Parameters.AddWithValue("@Data", SqlDbType.VarBinary).Value = orderReportFileToUpload;
+                        CIABcommand.Parameters.AddWithValue("@ActualFileName", SqlDbType.NVarChar).Value = orderDetails.FileName;
                         SqlDataReader reader = CIABcommand.ExecuteReader();
-
                         ViewBag.UploadMessageFile3 = "File uploaded successfully";
                         return View("OrderDetail", viewModel);
                     }
@@ -191,9 +188,6 @@ namespace CIAB.Controllers
             }
             return View("OrderDetail", viewModel);
         }
-
-
-
         //This function is to read the binary Record from DB and return to The View.
         public FileResult ShowDocument1(int? orderNumber, string FileName)
         {
@@ -227,7 +221,6 @@ namespace CIAB.Controllers
             }
             return null;
         }
-
         public FileResult ShowDocument2(int? orderNumber, string FileName)
         {
             try
@@ -260,7 +253,6 @@ namespace CIAB.Controllers
             }
             return null;
         }
-
         public FileResult ShowDocument3(int? orderNumber, string FileName)
         {
             try

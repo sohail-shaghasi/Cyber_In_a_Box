@@ -1,0 +1,6 @@
+2015-11-16 10:22:18.0877 ERROR PasswordResetFromUserListingPage_Mailbox unavailable. The server response was: 5.7.3 Requested action aborted; user not authenticated | StackTrace:    at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at CIAB.Controllers.ResetPasswordController.SendPasswordFromUserDetailsPage(String strEmailFromDB, String strUserName, String strUniqueID)
+   at CIAB.Controllers.ResetPasswordController.PasswordResetFromUserListingPage(String Email, String UserName)

@@ -112,10 +112,7 @@ namespace CIAB.Controllers
                 }
 
                 int userIDFromSession = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"]);
-
                 ConfirmOrderCustomer CustomerOrderConfirmation = UserDetails();
-
-
                 SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
                 SqlCommand CIABcommand = new SqlCommand();
                 CIABconnection.Open();
@@ -125,9 +122,7 @@ namespace CIAB.Controllers
                 CIABcommand.Parameters.AddWithValue("@UserID", userIDFromSession);
                 CIABcommand.Parameters.AddWithValue("@parameter", strProductHandle);
                 CIABcommand.ExecuteNonQuery();
-
                 SendOrderConfirmationEmail();//send email confirmation to customer
-
                 return View(CustomerOrderConfirmation);
             }
             catch (Exception ex)
@@ -140,9 +135,7 @@ namespace CIAB.Controllers
         {
             try
             {
-
                 var body = "<p>Email From : {0} ";
-
                 string strReciever = HttpContext.Session["email"].ToString();
                 string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
                 string strSubject = "Great, you just confirm your purchase ";
@@ -150,31 +143,19 @@ namespace CIAB.Controllers
                 string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
                 string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
                 int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-                //string strEmailCC = System.Configuration.ConfigurationManager.AppSettings["smtpcc"];
-
-
-
                 MailMessage message = new MailMessage();
                 MailAddress to = new MailAddress(strReciever);
                 message.To.Add(to);//sent to email address
-
-
                 message.From = new MailAddress(strEmailFrom);
                 message.Subject = strSubject; //Subject;
                 message.Body = string.Format(body, strEmailFrom);
                 message.IsBodyHtml = true;
-
-
-
-
                 SmtpClient smtp = new SmtpClient();
                 var credential = new NetworkCredential //credebtials for smtp client account
                 {
                     UserName = strSMTPUser,
                     Password = strSMPTpass
                 };
-
-
                 smtp.Credentials = credential;
                 smtp.Host = strSMPTHost;
                 smtp.Port = SMPTPort;
@@ -196,23 +177,15 @@ namespace CIAB.Controllers
                 SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
                 SqlCommand CIABcommand = new SqlCommand();
                 CIABconnection.Open();
-
                 CIAB.Models.ConfirmOrderCustomer CustomerOrderConfirmation = new Models.ConfirmOrderCustomer();
-
                 CIABcommand.CommandType = CommandType.StoredProcedure;
                 CIABcommand.Connection = CIABconnection;
                 CIABcommand.CommandText = "sp_UserDetails";
-
-
-
                 if (Session["UserId"] != null)
                 {
                     UserIDFromSession = Session["UserId"].ToString();
                 }
                 CIABcommand.Parameters.AddWithValue("@UserID", UserIDFromSession);//
-
-
-
                 SqlDataReader reader = CIABcommand.ExecuteReader();
                 while (reader.Read())
                 {
@@ -226,8 +199,6 @@ namespace CIAB.Controllers
                     CustomerOrderConfirmation.ContactNumber = reader["ContactNumber"].ToString();
                     CustomerOrderConfirmation.CompanyName = reader["CompanyName"].ToString();
                     CustomerOrderConfirmation.CompanyAddress = reader["CompanyAddress"].ToString();
-
-
                 }
 
                 return CustomerOrderConfirmation;
@@ -239,6 +210,5 @@ namespace CIAB.Controllers
             }
 
         }
-
     }
 }

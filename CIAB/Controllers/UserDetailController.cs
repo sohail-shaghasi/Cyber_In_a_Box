@@ -21,7 +21,12 @@ namespace CIAB.Controllers
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult UserDetails([DataSourceRequest]DataSourceRequest request)
         {
-                var lstUserModel = new List<UserDetail>();//List of Object
+            if (Convert.ToString(Session["UserName"]).ToLower() == null || Convert.ToString(Session["UserName"]).ToLower() == string.Empty)
+            {
+                return RedirectToAction("SignUpLogin", "Home");
+            }    
+            
+            var lstUserModel = new List<UserDetail>();//List of Object
             try
             {
 

@@ -9,6 +9,9 @@ using Kendo.Mvc.Extensions;
 using System.Data.SqlClient;
 using System.IO;
 using CIAB.DataLayer;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 ﻿
 
 
@@ -20,8 +23,13 @@ namespace CIAB.Controllers
         {
             return View();
         }
-        public ViewResult AdminView([DataSourceRequest]DataSourceRequest request)
+        public ActionResult AdminView([DataSourceRequest]DataSourceRequest request)
         {
+            if (Convert.ToString(Session["UserName"])==null || Convert.ToString(Session["UserName"]) == string.Empty)
+            {
+                return RedirectToAction("SignUpLogin", "Home");
+            }
+
             try
             {
                 var adminDataLayer = new AdminDataLayer();
