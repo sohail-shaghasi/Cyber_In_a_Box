@@ -20,9 +20,7 @@ namespace CIAB.DataLayer
             string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
             string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
             int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-            if (strReciever != null || strReciever != string.Empty || strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
-                || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
-            {
+      
                 using (MailMessage message = new MailMessage())
                 {
                     message.From = new MailAddress(strEmailFrom);
@@ -34,19 +32,24 @@ namespace CIAB.DataLayer
                     message.BodyEncoding = Encoding.UTF8;
                     using (SmtpClient smtp = new SmtpClient())
                     {
-                        var credential = new NetworkCredential
+                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
                         {
-                            UserName = strSMTPUser,
-                            Password = strSMPTpass
-                        };
-                        smtp.Credentials = credential;
+                            var credential = new NetworkCredential
+                            {
+                                UserName = strSMTPUser,
+                                Password = strSMPTpass
+                            };
+                            smtp.Credentials = credential;
+                        }
                         smtp.Host = strSMPTHost;
-                        smtp.Port = SMPTPort;
+                        if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                        {
+                            smtp.Port = SMPTPort;
+                        }
                         smtp.EnableSsl = true;
                         smtp.Send(message);
                     }
                 }
-            }
         }
         public int RegisterUser(User NewUser)
         {

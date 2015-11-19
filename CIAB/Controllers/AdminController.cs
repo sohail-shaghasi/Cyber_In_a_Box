@@ -31,6 +31,7 @@ namespace CIAB.Controllers
             catch (Exception ex)
             {
                 base.Logger.Error(ex, "AdminView_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
+                base.Logger.Fatal(ex, "AdminView_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
 
                 return View(new List<AdminViewModel>());
             }

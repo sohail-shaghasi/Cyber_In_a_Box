@@ -115,25 +115,29 @@ namespace CIAB.Controllers
                 string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
                 string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
                 int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-                if (strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
-                    || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
+                MailMessage message = new MailMessage();
+                MailAddress to = new MailAddress(strReciever);
+                message.To.Add(to);//sent to email address
+                message.From = new MailAddress(strEmailFrom);
+                message.Subject = strSubject; //Subject;
+                message.Body = string.Format(body, strEmailFrom);
+                message.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient())
                 {
-                    MailMessage message = new MailMessage();
-                    MailAddress to = new MailAddress(strReciever);
-                    message.To.Add(to);//sent to email address
-                    message.From = new MailAddress(strEmailFrom);
-                    message.Subject = strSubject; //Subject;
-                    message.Body = string.Format(body, strEmailFrom);
-                    message.IsBodyHtml = true;
-                    SmtpClient smtp = new SmtpClient();
-                    var credential = new NetworkCredential //credebtials for smtp client account
+                    if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
                     {
-                        UserName = strSMTPUser,
-                        Password = strSMPTpass
-                    };
-                    smtp.Credentials = credential;
+                        var credential = new NetworkCredential
+                        {
+                            UserName = strSMTPUser,
+                            Password = strSMPTpass
+                        };
+                        smtp.Credentials = credential;
+                    }
                     smtp.Host = strSMPTHost;
-                    smtp.Port = SMPTPort;
+                    if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                    {
+                        smtp.Port = SMPTPort;
+                    }
                     smtp.EnableSsl = true;
                     smtp.Send(message);
                 }
@@ -149,7 +153,7 @@ namespace CIAB.Controllers
             var OrderDL = new OrderDataLayer();
             try
             {
-                var CustomerOrderConfirmation =OrderDL.GetUserDetails();
+                var CustomerOrderConfirmation = OrderDL.GetUserDetails();
                 return CustomerOrderConfirmation;
             }
             catch (Exception ex)

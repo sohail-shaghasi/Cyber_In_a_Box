@@ -100,17 +100,25 @@ namespace CIAB.Controllers
                 SBEmailBody.Append("KPMG Singapore");
                 message.Body = SBEmailBody.ToString();
                 message.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                var credential = new NetworkCredential
+                using (SmtpClient smtp = new SmtpClient())
                 {
-                    UserName = strSMTPUser,
-                    Password = strSMPTpass
-                };
-                smtp.Credentials = credential;
-                smtp.Host = strSMPTHost;
-                smtp.Port = SMPTPort;
-                smtp.EnableSsl = true;
-                smtp.Send(message);
+                    if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = strSMTPUser,
+                            Password = strSMPTpass
+                        };
+                        smtp.Credentials = credential;
+                    }
+                    smtp.Host = strSMPTHost;
+                    if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                    {
+                        smtp.Port = SMPTPort;
+                    }
+                    smtp.EnableSsl = true;
+                    smtp.Send(message);
+                }
             }
         }
         [HttpGet]

@@ -53,14 +53,20 @@ namespace CIAB.Models
                     message.IsBodyHtml = true;
                     using (SmtpClient smtp = new SmtpClient())
                     {
-                        var credential = new NetworkCredential
+                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
                         {
-                            UserName = strSMTPUser,
-                            Password = strSMPTpass
-                        };
-                        smtp.Credentials = credential;
+                            var credential = new NetworkCredential
+                            {
+                                UserName = strSMTPUser,
+                                Password = strSMPTpass
+                            };
+                            smtp.Credentials = credential;
+                        }
                         smtp.Host = strSMPTHost;
-                        smtp.Port = SMPTPort;
+                        if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                        {
+                            smtp.Port = SMPTPort;
+                        }
                         smtp.EnableSsl = true;
                         smtp.Send(message);
                     }

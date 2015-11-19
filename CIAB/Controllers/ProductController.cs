@@ -75,19 +75,26 @@ namespace CIAB.Controllers
                     message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
                     message.IsBodyHtml = true;
                     // credebtials for smtp client account
-                    SmtpClient smtp = new SmtpClient();
-                    var credential = new NetworkCredential
+
+                    using (SmtpClient smtp = new SmtpClient())
                     {
-                        UserName = strSMTPUser,
-                        Password = strSMPTpass
-                    };
-
-                    smtp.Credentials = credential;
-                    smtp.Host = strSMPTHost;
-                    smtp.Port = SMPTPort;
-                    smtp.EnableSsl = true;
-
-                    await smtp.SendMailAsync(message);
+                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                        {
+                            var credential = new NetworkCredential
+                            {
+                                UserName = strSMTPUser,
+                                Password = strSMPTpass
+                            };
+                            smtp.Credentials = credential;
+                        }
+                        smtp.Host = strSMPTHost;
+                        if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                        {
+                            smtp.Port = SMPTPort;
+                        }
+                        smtp.EnableSsl = true;
+                        await smtp.SendMailAsync(message);
+                    }
                     return Redirect("https://cmasurvey2015.questionpro.com");
                 }
                 return View();
