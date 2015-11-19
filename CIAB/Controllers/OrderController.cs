@@ -1,18 +1,16 @@
 ﻿using CIAB.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using CIAB.DataLayer;
 
 namespace CIAB.Controllers
 {
     public class OrderController : BaseController
     {
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -20,15 +18,11 @@ namespace CIAB.Controllers
         public ActionResult DispalyOrder(string ProductHandle)
         {
             Session["productHandle"] = ProductHandle;
-
-
             if (Convert.ToString(Session["UserName"]).ToLower() == null || Convert.ToString(Session["UserName"]).ToLower() == string.Empty)
             {
                 return RedirectToAction("SignUpLogin", "Home");
             }
-
             ConfirmOrderCustomer confirmOrderCustomer = UserDetails();
-
             try
             {
                 switch (ProductHandle)
@@ -56,44 +50,30 @@ namespace CIAB.Controllers
             try
             {
                 var productHandle = Convert.ToString(Session["productHandle"]);
-
                 if (productHandle == "CIABWD")
                 {
-                    // ViewData["Product"] = CustomerOrderConfirmation;
                     Session["ProductName"] = "WebSite Defacement Monitoring Starting from: $333/Month*";
                     Session["ProductDuration"] = "*Min 6 Months";
-
                     return RedirectToAction("DisplayThankYou", "Order");
                 }
-
-
                 else if (productHandle == "CIABETP")
                 {
                     Session["ProductName"] = "Email Threat Prevention Starting from: $583/Month*";
                     Session["ProductDuration"] = "*Min 12 Months";
-
                     return RedirectToAction("DisplayThankYou", "Order");
                 }
-
-
                 else if (productHandle == "CIABVS")
                 {
                     Session["ProductName"] = "Vulnerability Scan Starting from: $599 Per Scan*";
                     Session["ProductDuration"] = "*Blocks of 10 IP Addresses";
-
                     return RedirectToAction("DisplayThankYou", "Order");
                 }
-
-
-
                 else if (productHandle == "CIABCSC")
                 {
                     Session["ProductName"] = "Cybersecurity Health Check*";
                     Session["ProductDuration"] = "*Starting from: $599 for detailed report";
-
                     return RedirectToAction("DisplayThankYou", "Order");
                 }
-
             }
             catch (Exception ex)
             {
@@ -110,18 +90,10 @@ namespace CIAB.Controllers
                 {
                     strProductHandle = Session["productHandle"].ToString();
                 }
-
                 int userIDFromSession = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"]);
-                ConfirmOrderCustomer CustomerOrderConfirmation = UserDetails();
-                SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
-                SqlCommand CIABcommand = new SqlCommand();
-                CIABconnection.Open();
-                CIABcommand.CommandType = CommandType.StoredProcedure;
-                CIABcommand.Connection = CIABconnection;
-                CIABcommand.CommandText = "sp_CreateOrder";
-                CIABcommand.Parameters.AddWithValue("@UserID", userIDFromSession);
-                CIABcommand.Parameters.AddWithValue("@parameter", strProductHandle);
-                CIABcommand.ExecuteNonQuery();
+                var CustomerOrderConfirmation = UserDetails();
+                var orderDL = new OrderDataLayer();
+                orderDL.DisplayOrderConfirmation(strProductHandle, userIDFromSession);
                 SendOrderConfirmationEmail();//send email confirmation to customer
                 return View(CustomerOrderConfirmation);
             }
@@ -174,36 +146,10 @@ namespace CIAB.Controllers
         }
         private ConfirmOrderCustomer UserDetails()//This Function returns User information from User Table.
         {
-            var UserIDFromSession = "";
+            var OrderDL = new OrderDataLayer();
             try
             {
-                SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
-                SqlCommand CIABcommand = new SqlCommand();
-                CIABconnection.Open();
-                CIAB.Models.ConfirmOrderCustomer CustomerOrderConfirmation = new Models.ConfirmOrderCustomer();
-                CIABcommand.CommandType = CommandType.StoredProcedure;
-                CIABcommand.Connection = CIABconnection;
-                CIABcommand.CommandText = "sp_UserDetails";
-                if (Session["UserId"] != null)
-                {
-                    UserIDFromSession = Session["UserId"].ToString();
-                }
-                CIABcommand.Parameters.AddWithValue("@UserID", UserIDFromSession);//
-                SqlDataReader reader = CIABcommand.ExecuteReader();
-                while (reader.Read())
-                {
-                    CustomerOrderConfirmation.FullName = reader["FullName"].ToString();
-                    CustomerOrderConfirmation.UserID = Convert.ToInt32(UserIDFromSession);
-                    CustomerOrderConfirmation.JobTitle = reader["JobTitle"].ToString();
-                    CustomerOrderConfirmation.LastName = reader["LastName"].ToString();
-                    CustomerOrderConfirmation.UserName = reader["UserName"].ToString();
-                    CustomerOrderConfirmation.Website = reader["Website"].ToString();
-                    CustomerOrderConfirmation.Email = reader["Email"].ToString();
-                    CustomerOrderConfirmation.ContactNumber = reader["ContactNumber"].ToString();
-                    CustomerOrderConfirmation.CompanyName = reader["CompanyName"].ToString();
-                    CustomerOrderConfirmation.CompanyAddress = reader["CompanyAddress"].ToString();
-                }
-
+                var CustomerOrderConfirmation =OrderDL.GetUserDetails();
                 return CustomerOrderConfirmation;
             }
             catch (Exception ex)
@@ -211,7 +157,7 @@ namespace CIAB.Controllers
                 base.Logger.Error(ex, "UserDetails_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
                 return new ConfirmOrderCustomer();
             }
-
         }
+        #endregion
     }
 }

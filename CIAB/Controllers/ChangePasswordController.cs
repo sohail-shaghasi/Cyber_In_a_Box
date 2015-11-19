@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Web.UI;
 using System.Security.Cryptography;
 using System.Text;
 using CIAB.Models;
@@ -16,12 +10,11 @@ namespace CIAB.Controllers
 {
     public class ChangePasswordController : BaseController
     {
-        //
+        #region Methods
         public ActionResult Index()
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult ChangeUserPassword()
         {
@@ -32,7 +25,6 @@ namespace CIAB.Controllers
 
             return View();
         }
-
         [HttpPost]
         public ActionResult ChangeUserPassword(ResetPassword ResetPass)
         {
@@ -81,12 +73,10 @@ namespace CIAB.Controllers
                 return View("ChangeUserPassword", ResetPass);
             }
         }
-
         public ViewResult PasswordResetSuccess()
         {
             return View();
         }
-
         private int AddNewPassword(ResetPassword ResetPass, string strCurrentPass, string strNewPass)
         {
             if (HttpContext.Session["UserName"] != null)
@@ -98,8 +88,6 @@ namespace CIAB.Controllers
 
             return (result);
         }
-
-      
         private string GetSHA1(string password)
         {
             SHA1CryptoServiceProvider sha1Provider = new SHA1CryptoServiceProvider();
@@ -117,8 +105,6 @@ namespace CIAB.Controllers
 
             return SB_Hexadecimal.ToString();
         }
-
-
-
+        #endregion
     }
 }

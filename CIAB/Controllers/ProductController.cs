@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CIAB.Controllers
 {
     public class ProductController : BaseController
     {
-
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -33,11 +30,8 @@ namespace CIAB.Controllers
         {
             return View();
         }
-
         public ActionResult EmailThreatPrevention()
         {
-
-
             return View();
         }
         [HttpGet]
@@ -107,6 +101,6 @@ namespace CIAB.Controllers
             }
 
         }
-
+        #endregion
     }
 }

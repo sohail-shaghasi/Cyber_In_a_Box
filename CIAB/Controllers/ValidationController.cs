@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CIAB.Models;
@@ -12,6 +10,7 @@ namespace CIAB.Controllers
 {
     public class ValidationController : BaseController
     {
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -48,10 +47,8 @@ namespace CIAB.Controllers
         [HttpGet]
         public ActionResult IsEmailAvailable(User RegisterEmail)
         {
-            
             try
             {
-
                 SqlConnection con = new SqlConnection(CIABconnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
@@ -60,15 +57,12 @@ namespace CIAB.Controllers
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Email", RegisterEmail.registerViewModel.RegisterEmail);
                 con.Open();
-
                 SqlDataReader reader = cmd.ExecuteReader();
-
                 while (reader.Read())
                 {
                     if ((int)reader["ReturnCode"] == 1)
                     {
                         return Json(string.Format("{0} is in Use", RegisterEmail.registerViewModel.RegisterEmail), JsonRequestBehavior.AllowGet);
-
                     }
                 }
             }
@@ -76,8 +70,6 @@ namespace CIAB.Controllers
             {
                 base.Logger.Error(ex, "IsEmailAvailable_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
-
-
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -87,25 +79,19 @@ namespace CIAB.Controllers
             StringBuilder SB_Hexadecimal = new StringBuilder();
             var result = false;
             string strOldPassword = "";
-
             try
             {
                 SHA1CryptoServiceProvider sha1Provider = new SHA1CryptoServiceProvider();
                 sha1Provider.ComputeHash(ASCIIEncoding.ASCII.GetBytes(CurrentPassWithSalt));
                 byte[] hashArray = sha1Provider.Hash;
-
                 foreach (byte passByte in hashArray)
                 {
                     SB_Hexadecimal.AppendFormat("{0:x2}", passByte);
                 }
-
-                //check if Password session is empty.
                 if (HttpContext.Session["Password"] != null)
                 {
                     strOldPassword = HttpContext.Session["Password"].ToString();
                 }
-
-                //check if Old Password is same as the current password.
                 if (SB_Hexadecimal.ToString() == strOldPassword)
                 {
                     result = true;
@@ -115,8 +101,8 @@ namespace CIAB.Controllers
             {
                 base.Logger.Error(ex, "IsCurrentPasswordAvailable_{0} | StackTrace: {1}", ex.Message, ex.StackTrace);
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

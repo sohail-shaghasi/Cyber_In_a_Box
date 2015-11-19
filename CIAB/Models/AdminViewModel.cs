@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using System.Web.Mvc;
-
-
-
-
 namespace CIAB.Models
 {
     public class AdminViewModel
     {
-
         [HiddenInput(DisplayValue = true)]
         public int? OrderID { get; set; }
         public int UserId { get; set; }
@@ -35,7 +23,6 @@ namespace CIAB.Models
         [Required]
         public string UserContactNumber { get; set; }
         [Required]
-        
         ProductName productName = new ProductName();
         [UIHint("ProductsDropDownlist")]
         public ProductName ProductName
@@ -43,7 +30,6 @@ namespace CIAB.Models
             get { return productName; } 
             set { productName = value;}
         }
-
         AdminOrderStatus adminOrderStatus = new AdminOrderStatus();
         [UIHint("adminViewStatus")]
         public AdminOrderStatus AdminOrderStatus
@@ -52,17 +38,14 @@ namespace CIAB.Models
             set { adminOrderStatus = value; }
         }
     }
-
     public class AdminOrderStatus
     {
         public int Code { get; set; }
-
         public string StatusValue { get; set; }
     }
     public class ProductName
     {
         public int Product_ID { get; set; }
-
         public string Product_Name { get; set; }
     }
 }

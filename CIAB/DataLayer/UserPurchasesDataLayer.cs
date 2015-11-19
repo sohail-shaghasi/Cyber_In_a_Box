@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using CIAB.Models;
 using System.Data.SqlClient;
 using System.Data;
-
 namespace CIAB.DataLayer
 {
     public class UserPurchasesDataLayer : BaseDataLayer
     {
         public int UserID { get; set; }
+       
+        #region Methods
         public List<UserPurchasesViewModel> GetListOfUserOrders()
         {
-
             if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["UserId"] != string.Empty)
             {
                 UserID = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
@@ -47,11 +46,24 @@ namespace CIAB.DataLayer
             }
             return lstUserPurchaseOrders;
         }
-
-
-        //public byte[] DownloadReport()
-        //{
-        //    return 
-        //}
+        public byte[] GetPDFFromDB(int? orderID, string File)
+        {
+            byte[] pdfbytes = null;
+            SqlConnection CIABconnection = new SqlConnection(CIABconnectionString);
+            SqlCommand CIABcommand = new SqlCommand();
+            CIABconnection.Open();
+            CIABcommand.CommandType = CommandType.StoredProcedure;
+            CIABcommand.Connection = CIABconnection;
+            CIABcommand.CommandText = "sp_DownloadReport";
+            CIABcommand.Parameters.AddWithValue("@File", File);
+            CIABcommand.Parameters.AddWithValue("@OrderID", orderID);
+            SqlDataReader reader = CIABcommand.ExecuteReader();
+            while (reader.Read())
+            {
+                pdfbytes = (byte[])reader[0];
+            }
+            return pdfbytes;
+        }
+        #endregion
     }
 }

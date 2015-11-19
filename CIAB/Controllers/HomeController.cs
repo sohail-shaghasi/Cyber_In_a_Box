@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using CIAB.Models;
-using System.Net.Mail;
-using System.Net;
-using System.Data.SqlClient;
-using System.Data;
 using System.Text;
 using System.Security.Cryptography;
 using CIAB.DataLayer;
@@ -13,10 +8,7 @@ namespace CIAB.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController()
-        {
-
-        }
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -30,7 +22,6 @@ namespace CIAB.Controllers
         public ActionResult Contact(CIAB.Models.EmailFrom emailFrom)
         {
             string inputName, Subject, inputEmail, Message, optProduct;
-
             inputName = emailFrom.inputName;
             Subject = emailFrom.Subject;
             inputEmail = emailFrom.inputEmail;
@@ -81,8 +72,6 @@ namespace CIAB.Controllers
         {
             try
             {
-                
-
                 if (ModelState.IsValid)//Check if Model properties are Valid
                 {
                     var homeDataLayer = new HomeDataLayer();
@@ -158,7 +147,6 @@ namespace CIAB.Controllers
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult UserProfileEdit()
         {
@@ -173,7 +161,6 @@ namespace CIAB.Controllers
 
             return View();
         }
-
         [HttpPost]
         public ActionResult UserProfileEdit(CIAB.Models.UserProfileEdit userProfileEdit)
         {
@@ -187,7 +174,6 @@ namespace CIAB.Controllers
                 profileDL.UpdateProfile(userProfileEdit);
                 ViewData["ProfileUpdated"] = "Successfully Updated Your Profile. ";//message for pop up Alert().
                 GetUserProfile();
-
             }
             catch (Exception ex)
             {
@@ -196,7 +182,6 @@ namespace CIAB.Controllers
 
             return View(userProfileEdit);
         }
-
         private void GetUserProfile()
         {
             if (Session["UserName"] != null)
@@ -215,5 +200,6 @@ namespace CIAB.Controllers
             Session.Remove("UserName");
             return RedirectToAction("Index");
         }
-     }
+        #endregion
+    }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace CIAB.Models
 {
     public class Order
@@ -14,17 +10,12 @@ namespace CIAB.Models
         public DateTimeOffset? OrderDate{get; set;}
         public int ProductID{ get; set;}
         public int CustomerID{ get; set; }
-
         public double subTotal
         {
             get
             {
                 return Quantity * UnitPrice;
             }
-            
         }
-
-
-
     }
 }

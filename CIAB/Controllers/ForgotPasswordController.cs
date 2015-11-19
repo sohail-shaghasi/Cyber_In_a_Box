@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using CIAB.Models;
-using System.Text;
-using System.Security.Cryptography;
 using CIAB.DataLayer;
 
 namespace CIAB.Controllers
 {
     public class ForgotPasswordController : BaseController
     {
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -111,5 +105,6 @@ namespace CIAB.Controllers
         {
             return View();
         }
+        #endregion
     }
 }

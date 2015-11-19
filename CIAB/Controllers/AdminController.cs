@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CIAB.Models;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using System.Data.SqlClient;
-using System.IO;
 using CIAB.DataLayer;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-
-﻿
-
-
 namespace CIAB.Controllers
 {
     public class AdminController : BaseController
     {
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -29,7 +20,6 @@ namespace CIAB.Controllers
             {
                 return RedirectToAction("SignUpLogin", "Home");
             }
-
             try
             {
                 var adminDataLayer = new AdminDataLayer();
@@ -62,7 +52,6 @@ namespace CIAB.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
-
         public JsonResult AdminViewProductName()
         {
             var adminDataLayer = new AdminDataLayer();
@@ -71,12 +60,10 @@ namespace CIAB.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult Create()
         {
             return View();
         }
-
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update([DataSourceRequest] DataSourceRequest request, AdminViewModel adminModel)
         {
@@ -84,7 +71,6 @@ namespace CIAB.Controllers
             {
                 var adminDataLayer = new AdminDataLayer();
                 adminDataLayer.UpdateOrders(adminModel);
-
             }
             catch (Exception ex)
             {
@@ -96,7 +82,6 @@ namespace CIAB.Controllers
         {
             return View();
         }
-
-
+        #endregion
     }
 }

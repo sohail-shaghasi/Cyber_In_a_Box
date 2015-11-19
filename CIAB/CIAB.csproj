@@ -168,7 +168,10 @@
     <Compile Include="DataLayer\ChangePasswordDataLayer.cs" />
     <Compile Include="DataLayer\ForgotPasswordDataLayer.cs" />
     <Compile Include="DataLayer\HomeDataLayer.cs" />
+    <Compile Include="DataLayer\OrderDataLayer.cs" />
     <Compile Include="DataLayer\ProfileDataLayer.cs" />
+    <Compile Include="DataLayer\ResetPasswordDataLayer.cs" />
+    <Compile Include="DataLayer\UserDetailDataLayer.cs" />
     <Compile Include="DataLayer\UserPurchasesDataLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

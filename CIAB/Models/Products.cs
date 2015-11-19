@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations;
-
-namespace CIAB.Models
+﻿namespace CIAB.Models
 {
-
     public class Products
     {
         public int ProductID { get; set; }
@@ -21,6 +11,5 @@ namespace CIAB.Models
         public int ReorderLevel { get; set; }
         public decimal? UnitPrice { get; set; }
         public string ProductDescription { get; set; }
-
     }
 }
