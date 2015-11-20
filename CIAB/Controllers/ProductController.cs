@@ -56,29 +56,27 @@ namespace CIAB.Controllers
             string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
             int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
             string strEmailCC = System.Configuration.ConfigurationManager.AppSettings["smtpcc"];
+            bool smtpEnableSSL = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["smtpEnableSSL"]);
             try
             {
-                if (strSubject != string.Empty || strSubject != null || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
+                var body = "<p>Email From : {0}  </p> <p>Subject : {1} </p> <p>Name : {2} </p> <p>Product : {3} </p> <p>Message: {4} </p>";
+                using (var message = new MailMessage())
                 {
-                    var body = "<p>Email From : {0}  </p> <p>Subject : {1} </p> <p>Name : {2} </p> <p>Product : {3} </p> <p>Message: {4} </p>";
-                    MailMessage message = new MailMessage();
                     if (strReciever.ToString() != string.Empty)
                     {
                         foreach (string tos in strReciever.Split(';'))
                         {
                             MailAddress to = new MailAddress(tos);
-                            message.To.Add(to);//sent to email address
+                            message.To.Add(to);
                         }
                     }
                     message.From = new MailAddress(inputEmail);
-                    message.Subject = strSubject; //Subject;
+                    message.Subject = strSubject;
                     message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
                     message.IsBodyHtml = true;
-                    // credebtials for smtp client account
-
                     using (SmtpClient smtp = new SmtpClient())
                     {
-                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                        if (string.IsNullOrEmpty(strSMTPUser) == false && string.IsNullOrEmpty(strSMPTpass) == false)
                         {
                             var credential = new NetworkCredential
                             {
@@ -92,14 +90,15 @@ namespace CIAB.Controllers
                         {
                             smtp.Port = SMPTPort;
                         }
-                        smtp.EnableSsl = true;
+                        if (smtpEnableSSL==true)
+                        {
+                            smtp.EnableSsl = smtpEnableSSL;
+                        }
                         await smtp.SendMailAsync(message);
                     }
                     return Redirect("https://cmasurvey2015.questionpro.com");
                 }
-                return View();
             }
-
             catch (Exception ex)
             {
                 ViewData["smtpError"] = "Unable to send an email";

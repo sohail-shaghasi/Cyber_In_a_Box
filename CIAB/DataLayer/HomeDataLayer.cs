@@ -1,5 +1,6 @@
 ﻿using CIAB.Models;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
@@ -13,43 +14,46 @@ namespace CIAB.DataLayer
         #region Methods
         public void ContactUs(string inputName, string Subject, string inputEmail, string Message, string optProduct, string body)
         {
-            string strReciever = System.Configuration.ConfigurationManager.AppSettings["smtpReciever"];
-            string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
-            string strSubject = System.Configuration.ConfigurationManager.AppSettings["smtpSubject"];
-            string strSMTPUser = System.Configuration.ConfigurationManager.AppSettings["smtpUser"];
-            string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
-            string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
-            int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-      
-                using (MailMessage message = new MailMessage())
+            string strReciever = ConfigurationManager.AppSettings["smtpReciever"];
+            string strEmailFrom =ConfigurationManager.AppSettings["smtpEmailFrom"];
+            string strSubject =ConfigurationManager.AppSettings["smtpSubject"];
+            string strSMTPUser =ConfigurationManager.AppSettings["smtpUser"];
+            string strSMPTpass =ConfigurationManager.AppSettings["smtpPass"];
+            string strSMPTHost =ConfigurationManager.AppSettings["smtpServer"];
+            int SMPTPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+            bool smtpEnableSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpEnableSSL"]);
+            using (MailMessage message = new MailMessage())
+            {
+                message.From = new MailAddress(inputEmail);
+                message.To.Add(strReciever);
+                message.Subject = strSubject;
+                message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
+                message.IsBodyHtml = true;
+                message.SubjectEncoding = Encoding.UTF8;
+                message.BodyEncoding = Encoding.UTF8;
+                using (SmtpClient smtp = new SmtpClient())
                 {
-                    message.From = new MailAddress(strEmailFrom);
-                    message.To.Add(inputEmail);
-                    message.Subject = strSubject; //Subject;
-                    message.Body = string.Format(body, inputEmail, Subject, inputName, optProduct, Message);
-                    message.IsBodyHtml = true;
-                    message.SubjectEncoding = Encoding.UTF8;
-                    message.BodyEncoding = Encoding.UTF8;
-                    using (SmtpClient smtp = new SmtpClient())
+                    if (string.IsNullOrEmpty(strSMTPUser) == false && string.IsNullOrEmpty(strSMPTpass) == false)
                     {
-                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                        var credential = new NetworkCredential
                         {
-                            var credential = new NetworkCredential
-                            {
-                                UserName = strSMTPUser,
-                                Password = strSMPTpass
-                            };
-                            smtp.Credentials = credential;
-                        }
-                        smtp.Host = strSMPTHost;
-                        if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
-                        {
-                            smtp.Port = SMPTPort;
-                        }
-                        smtp.EnableSsl = true;
-                        smtp.Send(message);
+                            UserName = strSMTPUser,
+                            Password = strSMPTpass
+                        };
+                        smtp.Credentials = credential;
                     }
+                    smtp.Host = strSMPTHost;
+                    if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
+                    {
+                        smtp.Port = SMPTPort;
+                    }
+                    if (smtpEnableSSL == true)
+                    {
+                        smtp.EnableSsl = smtpEnableSSL;
+                    }
+                    smtp.Send(message);
                 }
+            }
         }
         public int RegisterUser(User NewUser)
         {

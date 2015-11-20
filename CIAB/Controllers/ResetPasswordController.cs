@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.Mvc;
 using CIAB.Models;
 using CIAB.DataLayer;
+using System.Configuration;
 namespace CIAB.Controllers
 {
     public class ResetPasswordController : BaseController
@@ -65,26 +66,25 @@ namespace CIAB.Controllers
         }
         private void SendPasswordFromUserDetailsPage(string strEmailFromDB, string strUserName, string strUniqueID)
         {
-            //get the controller and action method
             var url = new UrlHelper(Request.RequestContext);
             var absolutePath = url.Action("PasswordResetPage", "ResetPassword", new { UniqueID = strUniqueID });
             var baseUrl1 = Request.Url.Authority;
-            string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
-            string strSubject = System.Configuration.ConfigurationManager.AppSettings["smtpSubject"];
-            string strSMTPUser = System.Configuration.ConfigurationManager.AppSettings["smtpUser"];
-            string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
-            string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
-            int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-            if (strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
-                || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
+            string strEmailFrom = ConfigurationManager.AppSettings["smtpEmailFrom"];
+            string strSubject = ConfigurationManager.AppSettings["smtpSubject"];
+            string strSMTPUser = ConfigurationManager.AppSettings["smtpUser"];
+            string strSMPTpass = ConfigurationManager.AppSettings["smtpPass"];
+            string strSMPTHost = ConfigurationManager.AppSettings["smtpServer"];
+            int SMPTPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+            bool smtpEnableSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpEnableSSL"]);
+
+            using (var message = new MailMessage())
             {
-                MailMessage message = new MailMessage();
-                if (strEmailFromDB.ToString() != string.Empty || strEmailFromDB.ToString() != null)
+                if (string.IsNullOrEmpty(strEmailFromDB) == false)
                 {
                     foreach (string tos in strEmailFromDB.Split(';'))
                     {
                         MailAddress to = new MailAddress(tos);
-                        message.To.Add(to);//sent to email address
+                        message.To.Add(to);
                     }
                 }
                 message.From = new MailAddress(strEmailFrom);
@@ -102,7 +102,7 @@ namespace CIAB.Controllers
                 message.IsBodyHtml = true;
                 using (SmtpClient smtp = new SmtpClient())
                 {
-                    if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                    if (string.IsNullOrEmpty(strSMTPUser) == false && string.IsNullOrEmpty(strSMPTpass) == false)
                     {
                         var credential = new NetworkCredential
                         {
@@ -116,7 +116,10 @@ namespace CIAB.Controllers
                     {
                         smtp.Port = SMPTPort;
                     }
-                    smtp.EnableSsl = true;
+                    if (smtpEnableSSL == true)
+                    {
+                        smtp.EnableSsl = smtpEnableSSL;
+                    }
                     smtp.Send(message);
                 }
             }

@@ -93,16 +93,11 @@ namespace CIAB.Controllers
             SHA1CryptoServiceProvider sha1Provider = new SHA1CryptoServiceProvider();
             sha1Provider.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
             byte[] hashArray = sha1Provider.Hash;
-
-
             StringBuilder SB_Hexadecimal = new StringBuilder();
-
             foreach (byte passByte in hashArray)
             {
                 SB_Hexadecimal.AppendFormat("{0:x2}", passByte);
             }
-
-
             return SB_Hexadecimal.ToString();
         }
         #endregion

@@ -13,7 +13,8 @@ namespace CIAB.DataLayer
         #region Methods
         public List<UserPurchasesViewModel> GetListOfUserOrders()
         {
-            if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["UserId"] != string.Empty)
+            string strUserID = HttpContext.Current.Session["UserId"].ToString();
+            if (string.IsNullOrEmpty(strUserID) == false)
             {
                 UserID = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
             }
@@ -24,7 +25,7 @@ namespace CIAB.DataLayer
             CIABcommand.CommandType = System.Data.CommandType.StoredProcedure;
             CIABcommand.Connection = CIABconnection;
             CIABcommand.CommandText = "sp_ReadUserPurchaseOrders";
-            CIABcommand.Parameters.AddWithValue("@UserID", UserID);//Input Parameter
+            CIABcommand.Parameters.AddWithValue("@UserID", UserID);
             var reader = CIABcommand.ExecuteReader();
             while (reader.Read())
             {

@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using CIAB.DataLayer;
+using System.Configuration;
 
 namespace CIAB.Controllers
 {
@@ -109,22 +110,24 @@ namespace CIAB.Controllers
             {
                 var body = "<p>Email From : {0} ";
                 string strReciever = HttpContext.Session["email"].ToString();
-                string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
-                string strSubject = "Great, you just confirm your purchase ";
-                string strSMTPUser = System.Configuration.ConfigurationManager.AppSettings["smtpUser"];
-                string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
-                string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
-                int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
+                string strEmailFrom = ConfigurationManager.AppSettings["smtpEmailFrom"];
+                string strSubject = ConfigurationManager.AppSettings["OrderConfirmationSubject"];
+                string strSMTPUser = ConfigurationManager.AppSettings["smtpUser"];
+                string strSMPTpass = ConfigurationManager.AppSettings["smtpPass"];
+                string strSMPTHost = ConfigurationManager.AppSettings["smtpServer"];
+                int SMPTPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+                bool smtpEnableSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpEnableSSL"]);
+
                 MailMessage message = new MailMessage();
                 MailAddress to = new MailAddress(strReciever);
-                message.To.Add(to);//sent to email address
+                message.To.Add(to);
                 message.From = new MailAddress(strEmailFrom);
-                message.Subject = strSubject; //Subject;
+                message.Subject = strSubject;
                 message.Body = string.Format(body, strEmailFrom);
                 message.IsBodyHtml = true;
                 using (SmtpClient smtp = new SmtpClient())
                 {
-                    if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
+                    if (string.IsNullOrEmpty(strSMTPUser) == false && string.IsNullOrEmpty(strSMPTpass) == false)
                     {
                         var credential = new NetworkCredential
                         {
@@ -138,7 +141,10 @@ namespace CIAB.Controllers
                     {
                         smtp.Port = SMPTPort;
                     }
-                    smtp.EnableSsl = true;
+                    if (smtpEnableSSL == true)
+                    {
+                    smtp.EnableSsl = smtpEnableSSL;
+                    }
                     smtp.Send(message);
                 }
             }

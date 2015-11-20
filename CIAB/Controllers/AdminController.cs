@@ -56,9 +56,7 @@ namespace CIAB.Controllers
         public JsonResult AdminViewProductName()
         {
             var adminDataLayer = new AdminDataLayer();
-
             var result = adminDataLayer.GetListofProductName();
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create()

@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 namespace CIAB.Models
 {
     public class UserForgotPassword
@@ -20,58 +21,59 @@ namespace CIAB.Models
         public string ConfirmPassword { get; set; }
         public void SendPasswordResetEmail(string stremail, string strserName, string strUniqueID)
         {
-            string strEmailFrom = System.Configuration.ConfigurationManager.AppSettings["smtpEmailFrom"];
-            string strSubject = System.Configuration.ConfigurationManager.AppSettings["smtpSubject"];
-            string strSMTPUser = System.Configuration.ConfigurationManager.AppSettings["smtpUser"];
-            string strSMPTpass = System.Configuration.ConfigurationManager.AppSettings["smtpPass"];
-            string strSMPTHost = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
-            int SMPTPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
+            string strEmailFrom = ConfigurationManager.AppSettings["smtpEmailFrom"];
+            string strSubject = ConfigurationManager.AppSettings["smtpSubject"];
+            string strSMTPUser = ConfigurationManager.AppSettings["smtpUser"];
+            string strSMPTpass = ConfigurationManager.AppSettings["smtpPass"];
+            string strSMPTHost = ConfigurationManager.AppSettings["smtpServer"];
+            int SMPTPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+            bool smtpEnableSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["smtpEnableSSL"]);
             var url = new System.Web.Mvc.UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
             var absolutePath = url.Action("PasswordReset", "ForgotPassword", new { UniqueID = strUniqueID });
             var baseUrl1 = HttpContext.Current.Request.Url.Authority;
-            if (strEmailFrom != null || strEmailFrom != string.Empty || strSubject != string.Empty || strSubject != null
-                || strSMPTpass != null || strSMPTpass != string.Empty || strSMPTHost != string.Empty || strSMPTHost != null || strSMPTHost != string.Empty)
+            using (MailMessage message = new MailMessage())
             {
-                using (MailMessage message = new MailMessage())
+                if (string.IsNullOrEmpty(stremail) == false)
                 {
-                    if (stremail.ToString() != string.Empty || stremail.ToString() != null)
+                    message.To.Add(stremail);
+                }
+                message.From = new MailAddress(strEmailFrom);
+                message.Subject = strSubject; //Subject;
+                StringBuilder SBEmailBody = new StringBuilder();
+                SBEmailBody.Append("Dear " + strserName + ", <br/><br/>");
+                SBEmailBody.Append("You (or someone else) have requested to reset your password at " + DateTime.Now);
+                SBEmailBody.Append("<br/><br/>");
+                SBEmailBody.Append("Please Click on the following link to reset Your password");
+                SBEmailBody.Append("<br/><br/>");
+                SBEmailBody.Append("http://" + baseUrl1 + absolutePath);
+                SBEmailBody.Append("<br/><br/><br/><br/>");
+                SBEmailBody.Append("KPMG Singapore");
+                message.Body = SBEmailBody.ToString();
+                message.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    if (string.IsNullOrEmpty(strSMTPUser) == false && string.IsNullOrEmpty(strSMPTpass) == false)
                     {
-                        message.To.Add(stremail);
+                        var credential = new NetworkCredential
+                        {
+                            UserName = strSMTPUser,
+                            Password = strSMPTpass
+                        };
+                        smtp.Credentials = credential;
                     }
-                    message.From = new MailAddress(strEmailFrom);
-                    message.Subject = strSubject; //Subject;
-                    StringBuilder SBEmailBody = new StringBuilder();
-                    SBEmailBody.Append("Dear " + strserName + ", <br/><br/>");
-                    SBEmailBody.Append("You (or someone else) have requested to reset your password at " + DateTime.Now);
-                    SBEmailBody.Append("<br/><br/>");
-                    SBEmailBody.Append("Please Click on the following link to reset Your password");
-                    SBEmailBody.Append("<br/><br/>");
-                    SBEmailBody.Append("http://" + baseUrl1 + absolutePath);
-                    SBEmailBody.Append("<br/><br/><br/><br/>");
-                    SBEmailBody.Append("KPMG Singapore");
-                    message.Body = SBEmailBody.ToString();
-                    message.IsBodyHtml = true;
-                    using (SmtpClient smtp = new SmtpClient())
+                    smtp.Host = strSMPTHost;
+                    if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
                     {
-                        if (string.IsNullOrEmpty(strSMTPUser) == false || string.IsNullOrEmpty(strSMPTpass) == false)
-                        {
-                            var credential = new NetworkCredential
-                            {
-                                UserName = strSMTPUser,
-                                Password = strSMPTpass
-                            };
-                            smtp.Credentials = credential;
-                        }
-                        smtp.Host = strSMPTHost;
-                        if (string.IsNullOrEmpty(SMPTPort.ToString()) == false)
-                        {
-                            smtp.Port = SMPTPort;
-                        }
-                        smtp.EnableSsl = true;
-                        smtp.Send(message);
+                        smtp.Port = SMPTPort;
                     }
+                    if (smtpEnableSSL ==true)
+                    {
+                        smtp.EnableSsl = smtpEnableSSL;
+                    }
+                    smtp.Send(message);
                 }
             }
         }
     }
 }
+

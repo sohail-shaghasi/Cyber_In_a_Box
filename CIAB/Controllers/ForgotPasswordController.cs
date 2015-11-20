@@ -45,8 +45,7 @@ namespace CIAB.Controllers
                                 forgotPassword.UniqueID = reader["UniqueID"].ToString();
                                 forgotPassword.EmailFromDB = reader["Email"].ToString();
                                 forgotPassword.UserName = reader["UserName"].ToString();
-                                //call to function SendPasswordResetEmail
-                                CIAB.Models.UserForgotPassword ModelForgotPassword = new Models.UserForgotPassword();
+                                var ModelForgotPassword = new UserForgotPassword();
                                 ModelForgotPassword.SendPasswordResetEmail(forgotPassword.EmailFromDB, forgotPassword.UserName, forgotPassword.UniqueID);
                                 TempData["ResetMessage"] = "You will receive an email with the password reset link. Follow the instruction in the email to reset your password.";
                                 return RedirectToAction("GetMessages", "ForgotPassword");
