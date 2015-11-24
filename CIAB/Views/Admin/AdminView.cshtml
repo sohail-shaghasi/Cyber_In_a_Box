@@ -54,7 +54,7 @@
                                     {
                                         model.Id(config => config.OrderID);
                                         model.Field(product => product.AdminOrderStatus.StatusValue);
-                                        model.Field(product => product.ProductName.Product_Name);  
+                                        model.Field(product => product.ProductName.Product_Name);
                                     })
                             .PageSize(10)
                             .ServerOperation(false)
@@ -66,13 +66,13 @@
                             )
                             .Reorderable(reorder => reorder.Columns(true))
                             .Resizable(resize => resize.Columns(true))
-
+                            .Filterable()
                             .Pageable()
                             .Sortable()
-                            //.ColumnMenu()
+                                //.ColumnMenu()
                             .Editable(m => m.Mode(Kendo.Mvc.UI.GridEditMode.InLine))
-                           // .HtmlAttributes(new { style = "height:800px; width: 1100px" })
-                            )
+                                // .HtmlAttributes(new { style = "height:800px; width: 1100px" })
+                        )
                     </div>
 
                     @(Html.Kendo().Window()
